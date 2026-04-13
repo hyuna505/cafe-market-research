@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브랜드 리서치 아카이브 — 22개 브랜드</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f3;color:#1a1a1a;padding:2rem 1.5rem}
+.page-header{margin-bottom:1.5rem}
+.page-title{font-size:18px;font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.page-sub{font-size:12px;color:#999}
+.toolbar{display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.filter-btn{font-size:12px;padding:4px 14px;border-radius:100px;border:1px solid #ccc;background:transparent;color:#666;cursor:pointer;transition:all .15s}
+.filter-btn:hover{border-color:#999;color:#333}
+.filter-btn.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:14px}
+.card{border:0.5px solid #ddd;border-radius:12px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
+.card-top{padding:14px 16px 10px;border-bottom:0.5px solid #eee}
+.card-flag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;display:inline-block;margin-bottom:6px}
+.kr{background:#E8F4FD;color:#0C447C}
+.jp{background:#FFF3E0;color:#854F0B}
+.us{background:#F3E5F5;color:#534AB7}
+.cn{background:#FCE4EC;color:#993556}
+.card-name{font-size:15px;font-weight:600;color:#1a1a1a;line-height:1.3;margin-bottom:2px;text-decoration:none;display:block}
+.card-name:hover{text-decoration:underline;color:#185FA5}
+.card-en{font-size:11px;color:#aaa}
+.card-body{padding:12px 16px;flex:1;display:flex;flex-direction:column;gap:9px}
+.row{display:grid;grid-template-columns:76px 1fr;gap:4px 8px;align-items:start}
+.lbl{font-size:11px;color:#aaa;padding-top:2px;line-height:1.4}
+.val{font-size:12px;color:#1a1a1a;line-height:1.5}
+.price{font-size:12px;color:#185FA5;font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:1px}
+.tag{font-size:11px;padding:2px 8px;border-radius:100px;background:#f0f0ee;color:#666}
+.tag.pos{background:#eaf3de;color:#3B6D11}
+.tag.neg{background:#feebeb;color:#A32D2D}
+.tag.usage{background:#E8F4FD;color:#0C447C}
+.divider{height:0.5px;background:#eee;margin:2px 0}
+.insight-box{background:#f5f5f3;border-radius:8px;padding:8px 10px;margin-top:2px}
+.insight-lbl{font-size:10px;color:#aaa;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+.insight-txt{font-size:12px;color:#1a1a1a;line-height:1.55}
+.hidden{display:none}
+@media print{body{background:#fff;padding:1rem}.filter-btn{display:none}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="page-title">브랜드 리서치 아카이브</div>
+  <div class="page-sub">카페 기획 프로젝트 벤치마킹 · 총 22개 브랜드 · 국내 16 / 일본 2 / 미국 2 / 중국 2</div>
+</div>
+<div class="toolbar">
+  <button class="filter-btn active" onclick="filter('all',this)">전체 22</button>
+  <button class="filter-btn" onclick="filter('kr',this)">국내 16</button>
+  <button class="filter-btn" onclick="filter('jp',this)">일본 2</button>
+  <button class="filter-btn" onclick="filter('us',this)">미국 2</button>
+  <button class="filter-btn" onclick="filter('cn',this)">중국 2</button>
+</div>
+<div class="grid" id="grid">
+
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://brianscoffee.com/" target="_blank">브라이언스커피</a></div>
+      <div class="card-en">Brian's Coffee · 2009년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,000원 ~ 6,000원 (원두 선택 및 매장별 상이)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">하이엔드 로스터리</span><span class="tag">스콘 성지</span><span class="tag">슬로우 커피 (Slow Coffee)</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 도곡 본점 및 백화점 입점 매장 음료·디저트 판매 / B2B: 전국 카페·사무실 대상 원두 납품 및 바리스타 교육 / 온라인·리테일: 자사몰 원두·드립백</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">시그니처 커피와 디저트의 조합 / 백화점 입점형 프리미엄 카페 운영 / 원두 납품과 교육을 결합한 복합 수익 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">독보적인 베이커리(스콘) 경쟁력</span><span class="tag pos">직접 생두 수입을 통한 원가 절감 및 품질 관리</span><span class="tag pos">탄탄한 B2B 수익 기반</span><span class="tag neg">높은 가격대로 인한 대중적 접근성 제약</span><span class="tag neg">'스콘'에 편중된 베이커리 이미지</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">강력한 시그니처 메뉴 하나는 브랜드 전체의 객단가와 방문 이유를 동시에 강화할 수 있다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://fourb.co.kr/" target="_blank">포비</a></div>
+      <div class="card-en">FOURB · 2018년경</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,500~6,500원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">밝은 라이프스타일</span><span class="tag">기본의 미학</span><span class="tag">이지 큐레이션</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 홀 음료·베이글·스프레드 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 일부 MD 판매 / 확장·부가 수익: 전시·작가 협업 및 문화 프로</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">베이글과 다양한 스프레드 조합 / 식사 대용 가능한 베이커리 카페 포지션 / 단품보다 세트형 선택으로 객단가 상승</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">명확한 수익 모델</span><span class="tag pos">이지 큐레이션</span><span class="tag pos">팝업 친화 공간</span><span class="tag neg">브랜드 깊이 약함</span><span class="tag neg">서사 부족</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">전문성은 제품 설명보다도 사람과 팀의 서사가 살아 있을 때 더 강한 브랜드 자산이 된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://milestonecoffee.kr/" target="_blank">마일스톤커피</a></div>
+      <div class="card-en">Milestone Coffee · 2015년경</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">6,000~7,000원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">호주식 환대</span><span class="tag">참새방앗간</span><span class="tag">올드스쿨 빈티지</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 홀 음료·디저트 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 굿즈 판매 / 확장·부가 수익: 시그니처 디저트 기반 객단가 확장</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">플랫화이트·비엔나커피 등 호주식 시그니처 음료 / 직접 제조 디저트(티라미수·스콘) / 음료와 디저트 동반 구매 유도</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"><span class="tag usage">확장</span></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">높은 재방문율</span><span class="tag pos">참새방앗간 동선</span><span class="tag pos">접객 팬덤</span><span class="tag neg">메뉴 차별화 약함</span><span class="tag neg">입지 의존도 높음</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">지역 기반 브랜드도 압도적인 실력과 권위를 확보하면 전국 단위 팬덤과 유통 확장이 가능하다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://www.instagram.com/imi.coffee/" target="_blank">이미커피</a></div>
+      <div class="card-en">imi coffee · 2011년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">6,500원 (페어링 세트 중심 운영)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">커피와 디저트의 결합</span><span class="tag">오마카세 식 서빙</span><span class="tag">스토리텔링</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 페어링 음료·디저트 중심 매장 판매 / B2B: 원두 유통 및 디저트·카페 기획 컨설팅 / 온라인·리테일: 원두 판매 가능성 / 확장·부가 수익: 페어링</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">커피와 디저트의 정교한 페어링 경험 / 높은 객단가의 코스형 소비 / 메뉴 기획력 자체를 상품화한 운영 방식</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">독보적인 페어링 스토리텔링</span><span class="tag pos">높은 고객 체감 가치</span><span class="tag pos">차별화된 접객 품질</span><span class="tag neg">낮은 회전율 및 확장성</span><span class="tag neg">운영 인력의 높은 숙련도 요구</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">좋은 카페는 많은 설명보다도 덜어낸 완성도로 ‘굳이 찾아갈 이유’를 만든다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://fritz.co.kr/" target="_blank">프릳츠</a></div>
+      <div class="card-en">Fritz Coffee Company · 2014년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">6,000~6,500원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">기술자 공동체</span><span class="tag">코리안 빈티지</span><span class="tag">생활 밀착형</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 매장 음료·베이커리 판매 / B2B: 전국 카페 대상 원두 납품 및 교육 / 온라인·리테일: 온라인 원두·드립백 판매 / 확장·부가 수익: 캐릭터 굿즈 </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">고품질 스페셜티 커피와 베이커리 결합 / 캐릭터성과 세계관이 강한 브랜드 굿즈 / 원두 납품까지 이어지는 다층 매출 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">세계관 일관성</span><span class="tag pos">굿즈 자산화</span><span class="tag pos">B2B 구조</span><span class="tag neg">베이커리 운영 부담</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">환대는 서비스가 아니라 공간의 분위기와 재방문을 만드는 핵심 브랜드 경험이다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://www.instagram.com/camel__coffee/" target="_blank">카멜커피</a></div>
+      <div class="card-en">Camel Coffee  · 2017년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,500원 ~ 6,000원 (시그니처 '카멜커피' 6,000원)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">빈티지 큐레이션</span><span class="tag">퍼스널 브랜딩</span><span class="tag">카멜 아이덴티티</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 주요 상권 직영 매장 음료 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 라이프스타일 굿즈 판매 / 확장·부가 수익: 편의점·백화점 등 대</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">핫플레이스 기반 시그니처 커피 판매 / 라이프스타일 굿즈와 협업 상품 / 오프라인 화제성을 외부 채널 매출로 확장하는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">대체 불가능한 독보적인 브랜드 이미지</span><span class="tag pos">유통 대기업이 먼저 찾는 강력한 콜라보 파워</span><span class="tag pos">팬덤 기반의 높은 화제성</span><span class="tag neg">설립자 개인의 캐릭터에 대한 높은 의존도 / 공간의 미학 대비 좌석의 불편함 등 운영 효율성 이슈 / 확장 시 초기 빈티지 감성 유지의 어려움</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">과장 없는 태도와 기본기 중심 운영은 오히려 더 깊은 신뢰와 취향 충성도를 만든다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://gimisa.com/" target="_blank">기미사</a></div>
+      <div class="card-en">GIMISA · 2020년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,500원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">맛을 보는 사람들</span><span class="tag">향미의 시각화</span><span class="tag">큐레이션 카드</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 성수 매장 음료 판매 / B2B: 고품질 원두 유통·기업/기관 대상 클래스 및 컨설팅 / 온라인·리테일: 원두 판매 가능성 / 확장·부가 수익: 커피 교</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">원두 품질과 추출 전문성 중심의 커피 경험 / 클래스·컨설팅으로 확장 가능한 전문성 / 매장 경험을 B2B 신뢰로 연결하는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">정교한 향미 설명 능력</span><span class="tag pos">뛰어난 시각 큐레이션</span><span class="tag pos">고급스러운 브랜드 이미지</span><span class="tag neg">높은 진입 장벽(전문성 위주)</span><span class="tag neg">매장 접근성의 제한</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">브랜드 철학은 문장보다도 시각 언어와 반복되는 경험의 결로 더 선명하게 각인된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://momos.co.kr/" target="_blank">모모스커피</a></div>
+      <div class="card-en">Momos Coffee · 2007년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">6,000~7,000원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">로컬의 세계화</span><span class="tag">전문성 권위</span><span class="tag">챔피언십 신뢰</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 매장 음료 판매 / B2B: 다이렉트 트레이드 기반 원두 공급 및 교육 / 온라인·리테일: 온라인 원두·드립백 판매 및 채널 입점 / 확장·부가 수익: </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">챔피언십 기반의 커피 전문성 / 싱글오리진 원두와 드립백 판매 / 오프라인 명성을 온라인·유통 채널로 확장하는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">로컬 서사 팬덤</span><span class="tag pos">채널 다변화</span><span class="tag pos">전문성 권위</span><span class="tag neg">지역 기반 확장 한계</span><span class="tag neg">전문성 의존도 높음</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">추상적인 맛의 차이는 고객이 이해할 수 있는 언어와 시각 자료로 번역될 때 설득력이 생긴다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://lowkeycoffee.com/" target="_blank">로우키</a></div>
+      <div class="card-en">lowkey · 2010년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,000원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">낮은 자세의 전문성</span><span class="tag">클린컵의 정석</span><span class="tag">지역 커뮤니티 허브</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 매장 음료·원두 판매 / B2B: 전국 카페 대상 원두 납품 / 온라인·리테일: 드립백·정기구독 운영 / 확장·부가 수익: 구독 기반 재구매 구조</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">농장 이야기·생두 수입 과정 전문적 뒷이야기 콘텐츠화. '부산의 자부심'이라는 강력한 지역 팬덤 확보.+M9</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"><span class="tag usage">확장</span></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">압도적인 원두 품질 일관성</span><span class="tag pos">탄탄한 로컬 팬덤</span><span class="tag pos">브랜드의 진정성</span><span class="tag neg">대중적 인지도 확장의 한계</span><span class="tag neg">킬러 디저트 메뉴의 부재</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">강한 카페 브랜드는 음료 판매를 넘어 ‘방문할 가치가 있는 장소’ 자체를 자산으로 만든다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://werk.co.kr/" target="_blank">베르크 로스터스</a></div>
+      <div class="card-en">WERK ROASTERS · 2018년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,500원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">작업(Werk)의 숭고함</span><span class="tag">블랙 &amp; 다크그레이</span><span class="tag">설계된 경험</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 매장 음료 판매 / B2B: 대규모 로스팅 팩토리 기반 원두 납품 / 온라인·리테일: 감도 높은 MD 및 원두 판매 / 확장·부가 수익: 로스터리 기반 </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">로스터리 기반의 안정적 원두 생산 / 감도 높은 MD와 패키지 / 매장보다 생산·납품 역량이 강한 수익 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">독보적인 시각 아이덴티티</span><span class="tag pos">높은 브랜드 충성도</span><span class="tag pos">강력한 협업 기획력</span><span class="tag neg">다소 무겁고 진지한 브랜드 이미지</span><span class="tag neg">공간 구조상 회전율 저하</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">음료의 차별성은 재료 자체보다도 그것을 하나의 경험으로 엮는 서사에서 완성된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://www.manufactcoffee.com/" target="_blank">메뉴팩트커피</a></div>
+      <div class="card-en">Manafact Coffee · 2013년경</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">6,000~7,000원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">본질과 지속성</span><span class="tag">덜어냄의 미학</span><span class="tag">히든 브랜딩</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 홀 음료 판매 / B2B: 카페 원두 납품 / 온라인·리테일: 온라인 원두 판매 / 확장·부가 수익: 감도 맞는 외부 채널 입점</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">공간감 있는 홀 경험과 원두 판매 / B2B 원두 납품 중심의 실질 수익 구조 / 감도 맞는 외부 채널 확장</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">철학의 일관성</span><span class="tag pos">히든 브랜딩</span><span class="tag pos">목적지형 팬덤</span><span class="tag neg">대중 진입장벽</span><span class="tag neg">초반 유입 느림</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">브랜드는 완벽한 시스템보다도 뚜렷한 취향과 자기다움이 있을 때 더 강하게 확장된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://terarosa.com/" target="_blank">테라로사</a></div>
+      <div class="card-en">TERAROSA · 2002년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,800원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">1세대 스페셜티</span><span class="tag">공간의 미학</span><span class="tag">전 직원 정규직</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 전국 직영점 음료·베이커리·키친 판매 / B2B: 호텔·기업 대상 원두 및 홀세일 공급 / 온라인·리테일: 온라인 원두 판매 / 확장·부가 수익: 대형 </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">대형 플래그십 공간 경험 / 원두·베이커리·키친을 결합한 복합 매출 / 전국 직영과 B2B 홀세일이 함께 가는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">스페셜티 대중 인지도 1위</span><span class="tag pos">압도적인 공간 집객력</span><span class="tag pos">전 공정 수직 계열화</span><span class="tag neg">거대해진 조직의 유연성 부족</span><span class="tag neg">올드해질 수 있는 브랜드 이미지</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">강한 비주얼의 대표 메뉴 하나는 브랜드 인지와 신규 유입을 빠르게 견인하는 가장 효율적인 장치가 된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://www.ourbakery.info/" target="_blank">아우어베이커리</a></div>
+      <div class="card-en">OUR Bakery · 2016년경</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">5,500~6,500원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">패셔너블 F&amp;B</span><span class="tag">팝업 최적화</span><span class="tag">비주얼 임팩트</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 베이커리·음료 중심 매장 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 일부 상품 판매 / 확장·부가 수익: 팝업·브랜드 협업 및 센트럴 </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">더티초코·빨미까레 등 비주얼 강한 베이커리 / SNS 확산형 시그니처 메뉴 / 센트럴 키친 기반 다점포 확장</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">강력한 비주얼 각인</span><span class="tag pos">팝업 기획력</span><span class="tag pos">브랜드 협업</span><span class="tag neg">트렌드 의존도</span><span class="tag neg">자사 프리미엄과 온도차</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">어려운 카테고리도 쉽게 고를 수 있게 설계하면 전문성과 대중성을 동시에 확보할 수 있다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://supermatcha.com/" target="_blank">슈퍼말차</a></div>
+      <div class="card-en">SUPER MATCHA · 2017년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">말차라떼 6,500~8,000원</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">말차 대중화</span><span class="tag">힙한 그린 에너지</span><span class="tag">글로벌 확장</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 국내외 직영 매장 음료 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 말차 파우더·라떼 믹스·티백 판매 / 확장·부가 수익: 글로벌 진출 </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">말차 라떼와 말차 디저트 / 말차 파우더·믹스 등 리테일 제품 / 강한 컬러 아이덴티티를 활용한 글로벌 확장</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"><span class="tag usage">확장</span></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">강력한 비주얼 아이덴티티</span><span class="tag pos">말차 카테고리 선도</span><span class="tag pos">글로벌 확장 의지</span><span class="tag neg">말차 단일 카테고리 의존</span><span class="tag neg">커피 카페와의 경쟁 격화</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">카페는 매장에서 끝나지 않고 집으로 이어지는 재구매 구조를 만들 때 비로소 브랜드 사업이 된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://magpie-and-tiger.com/index.html" target="_blank">맥파이앤타이거</a></div>
+      <div class="card-en">Magpie &amp; Tiger · 2019년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">티 코스 12,000~20,000원 (시즌·구성에 따라 상이)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">동아시아 차 큐레이션</span><span class="tag">일상의 취향</span><span class="tag">차와 닮은 삶</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 티룸 운영 및 티 코스·잎차·다기 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 티백·싱글오리진·허브차 판매 / 확장·부가 수익: 도예·패</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">티 코스와 잎차·다기 판매 / 차를 취향 소비로 전환하는 브랜드 경험 / 협업과 팝업으로 커뮤니티를 넓히는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">'차 → 취향·일상·감각' 언어로 번역</span><span class="tag pos">소규모이지만 강한 팬덤</span><span class="tag pos">협업·팝업 기획력</span><span class="tag neg">소규모 운영 한계</span><span class="tag neg">대중 인지도 낮음</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">낯선 차 문화도 일상적인 언어와 취향의 문법으로 번역하면 충분히 대중화될 수 있다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="kr">
+    <div class="card-top">
+      <span class="card-flag kr">국내</span>
+      <div><a class="card-name" href="https://www.osulloc.com/kr/ko" target="_blank">오설록</a></div>
+      <div class="card-en">OSULLOC · 1979년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">녹차라떼 7,500~8,500원 (티하우스 기준)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">한국 차의 고급화</span><span class="tag">티 라이프스타일</span><span class="tag">제주 유기농</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 티하우스 음료·디저트 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 온라인몰·백화점·선물세트·차 제품 판매 / 확장·부가 수익: 글로벌 수</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">녹차 기반 음료·디저트·선물세트 / 차 제품의 리테일 판매 / 티하우스 경험을 선물·유통·글로벌로 확장하는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">차 → 라이프스타일·선물·리테일 확장 구조</span><span class="tag pos">수직계열화(재배~판매) 차별화</span><span class="tag pos">글로벌 유기농 인증 획득</span><span class="tag neg">젊은층 진입장벽(고가·전통 이미지)</span><span class="tag neg">모회사(아모레퍼시픽) 의존도</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">복잡한 재료일수록 강한 시각 언어와 단순한 메시지로 각인시켜야 시장을 넓힐 수 있다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="jp">
+    <div class="card-top">
+      <span class="card-flag jp">일본</span>
+      <div><a class="card-name" href="https://onibuscoffee.com/" target="_blank">오니버스커피</a></div>
+      <div class="card-en">Onibus Coffee · 2012년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">600~700엔(약 6,000원)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">연결의 커피</span><span class="tag">동네 사랑방</span><span class="tag">일본식 장인정신</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 홀 음료 및 싱글오리진 원두 판매 / B2B: 도매 원두 공급 / 온라인·리테일: 원두 소매 판매 / 확장·부가 수익: 로스팅 설비 확장을 통한 홀세일 </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">싱글오리진 중심의 홀 음료와 원두 판매 / 소매와 도매를 함께 가져가는 로스터리 모델 / 일상형 로컬 브랜드의 장기 운영 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">커뮤니티 밀착도</span><span class="tag pos">일상성·재방문율</span><span class="tag pos">지속가능 브랜딩</span><span class="tag neg">확장 속도 느림</span><span class="tag neg">대중 인지도 낮음</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">브랜드의 프리미엄은 제품 하나가 아니라 공간의 여백과 운영 디테일까지 일관될 때 완성된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="jp">
+    <div class="card-top">
+      <span class="card-flag jp">일본</span>
+      <div><a class="card-name" href="https://roar-coffee.com/" target="_blank">로어 커피</a></div>
+      <div class="card-en">ROAR Coffee House &amp; Roastery · 2010년대</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">600~800엔(약 6,000~8,000원)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">커스터마이징 설계</span><span class="tag">비주얼 임팩트</span><span class="tag">오피스 에너지</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 드립·에스프레소·커스터마이징 음료·푸드 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 해당 없음 또는 제한적 / 확장·부가 수익: 오후 시</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">원두·추출 방식·우유 선택이 가능한 커스터마이징 음료 / 비주얼 라떼와 식사 메뉴 / 저녁 시간대 칵테일로 회전율 확장</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">강렬한 비주얼 각인</span><span class="tag pos">주문 경험 설계</span><span class="tag pos">시간대별 운영 전환</span><span class="tag neg">협소한 공간 한계</span><span class="tag neg">비주얼 의존도</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">확장 가능한 카페는 감성보다도 운영 효율과 반복 가능한 시스템을 먼저 설계해야 한다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="us">
+    <div class="card-top">
+      <span class="card-flag us">미국</span>
+      <div><a class="card-name" href="https://kr.bluebottlecoffee.com/" target="_blank">블루보틀커피</a></div>
+      <div class="card-en">Blue Bottle Coffee · 2002년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">6,500~8,000원 (국내 기준)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">커피계의 애플</span><span class="tag">미니멀 정밀주의</span><span class="tag">공간 경험</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 프리미엄 가격 기반 홀 음료 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 원두·브루잉 장비·굿즈 및 정기배송 판매 / 확장·부가 수익: </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">프리미엄 커피 경험과 브루잉 문화 / 원두 정기배송과 장비 판매 / 오프라인 경험을 DTC 재구매로 연결하는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">브랜드 일관성</span><span class="tag pos">구독 수익 모델</span><span class="tag pos">공간 경험 설계</span><span class="tag neg">네슬레 인수 후 정체성 논란</span><span class="tag neg">초기 창업 직접 모방 어려움</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">좋은 카페는 목적지가 되기 전에 먼저 동네의 일상 속에 자연스럽게 스며들어야 오래 간다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="us">
+    <div class="card-top">
+      <span class="card-flag us">미국</span>
+      <div><a class="card-name" href="https://www.blankstreet.com/en-US" target="_blank">블랭크 스트리트</a></div>
+      <div class="card-en">Blank Street Coffee · 2020년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">$3.45 (약 4,800원) / £2.90 (약 5,200원)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">데이터 기반 확장</span><span class="tag">자동화의 효율성</span><span class="tag">민트색 카트</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 소형 매장 기반 고회전 음료 판매 / B2B: 해당 없음 또는 제한적 / 온라인·리테일: 앱 기반 주문·리워드 운영 / 확장·부가 수익: 데이터 마케팅 </div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">소형 점포 기반의 빠른 회전 음료 판매 / 앱 중심 주문·리워드 시스템 / 운영 효율과 데이터 마케팅이 결합된 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">압도적인 운영 효율성</span><span class="tag pos">트렌디한 브랜드 이미지</span><span class="tag pos">앱 기반의 고객 락인(Lock-in)</span><span class="tag neg">'기계가 내린 커피'라는 편견</span><span class="tag neg">공간 체류 경험의 부재</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">차별화된 재료는 설명하는 것이 아니라 고객이 직접 선택하고 체험하게 만들 때 가장 강력해진다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="cn">
+    <div class="card-top">
+      <span class="card-flag cn">중국</span>
+      <div><a class="card-name" href="https://www.heytea.com/추" target="_blank">헤이티</a></div>
+      <div class="card-en">HEYTEA (喜茶) · 2012년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">3,900~7,400원 (국내 기준, 평균 6,100원)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">신식 차 음료</span><span class="tag">치즈티 원조</span><span class="tag">진짜 재료</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 글로벌 매장 음료 판매 / B2B: 가맹 및 파트너 확장 가능 구조 / 온라인·리테일: 앱·미니프로그램 기반 사전 주문 및 커스터마이징 / 확장·부가 수</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">치즈티·과일티 등 트렌디한 비커피 음료 / 커스터마이징 기반 주문 경험 / 디지털 선주문과 대형 체인 확장이 결합된 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">진짜 재료의 품질 차별화</span><span class="tag pos">글로벌 4,000개 매장 스케일</span><span class="tag pos">이종 콜라보·팝업 기획력</span><span class="tag neg">중국 브랜드 이미지 리스크</span><span class="tag neg">한국 내 경쟁 심화(차바이다오·챠지 등 동시 진출)</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">새로운 음료 카테고리는 ‘맛’보다도 커스터마이징과 체험의 재미를 설계할 때 더 빠르게 확산된다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-country="cn">
+    <div class="card-top">
+      <span class="card-flag cn">중국</span>
+      <div><a class="card-name" href="https://www.luckincoffee.com.sg/" target="_blank">루이싱커피</a></div>
+      <div class="card-en">Luckin Coffee · 2017년</div>
+    </div>
+    <div class="card-body">
+      <div class="row"><div class="lbl">기준가</div><div class="price">약 2,000~3,000원 (중국 기준 ¥15~20)</div></div>
+      <div class="row"><div class="lbl">키워드</div><div class="val"><div class="tags"><span class="tag">디지털 네이티브</span><span class="tag">스케일의 무기화</span><span class="tag">데이터 드리븐 브랜딩</span></div></div></div>
+      <div class="row"><div class="lbl">수익 구조</div><div class="val">B2C: 앱 전용 주문 기반 음료 판매 / B2B: 파트너스토어 운영 구조 / 온라인·리테일: 앱 기반 할인·쿠폰·구독 운영 / 확장·부가 수익: 대규모 체인 확</div></div>
+      <div class="row"><div class="lbl">킬러 콘텐츠</div><div class="val">앱 전용 할인 주문 구조 / 고빈도 신제품 출시 / 초대형 점포망과 디지털 프로모션으로 반복 구매를 만드는 구조</div></div>
+      <div class="row"><div class="lbl">인사이트</div><div class="val"><div class="tags"></div></div></div>
+      <div class="divider"></div>
+      <div class="tags"><span class="tag pos">데이터 기반 출점·메뉴 전략</span><span class="tag pos">앱 생태계 잠금 효과</span><span class="tag pos">스캔들 극복 서사 — 브랜드 회복력 증명</span><span class="tag neg">품질보다 편의·가격 중심 — 브랜드 감도 한계</span><span class="tag neg">수익성 불안정 (가격 할인 의존)</span></div>
+      <div class="insight-box">
+        <div class="insight-lbl">인사이트</div>
+        <div class="insight-txt">매장은 반드시 머무는 공간일 필요가 없으며, 브랜드는 습관으로 설계될 때 더 빠르게 확장된다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function filter(country,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(c=>{
+    c.classList.toggle('hidden',country!=='all'&&c.dataset.country!==country);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>네이버 플레이스 시장 리포트 — 2026. 1Q</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F6FA;
+    --surface: #FFFFFF;
+    --surface2: #F0F4FF;
+    --border: rgba(0,0,0,0.07);
+    --border2: rgba(0,0,0,0.11);
+    --text: #1A1D2E;
+    --muted: #7A84A6;
+    --accent-blue: #2478E8;
+    --accent-green: #0F9E6E;
+    --accent-amber: #C97D10;
+    --accent-rose: #D64270;
+    --accent-purple: #6C4FCE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* ── Header ── */
+  .report-header {
+    max-width: 860px;
+    margin: 0 auto 3.5rem;
+    border-bottom: 1px solid var(--border2);
+    padding-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+  .report-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .report-title span {
+    display: block;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .report-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .report-meta .quarter {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    color: var(--accent-blue);
+    line-height: 1;
+  }
+  .report-meta .source {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 5px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Slides wrapper ── */
+  .slides {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* ── Slide card ── */
+  .slide {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .slide:nth-child(1) { animation-delay: 0.1s; }
+  .slide:nth-child(2) { animation-delay: 0.22s; }
+  .slide:nth-child(3) { animation-delay: 0.34s; }
+  .slide:nth-child(4) { animation-delay: 0.46s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* slide header */
+  .slide-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .slide-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .slide-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .slide-title-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* slide body */
+  .slide-body {
+    padding: 1.2rem 1.4rem 1.4rem;
+  }
+
+  /* ── Two-column grid ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Rank box ── */
+  .rank-box {
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border2);
+  }
+  .rank-box-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .rank-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .rank-item:last-child { border-bottom: none; }
+  .rank-badge {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .rank-name { font-size: 12px; flex: 1; color: var(--text); }
+  .rank-score {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .rank-score.highlight { color: #854F0B; font-weight: 700; }
+
+  /* blue box */
+  .box-blue { background: #E6F1FB; border-color: #B5D4F4; }
+  .box-blue .rank-box-label { color: #185FA5; }
+  .box-blue .rank-badge { background: #B5D4F4; color: #042C53; }
+
+  /* green box */
+  .box-green { background: #EAF3DE; border-color: #C0DD97; }
+  .box-green .rank-box-label { color: #3B6D11; }
+  .box-green .rank-badge { background: #C0DD97; color: #173404; }
+
+  /* amber box */
+  .box-amber { background: #FAEEDA; border-color: #FAC775; }
+  .box-amber .rank-box-label { color: #633806; }
+  .box-amber .rank-badge { background: #FAC775; color: #412402; }
+
+  /* ── Conclusion bar ── */
+  .conclusion {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+  }
+  .conclusion-arrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .conclusion-text {
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* ── Category killer (slide 2 right box) ── */
+  .killer-box {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+  }
+  .killer-box-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .killer-item {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .killer-item:last-child { border-bottom: none; }
+  .killer-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .killer-desc {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .killer-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-right: 5px;
+    background: #FAEEDA;
+    color: #633806;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Area grid (slide 3) ── */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .area-card {
+    border-radius: 10px;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--border2);
+  }
+  .area-card.seoul { background: #EAF3DE; border-color: #C0DD97; }
+  .area-card.region { background: #EEEDFE; border-color: #CECBF6; }
+  .area-name-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .area-card.seoul .area-name-tag { color: #3B6D11; }
+  .area-card.region .area-name-tag { color: #3C3489; }
+  .area-place { font-size: 11.5px; color: var(--text); line-height: 1.4; }
+  .area-score {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── Keyword grid (slide 4) ── */
+  .kw-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .kw-card {
+    border-radius: 10px;
+    padding: 1rem 0.9rem;
+    border: 1px solid var(--border2);
+    position: relative;
+    overflow: hidden;
+  }
+  .kw-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .kw-card.c1 { background: #E6F1FB; }
+  .kw-card.c1::before { background: #2478E8; }
+  .kw-card.c2 { background: #EAF3DE; }
+  .kw-card.c2::before { background: #0F9E6E; }
+  .kw-card.c3 { background: #FBEAF0; }
+  .kw-card.c3::before { background: #D64270; }
+  .kw-hashtag {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 0.55rem;
+  }
+  .kw-card.c1 .kw-hashtag { color: var(--accent-blue); }
+  .kw-card.c2 .kw-hashtag { color: var(--accent-green); }
+  .kw-card.c3 .kw-hashtag { color: var(--accent-rose); }
+  .kw-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── Footer ── */
+  .report-footer {
+    max-width: 860px;
+    margin: 2.5rem auto 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-note {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .footer-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 600px) {
+    .two-col, .three-col, .kw-grid { grid-template-columns: 1fr; }
+    .report-header { flex-direction: column; align-items: flex-start; }
+    .report-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header class="report-header">
+  <div class="report-title">
+    <span>Naver Place · Data Lab</span>
+    네이버 데이터 기반<br>주요 상권별 인기 카페 현황 및 브랜드 순위
+  </div>
+  <div class="report-meta">
+    <div class="quarter">2026. 1Q</div>
+    <div class="source">출처: 네이버 플레이스·데이터랩<br>매월 1일 업데이트</div>
+  </div>
+</header>
+
+<div class="slides">
+
+  <!-- Slide 1 -->
+  <div class="slide">
+    <div class="slide-head">
+      <div class="slide-num" style="background:#B5D4F4;color:#042C53">01</div>
+      <div class="slide-label">시장 총평</div>
+      <div class="slide-title-text">온·오프라인 선호 지표의 이원화</div>
+    </div>
+    <div class="slide-body">
+      <div class="two-col">
+        <div class="rank-box box-blue">
+          <div class="rank-box-label">오프라인 방문 강자 — 네이버 리뷰 기준</div>
+          <div class="rank-item"><div class="rank-badge">1</div><div class="rank-name">블루보틀 커피 삼청점</div><div class="rank-score highlight">12,400+</div></div>
+          <div class="rank-item"><div class="rank-badge">2</div><div class="rank-name">어니언 성수</div><div class="rank-score">11,800+</div></div>
+          <div class="rank-item"><div class="rank-badge">3</div><div class="rank-name">카페 노티드 도산</div><div class="rank-score">10,500+</div></div>
+          <div class="rank-item"><div class="rank-badge">4</div><div class="rank-name">펠트 커피 이태원</div><div class="rank-score">9,200+</div></div>
+          <div class="rank-item"><div class="rank-badge">5</div><div class="rank-name">콘하스 망원</div><div class="rank-score">8,700+</div></div>
+        </div>
+        <div class="rank-box box-green">
+          <div class="rank-box-label">온라인 검색 강자 — 네이버 검색 지수</div>
+          <div class="rank-item"><div class="rank-badge">1</div><div class="rank-name">스타벅스</div><div class="rank-score highlight">지수 100</div></div>
+          <div class="rank-item"><div class="rank-badge">2</div><div class="rank-name">이디야커피</div><div class="rank-score">지수 72</div></div>
+          <div class="rank-item"><div class="rank-badge">3</div><div class="rank-name">메가커피</div><div class="rank-score">지수 68</div></div>
+          <div class="rank-item"><div class="rank-badge">4</div><div class="rank-name">컴포즈커피</div><div class="rank-score">지수 61</div></div>
+          <div class="rank-item"><div class="rank-badge">5</div><div class="rank-name">투썸플레이스</div><div class="rank-score">지수 58</div></div>
+        </div>
+      </div>
+      <div class="conclusion">
+        <div class="conclusion-arrow" style="color:var(--accent-blue)">→</div>
+        <div class="conclusion-text">소비자는 '특별한 경험'을 위해 발품을 팔고, '일상적 편의'를 위해 검색한다</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide">
+    <div class="slide-head">
+      <div class="slide-num" style="background:#FAC775;color:#412402">02</div>
+      <div class="slide-label">베이커리</div>
+      <div class="slide-title-text">로컬 브랜드의 전국구 팬덤화</div>
+    </div>
+    <div class="slide-body">
+      <div class="two-col">
+        <div class="rank-box box-amber">
+          <div class="rank-box-label">방문자 수 Top 5 — 네이버 리뷰 기준</div>
+          <div class="rank-item"><div class="rank-badge">1</div><div class="rank-name">성심당 대전</div><div class="rank-score highlight">22,400+</div></div>
+          <div class="rank-item"><div class="rank-badge">2</div><div class="rank-name">런던 베이글 뮤지엄 안국</div><div class="rank-score">15,200+</div></div>
+          <div class="rank-item"><div class="rank-badge">3</div><div class="rank-name">밀도 성수</div><div class="rank-score">12,800+</div></div>
+          <div class="rank-item"><div class="rank-badge">4</div><div class="rank-name">오월의 종 마포</div><div class="rank-score">10,400+</div></div>
+          <div class="rank-item"><div class="rank-badge">5</div><div class="rank-name">르뱅 베이커리 청담</div><div class="rank-score">9,600+</div></div>
+        </div>
+        <div class="killer-box">
+          <div class="killer-box-label">카테고리 킬러 브랜드</div>
+          <div class="killer-item">
+            <div class="killer-name">런던 베이글 뮤지엄</div>
+            <div class="killer-desc"><span class="killer-tag">베이글</span>검색지수 65 — 프랜차이즈 추월</div>
+          </div>
+          <div class="killer-item">
+            <div class="killer-name">밀도</div>
+            <div class="killer-desc"><span class="killer-tag">식빵</span>검색지수 52 — 아티제(48) 추월</div>
+          </div>
+          <div class="killer-item">
+            <div class="killer-name">오월의 종</div>
+            <div class="killer-desc"><span class="killer-tag">크루아상</span>검색지수 42 — 꾸준한 성장세</div>
+          </div>
+        </div>
+      </div>
+      <div class="conclusion">
+        <div class="conclusion-arrow" style="color:var(--accent-amber)">→</div>
+        <div class="conclusion-text">'보편적 메뉴'보다 '대체 불가능한 시그니처'가 브랜드 파워를 만든다</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide">
+    <div class="slide-head">
+      <div class="slide-num" style="background:#9FE1CB;color:#04342C">03</div>
+      <div class="slide-label">상권 분석</div>
+      <div class="slide-title-text">앵커 스토어 중심의 상권 형성</div>
+    </div>
+    <div class="slide-body">
+      <div class="three-col">
+        <div class="area-card seoul">
+          <div class="area-name-tag">서울 성수동</div>
+          <div class="area-place">어니언 성수<span class="area-score">★4.8 · 11,800+</span></div>
+          <div class="area-place">대림창고<span class="area-score">★4.7 · 8,200+</span></div>
+          <div class="area-place">할아버지공장<span class="area-score">★4.6 · 6,400+</span></div>
+        </div>
+        <div class="area-card seoul">
+          <div class="area-name-tag">서울 이태원</div>
+          <div class="area-place">펠트 커피<span class="area-score">★4.9 · 9,200+</span></div>
+          <div class="area-place">오월의 종<span class="area-score">★4.7 · 6,100+</span></div>
+          <div class="area-place">모모스커피<span class="area-score">★4.6 · 5,300+</span></div>
+        </div>
+        <div class="area-card seoul">
+          <div class="area-name-tag">서울 망원동</div>
+          <div class="area-place">콘하스 망원<span class="area-score">★4.8 · 8,700+</span></div>
+          <div class="area-place">카페 리브레<span class="area-score">★4.7 · 5,400+</span></div>
+          <div class="area-place">망원동 커피집<span class="area-score">★4.5 · 3,900+</span></div>
+        </div>
+        <div class="area-card region">
+          <div class="area-name-tag">강릉 안목</div>
+          <div class="area-place">테라로사 강릉본점<span class="area-score">★4.9 · 14,200+</span></div>
+          <div class="area-place">보헤미안 커피<span class="area-score">★4.8 · 8,600+</span></div>
+          <div class="area-place">안목 오션카페<span class="area-score">★4.7 · 6,400+</span></div>
+        </div>
+        <div class="area-card region">
+          <div class="area-name-tag">제주 애월</div>
+          <div class="area-place">카페 델문도<span class="area-score">★4.8 · 10,200+</span></div>
+          <div class="area-place">몽상드 애월<span class="area-score">★4.7 · 8,900+</span></div>
+          <div class="area-place">한림 해변 카페<span class="area-score">★4.6 · 5,600+</span></div>
+        </div>
+        <div class="area-card region">
+          <div class="area-name-tag">부산 해운대</div>
+          <div class="area-place">모모스커피<span class="area-score">★4.8 · 9,400+</span></div>
+          <div class="area-place">루프탑 광안리<span class="area-score">★4.7 · 7,100+</span></div>
+          <div class="area-place">오션뷰 광안리<span class="area-score">★4.6 · 5,800+</span></div>
+        </div>
+      </div>
+      <div class="conclusion">
+        <div class="conclusion-arrow" style="color:var(--accent-green)">→</div>
+        <div class="conclusion-text">신규 진입 시 단순 서비스 만족을 넘어선 '공간적 차별화' 필수 — 주요 상권 상위권 평점 ★4.6~4.9로 평준화</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide">
+    <div class="slide-head">
+      <div class="slide-num" style="background:#F4C0D1;color:#4B1528">04</div>
+      <div class="slide-label">소비 트렌드</div>
+      <div class="slide-title-text">리뷰와 검색을 부르는 3대 키워드</div>
+    </div>
+    <div class="slide-body">
+      <div class="kw-grid">
+        <div class="kw-card c1">
+          <div class="kw-hashtag">#스페셜티</div>
+          <div class="kw-desc">커피 본연의 맛과 전문성에 대한 높은 관여도. 블루보틀·펠트·테라로사 등 스페셜티 포지션이 방문 상위권 점유</div>
+        </div>
+        <div class="kw-card c2">
+          <div class="kw-hashtag">#로컬</div>
+          <div class="kw-desc">한옥·산업 재생·지역 특색을 담은 공간 선호. 어니언(성수 재생), 대림창고(창고 개조) 등 공간 서사가 리뷰 동기</div>
+        </div>
+        <div class="kw-card c3">
+          <div class="kw-hashtag">#SNS비주얼</div>
+          <div class="kw-desc">'찍을 거리'가 분명한 인테리어·메뉴가 방문의 결정적 동기. 오션뷰·루프탑·시그니처 음료가 SNS 확산 트리거</div>
+        </div>
+      </div>
+      <div class="conclusion">
+        <div class="conclusion-arrow" style="color:var(--accent-rose)">→</div>
+        <div class="conclusion-text">리뷰와 검색을 동시에 부르려면 세 키워드 중 최소 하나를 '대체 불가능한 수준'으로 소유해야 한다</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="report-footer">
+  <div class="footer-note">Naver Place · Data Lab &nbsp;|&nbsp; 매월 1일 업데이트 기준 &nbsp;|&nbsp; 2026. 1Q</div>
+  <div class="footer-dot"></div>
+</footer>
+
+</body>
+</html>

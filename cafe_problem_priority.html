@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>카페 산업 문제 우선순위 엔진</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 9pt;
+  color: #1a1a1a;
+  background: #fff;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 16mm 18mm;
+  background: #fff;
+}
+
+.doc-title {
+  font-size: 20pt;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.doc-sub {
+  font-size: 7.5pt;
+  color: #888780;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.divider-heavy { border: none; border-top: 1.5px solid #1a1a1a; margin-bottom: 12px; }
+.divider-light { border: none; border-top: 0.5px solid #D3D1C7; margin: 8px 0; }
+
+.sec-hdr {
+  font-size: 8pt;
+  font-weight: 500;
+  color: #888780;
+  letter-spacing: 0.05em;
+  margin: 12px 0 6px 0;
+  padding-bottom: 4px;
+  border-bottom: 0.5px solid #D3D1C7;
+}
+
+/* ── 평가 기준 안내 ── */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: #F1EFE8;
+  border: 0.5px solid #D3D1C7;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.guide-cell {
+  padding: 8px 10px;
+  border-right: 0.5px solid #D3D1C7;
+}
+.guide-cell:last-child { border-right: none; }
+.guide-name { font-size: 8pt; font-weight: 500; color: #1a1a1a; margin-bottom: 2px; }
+.guide-desc { font-size: 7pt; color: #888780; line-height: 1.5; }
+
+/* ── 메인 테이블 ── */
+.prob-table { width: 100%; border-collapse: collapse; }
+.prob-table thead tr {
+  background: #F1EFE8;
+  border-bottom: 1px solid #888780;
+}
+.prob-table th {
+  font-size: 7.5pt;
+  font-weight: 500;
+  color: #444441;
+  padding: 6px 5px;
+  text-align: left;
+  white-space: nowrap;
+}
+.prob-table th.center { text-align: center; }
+.prob-table td {
+  padding: 7px 5px;
+  font-size: 8pt;
+  vertical-align: middle;
+  border-bottom: 0.5px solid #D3D1C7;
+}
+.prob-table tr:last-child td { border-bottom: none; }
+
+.td-rank   { font-size: 8pt; font-weight: 500; color: #888780; text-align: center; width: 18px; }
+.td-name   { width: 104px; }
+.td-center { text-align: center; }
+.prob-name { font-size: 8.5pt; font-weight: 500; color: #1a1a1a; line-height: 1.3; margin-bottom: 2px; }
+.prob-desc { font-size: 7pt; color: #5F5E5A; line-height: 1.5; }
+
+.score-urg  { font-size: 14pt; font-weight: 700; }
+.score-wtp  { font-size: 14pt; font-weight: 700; color: #1D9E75; }
+.grow-sig   { font-size: 11pt; font-weight: 700; }
+.voice-sig  { font-size: 9pt; font-weight: 500; color: #854F0B; }
+
+.tag-grow  { display: inline-block; font-size: 6.5pt; font-weight: 500; padding: 1px 5px; border-radius: 3px; margin-left: 3px; background: #FCEBEB; color: #A32D2D; }
+.tag-vocal { display: inline-block; font-size: 6.5pt; font-weight: 500; padding: 1px 5px; border-radius: 3px; margin-left: 3px; background: #FAEEDA; color: #854F0B; }
+
+.badge {
+  display: inline-block;
+  font-size: 7pt;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.b-red    { background: #FCEBEB; color: #A32D2D; }
+.b-amber  { background: #FAEEDA; color: #854F0B; }
+.b-teal   { background: #E1F5EE; color: #0F6E56; }
+
+.fn-num {
+  display: inline-block;
+  font-size: 7pt;
+  font-weight: 500;
+  color: #185FA5;
+  background: #E6F1FB;
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-left: 2px;
+  line-height: 1.3;
+}
+
+/* ── 각주 ── */
+.footnotes {
+  margin-top: 14px;
+  border-top: 0.5px solid #D3D1C7;
+  padding-top: 10px;
+}
+.fn-hdr {
+  font-size: 8pt;
+  font-weight: 500;
+  color: #888780;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fn-period {
+  font-size: 7.5pt;
+  color: #888780;
+  background: #F1EFE8;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.fn-list { display: flex; flex-direction: column; gap: 0; }
+.fn-item {
+  display: grid;
+  grid-template-columns: 18px 40px 1fr;
+  align-items: baseline;
+  gap: 5px;
+  padding: 4px 0;
+  border-bottom: 0.3px solid #D3D1C7;
+  font-size: 7.5pt;
+}
+.fn-item:last-child { border-bottom: none; }
+.fn-type {
+  display: inline-block;
+  font-size: 6.5pt;
+  font-weight: 500;
+  padding: 1px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.fn-stat   { background: #EAF3DE; color: #3B6D11; }
+.fn-media  { background: #E6F1FB; color: #185FA5; }
+.fn-comm   { background: #FAEEDA; color: #854F0B; }
+.fn-trade  { background: #EEEDFE; color: #534AB7; }
+.fn-source { font-weight: 500; color: #1a1a1a; }
+.fn-desc   { color: #5F5E5A; }
+
+/* ── 인쇄 최적화 ── */
+@media print {
+  @page { size: A4; margin: 0; }
+  body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .page { width: 100%; min-height: auto; padding: 13mm 16mm; margin: 0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 제목 -->
+  <div class="doc-title">카페 산업 문제 우선순위 엔진</div>
+  <div class="doc-sub">
+    조사 기간: 2024년 1월 — 2026년 1월 &nbsp;|&nbsp;
+    출처 구성: 공공통계 2 · 언론 4 · 커뮤니티 2 · 전문지 3 &nbsp;|&nbsp;
+    점수 기준: 컨설턴트 판단 + 데이터 근거 혼합
+  </div>
+  <hr class="divider-heavy">
+
+  <!-- 평가 기준 -->
+  <div class="sec-hdr">평가 기준</div>
+  <div class="guide-grid">
+    <div class="guide-cell">
+      <div class="guide-name">긴급도 (1-10)</div>
+      <div class="guide-desc">지금 해결 안 하면 폐업·실패로 직결되는 정도</div>
+    </div>
+    <div class="guide-cell">
+      <div class="guide-name">지불 의향 (1-10)</div>
+      <div class="guide-desc">해결 솔루션·서비스에 실제로 돈을 쓸 가능성</div>
+    </div>
+    <div class="guide-cell">
+      <div class="guide-name">성장세</div>
+      <div class="guide-desc">↑↑ 급속 성장 &nbsp; ↑ 성장 중 &nbsp; → 현상 유지</div>
+    </div>
+    <div class="guide-cell">
+      <div class="guide-name">불평 강도</div>
+      <div class="guide-desc">★★ 커뮤니티·미디어 반복 언급 &nbsp; ★ 간헐적</div>
+    </div>
+  </div>
+
+  <!-- 문제 테이블 -->
+  <div class="sec-hdr">핵심 문제 10</div>
+  <table class="prob-table">
+    <thead>
+      <tr>
+        <th style="width:18px;">#</th>
+        <th style="width:104px;">문제</th>
+        <th class="center" style="width:28px;">긴급도</th>
+        <th class="center" style="width:28px;">지불 의향</th>
+        <th class="center" style="width:22px;">성장세</th>
+        <th class="center" style="width:26px;">불평 강도</th>
+        <th class="center" style="width:30px;">유형</th>
+        <th class="center" style="width:28px;">출처</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="td-rank">1</td>
+        <td class="td-name">
+          <div class="prob-name">원가 트리플 쇼크 <span class="tag-grow">급성장</span></div>
+          <div class="prob-desc">원두 57% 급등(2024→2025) + 고환율 + 물류비 동시 상승. 개인 카페는 선물계약 없어 직격탄.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#A32D2D;">10</span></td>
+        <td class="td-center"><span class="score-wtp">9</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#A32D2D;">↑↑</span></td>
+        <td class="td-center"><span class="voice-sig">★★</span></td>
+        <td class="td-center"><span class="badge b-red">원가</span></td>
+        <td class="td-center"><span class="fn-num">1</span><span class="fn-num">2</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">2</td>
+        <td class="td-name">
+          <div class="prob-name">임대료 vs 매출 역전 <span class="tag-vocal">불평 1위</span></div>
+          <div class="prob-desc">서울 번화가 월세 300~500만 원. 순수익 50만 원 수준. "열심히 일만 하고 번 돈은 없다."</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#A32D2D;">10</span></td>
+        <td class="td-center"><span class="score-wtp">8</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#888780;">→</span></td>
+        <td class="td-center"><span class="voice-sig">★★</span></td>
+        <td class="td-center"><span class="badge b-red">수익성</span></td>
+        <td class="td-center"><span class="fn-num">3</span><span class="fn-num">4</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">3</td>
+        <td class="td-name">
+          <div class="prob-name">차별화 불가능의 함정 <span class="tag-vocal">불평 2위</span></div>
+          <div class="prob-desc">"커피 맛만 바꾸면 될 줄 알았다"가 폐업 패턴. 공간·스토리·메뉴 3축 모두 필요.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#E24B4A;">9</span></td>
+        <td class="td-center"><span class="score-wtp">9</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#888780;">→</span></td>
+        <td class="td-center"><span class="voice-sig">★★</span></td>
+        <td class="td-center"><span class="badge b-amber">전략</span></td>
+        <td class="td-center"><span class="fn-num">5</span><span class="fn-num">4</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">4</td>
+        <td class="td-name">
+          <div class="prob-name">저가 프랜차이즈 생태계 교란 <span class="tag-grow">급성장</span></div>
+          <div class="prob-desc">메가·컴포즈 3년새 매장 2배. 저가 1곳 생기면 인근 개인카페 3~4곳 연쇄 폐업.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#E24B4A;">9</span></td>
+        <td class="td-center"><span class="score-wtp">7</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#A32D2D;">↑↑</span></td>
+        <td class="td-center"><span class="voice-sig" style="color:#888780;">★</span></td>
+        <td class="td-center"><span class="badge b-red">경쟁</span></td>
+        <td class="td-center"><span class="fn-num">6</span><span class="fn-num">7</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">5</td>
+        <td class="td-name">
+          <div class="prob-name">인력 수급 + 인건비 압박 <span class="tag-vocal">불평 3위</span></div>
+          <div class="prob-desc">최저시급 상승으로 월 355만 원↑ 고정 지출. 오너 혼자 운영 시 주 7일 13시간 노동.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#E24B4A;">8</span></td>
+        <td class="td-center"><span class="score-wtp">8</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#888780;">→</span></td>
+        <td class="td-center"><span class="voice-sig">★★</span></td>
+        <td class="td-center"><span class="badge b-amber">운영</span></td>
+        <td class="td-center"><span class="fn-num">4</span><span class="fn-num">8</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">6</td>
+        <td class="td-name">
+          <div class="prob-name">상권 분석 실패 → 조기 폐업 <span class="tag-vocal">불평</span></div>
+          <div class="prob-desc">평균 영업기간 2.9년. 임대 계약 만료 1~2년차에 폐업 집중. 유동인구·경쟁밀도·임대료 연동 판단 부재.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#EF9F27;">8</span></td>
+        <td class="td-center"><span class="score-wtp">8</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#888780;">→</span></td>
+        <td class="td-center"><span class="voice-sig">★★</span></td>
+        <td class="td-center"><span class="badge b-amber">창업준비</span></td>
+        <td class="td-center"><span class="fn-num">7</span><span class="fn-num">9</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">7</td>
+        <td class="td-name">
+          <div class="prob-name">단골 없는 구조 — 재방문 유도 장치 부재</div>
+          <div class="prob-desc">구독·멤버십 운영하는 독립 카페 극소수. 신규 유입에만 의존 → 마케팅 비용 무한 소모.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#EF9F27;">7</span></td>
+        <td class="td-center"><span class="score-wtp">8</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#888780;">→</span></td>
+        <td class="td-center"><span class="voice-sig" style="color:#888780;">★</span></td>
+        <td class="td-center"><span class="badge b-teal">고객관리</span></td>
+        <td class="td-center"><span class="fn-num">9</span><span class="fn-num">10</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">8</td>
+        <td class="td-name">
+          <div class="prob-name">메뉴 트렌드 교체 속도 압박 <span class="tag-grow">성장</span></div>
+          <div class="prob-desc">트렌드 주기 6개월. 소비자 82.4% 커스텀 옵션 활용. 소규모 카페 R&amp;D 여력 부재.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#EF9F27;">7</span></td>
+        <td class="td-center"><span class="score-wtp">6</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#E24B4A;">↑</span></td>
+        <td class="td-center"><span class="voice-sig" style="color:#888780;">★</span></td>
+        <td class="td-center"><span class="badge b-amber">메뉴</span></td>
+        <td class="td-center"><span class="fn-num">10</span><span class="fn-num">11</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">9</td>
+        <td class="td-name">
+          <div class="prob-name">과잉 초기 투자 → 회수 불가 구조</div>
+          <div class="prob-desc">에스프레소 머신 1,000~3,000만 원, 그라인더 400~800만 원, 인테리어. "창업비용이 생각보다 훨씬 많다."</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#EF9F27;">7</span></td>
+        <td class="td-center"><span class="score-wtp">7</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#888780;">→</span></td>
+        <td class="td-center"><span class="voice-sig" style="color:#888780;">★</span></td>
+        <td class="td-center"><span class="badge b-amber">창업준비</span></td>
+        <td class="td-center"><span class="fn-num">4</span><span class="fn-num">8</span></td>
+      </tr>
+
+      <tr>
+        <td class="td-rank">10</td>
+        <td class="td-name">
+          <div class="prob-name">SNS 마케팅 의존 + 성과 불투명 <span class="tag-grow">성장</span></div>
+          <div class="prob-desc">인스타·릴스 없이 신규 유입 불가에 가까움. 1인 카페 콘텐츠 제작 역량·예산 부재.</div>
+        </td>
+        <td class="td-center"><span class="score-urg" style="color:#888780;">6</span></td>
+        <td class="td-center"><span class="score-wtp">7</span></td>
+        <td class="td-center"><span class="grow-sig" style="color:#E24B4A;">↑</span></td>
+        <td class="td-center"><span class="voice-sig" style="color:#888780;">★</span></td>
+        <td class="td-center"><span class="badge b-teal">마케팅</span></td>
+        <td class="td-center"><span class="fn-num">5</span><span class="fn-num">9</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!-- 각주 -->
+  <div class="footnotes">
+    <div class="fn-hdr">
+      각주
+      <span class="fn-period">조사 기간: 2024년 1월 — 2026년 1월</span>
+    </div>
+    <div class="fn-list">
+      <div class="fn-item">
+        <span class="fn-num">1</span>
+        <span class="fn-type fn-stat">공공통계</span>
+        <span><span class="fn-source">한국농수산식품유통공사(aT) 식품산업통계정보</span> (2025년 2월) — 아라비카 원두 선물가격 2024년 평균 5,157달러/톤 → 2025년 8,116달러/톤 (+57.4%)</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">2</span>
+        <span class="fn-type fn-media">언론</span>
+        <span><span class="fn-source">헤럴드경제 「원두값·고환율 직격탄…카페 수익성 빨간불」</span> (2026년 2월) — 스타벅스코리아 영업이익 감소 원인으로 원두·환율 공식 언급. 커피빈·텐퍼센트 등 가격 인상 릴레이 확인</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">3</span>
+        <span class="fn-type fn-trade">전문지</span>
+        <span><span class="fn-source">소상공인 컨설팅 노트 「2025 카페 창업시장 현황 진단」</span> (2025년 6월) — 개인 카페 월 평균 매출 1,200~1,400만 원 추산. 순수익 50만 원 수준 분석</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">4</span>
+        <span class="fn-type fn-comm">커뮤니티</span>
+        <span><span class="fn-source">Blind 「퇴사하고 카페 창업하고 싶은데」 스레드</span> (2021년 1월, 누적 반응 확인) — 월세+인건비 압박, 알바 수급 어려움, 오너 노동 강도를 실명 직군 종사자들이 직접 기술</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">5</span>
+        <span class="fn-type fn-media">언론</span>
+        <span><span class="fn-source">아시아경제 「하루 13시간 일하고 월 400만원…서울 카페 1만개 자영업자 한숨」</span> (2025년 12월) — NYT 보도 인용. "커피 맛만 바꾸면 될 줄 알았다" 차별화 실패 패턴 인터뷰 수록</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">6</span>
+        <span class="fn-type fn-stat">공공통계</span>
+        <span><span class="fn-source">공정거래위원회 가맹사업거래시스템</span> (2025년 11월 집계) — 메가MGC커피 2022년 2,173개 → 2025년 3,998개 (+84%). 컴포즈커피 1,901 → 2,844개</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">7</span>
+        <span class="fn-type fn-media">언론</span>
+        <span><span class="fn-source">시사IN 「위기 경고 깜빡이는 대한민국 카페 자영업」</span> (2024년 2월) — 저가 카페 1곳 입점 시 인근 개인카페 3~4곳 연쇄 폐업 현상. 출점 거리 규제 부재 지적</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">8</span>
+        <span class="fn-type fn-comm">커뮤니티</span>
+        <span><span class="fn-source">브런치 「카페 창업 3년차 사장이 밝히는 카페 창업의 현실」</span> (2024년 4월) — 에스프레소 머신·그라인더 실매입 비용, 인건비 구조, 저가 경쟁 압박 1인칭 기술</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">9</span>
+        <span class="fn-type fn-trade">전문지</span>
+        <span><span class="fn-source">블랙워터이슈 「2025년 카페 산업에서 발견된 변화와 기회」</span> (2025년 12월) — 스페셜티 차별화 한계, 단골 구조 부재, 디지털 운영 효율화 필요성 분석</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">10</span>
+        <span class="fn-type fn-trade">전문지</span>
+        <span><span class="fn-source">블랙워터이슈 「2026년 한국 카페 시장 전략 점검」</span> (2026년 1월) — 가격 인상 후 매출 유지 vs 폐업 매장 분기 원인: 대체 가능한 카페 vs 일상의 루틴</span>
+      </div>
+      <div class="fn-item">
+        <span class="fn-num">11</span>
+        <span class="fn-type fn-trade">전문지</span>
+        <span><span class="fn-source">오픈서베이 「카페 트렌드 리포트 2025」</span> (2025년 12월) — 전국 20~59세 2,000명 조사. 커스텀 옵션 이용률 82.4%. 프리미엄 판단 기준: 원두 58% · 공간 50% · 베이커리 41%</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

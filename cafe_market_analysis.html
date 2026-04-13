@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>대한민국 카페 시장/니치 분석 인사이트</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 9pt;
+  color: #1a1a1a;
+  background: #fff;
+  padding: 0;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 16mm 18mm 16mm 18mm;
+  background: #fff;
+}
+
+/* ── 제목 블록 ── */
+.doc-title {
+  font-size: 20pt;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+.doc-sub {
+  font-size: 8pt;
+  color: #888780;
+  margin-bottom: 10px;
+}
+.divider-heavy {
+  border: none;
+  border-top: 1.5px solid #1a1a1a;
+  margin-bottom: 14px;
+}
+.divider-light {
+  border: none;
+  border-top: 0.5px solid #D3D1C7;
+  margin: 10px 0;
+}
+
+/* ── 섹션 헤더 ── */
+.sec-hdr {
+  font-size: 8pt;
+  font-weight: 500;
+  color: #888780;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 14px 0 6px 0;
+  padding-bottom: 4px;
+  border-bottom: 0.5px solid #D3D1C7;
+}
+
+/* ── TAM/SAM/SOM ── */
+.tam-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 0.5px solid #D3D1C7;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.tam-cell {
+  padding: 10px 12px;
+  background: #F1EFE8;
+  border-right: 0.5px solid #D3D1C7;
+}
+.tam-cell:last-child { border-right: none; }
+.tam-label { font-size: 7pt; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.tam-name  { font-size: 9pt; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
+.tam-value { font-size: 15pt; font-weight: 700; margin-bottom: 4px; }
+.tam-value.blue   { color: #185FA5; }
+.tam-value.green  { color: #3B6D11; }
+.tam-value.purple { color: #534AB7; }
+.tam-desc  { font-size: 7.5pt; color: #888780; line-height: 1.5; }
+
+/* ── 4분면 진단 ── */
+.diag-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 0.5px solid #D3D1C7;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.diag-cell {
+  padding: 9px 10px;
+  border-right: 0.5px solid #D3D1C7;
+}
+.diag-cell:last-child { border-right: none; }
+.diag-cell.red    { background: #FCEBEB; }
+.diag-cell.green  { background: #EAF3DE; }
+.diag-cell.blue   { background: #E6F1FB; }
+.diag-cell.amber  { background: #FAEEDA; }
+.diag-title       { font-size: 8pt; font-weight: 500; margin-bottom: 5px; }
+.diag-title.red   { color: #A32D2D; }
+.diag-title.green { color: #3B6D11; }
+.diag-title.blue  { color: #185FA5; }
+.diag-title.amber { color: #854F0B; }
+.diag-item        { font-size: 7.5pt; color: #444441; line-height: 1.7; }
+
+/* ── 리스트 행 (트렌드/기회/머니) ── */
+.row-list { display: flex; flex-direction: column; gap: 0; }
+.row-item {
+  display: grid;
+  grid-template-columns: 22px 50px 58px 1fr;
+  align-items: start;
+  gap: 6px;
+  padding: 7px 0;
+  border-bottom: 0.5px solid #D3D1C7;
+}
+.row-item:last-child { border-bottom: none; }
+.row-code  { font-size: 8pt; font-weight: 500; padding-top: 1px; }
+.row-name  { font-size: 9pt; font-weight: 500; color: #1a1a1a; padding-top: 1px; }
+.row-badge {
+  display: inline-block;
+  font-size: 7pt;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-top: 1px;
+  white-space: nowrap;
+}
+.row-desc  { font-size: 8pt; color: #5F5E5A; line-height: 1.55; }
+
+/* 뱃지 색상 */
+.b-red    { background: #FCEBEB; color: #A32D2D; }
+.b-blue   { background: #E6F1FB; color: #185FA5; }
+.b-purple { background: #EEEDFE; color: #534AB7; }
+.b-teal   { background: #E1F5EE; color: #0F6E56; }
+.b-amber  { background: #FAEEDA; color: #854F0B; }
+.b-gray   { background: #F1EFE8; color: #5F5E5A; }
+
+/* 코드 색상 */
+.c-red    { color: #A32D2D; }
+.c-blue   { color: #185FA5; }
+.c-purple { color: #534AB7; }
+.c-teal   { color: #0F6E56; }
+.c-amber  { color: #854F0B; }
+.c-green  { color: #3B6D11; }
+.c-gray   { color: #888780; }
+
+/* 머니 행 (2컬럼) */
+.money-item {
+  display: grid;
+  grid-template-columns: 16px 95px 1fr;
+  align-items: start;
+  gap: 6px;
+  padding: 7px 0;
+  border-bottom: 0.5px solid #D3D1C7;
+}
+.money-item:last-child { border-bottom: none; }
+.money-mark { font-size: 9pt; font-weight: 700; color: #3B6D11; }
+.money-name { font-size: 9pt; font-weight: 500; color: #1a1a1a; }
+.money-desc { font-size: 8pt; color: #5F5E5A; line-height: 1.55; }
+
+/* ── 인쇄 최적화 ── */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .page {
+    width: 100%;
+    min-height: auto;
+    padding: 14mm 16mm;
+    margin: 0;
+  }
+  .page-break { page-break-before: always; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 제목 -->
+  <div class="doc-title">대한민국 카페 시장/니치 분석 인사이트</div>
+  <div class="doc-sub">조사 기준: 2025년 1분기 기준 &nbsp;|&nbsp; 카페 창업 컨설턴트 관점 &nbsp;|&nbsp; 출처: aT·공정위·오픈서베이·블랙워터이슈 외</div>
+  <hr class="divider-heavy">
+
+  <!-- TAM/SAM/SOM -->
+  <div class="sec-hdr">시장 규모 — TAM / SAM / SOM</div>
+  <div class="tam-grid">
+    <div class="tam-cell">
+      <div class="tam-label">TAM</div>
+      <div class="tam-name">전체 커피·카페 시장</div>
+      <div class="tam-value blue">약 10~13조 원</div>
+      <div class="tam-desc">커피전문점 + RTD + 원두·캡슐 전 채널. 2024 기준 USD 12.5B. CAGR 9.7% 전망 (→2034)</div>
+    </div>
+    <div class="tam-cell">
+      <div class="tam-label">SAM</div>
+      <div class="tam-name">오프라인 카페 전문점 시장</div>
+      <div class="tam-value green">약 5~6조 원</div>
+      <div class="tam-desc">전국 약 95,000개 점포 기준 외식업 매출 추산. 서울·수도권 약 40%+. 스타벅스 단독 약 3조 원</div>
+    </div>
+    <div class="tam-cell">
+      <div class="tam-label">SOM</div>
+      <div class="tam-name">독립·스페셜티·콘셉트 카페 니치</div>
+      <div class="tam-value purple">약 0.5~1조 원</div>
+      <div class="tam-desc">비프랜차이즈 고관여 소비층. 1잔 평균 6,000~15,000원대. 방문 빈도↑ 체류 긴 소비층</div>
+    </div>
+  </div>
+
+  <!-- 시장 구조 진단 -->
+  <div class="sec-hdr">시장 구조 진단 (2025년 1분기 기준)</div>
+  <div class="diag-grid">
+    <div class="diag-cell red">
+      <div class="diag-title red">포화 신호</div>
+      <div class="diag-item">2025Q1 점포 수 첫 감소</div>
+      <div class="diag-item">평균 영업기간 2.9년</div>
+      <div class="diag-item">서울 폐업률 4.2%</div>
+      <div class="diag-item">카페 매출 –3.2% YoY</div>
+    </div>
+    <div class="diag-cell green">
+      <div class="diag-title green">성장 신호</div>
+      <div class="diag-item">1인당 연 소비 405잔</div>
+      <div class="diag-item">커피 수입액 +11% YoY</div>
+      <div class="diag-item">프리미엄 선호 소비 증가</div>
+      <div class="diag-item">RTD·구독 채널 확장 중</div>
+    </div>
+    <div class="diag-cell blue">
+      <div class="diag-title blue">저가 진영 — 돈이 흐르는 곳 ①</div>
+      <div class="diag-item">메가커피 4,000호점</div>
+      <div class="diag-item">컴포즈커피 3,000호점 돌파</div>
+      <div class="diag-item">테이크아웃 중심 고회전</div>
+      <div class="diag-item">20대·사회초년생 주 소비층</div>
+    </div>
+    <div class="diag-cell amber">
+      <div class="diag-title amber">프리미엄 진영 — 돈이 흐르는 곳 ②</div>
+      <div class="diag-item">스타벅스 주 이용률 40.9%</div>
+      <div class="diag-item">2,076개 매장 (전세계 3위)</div>
+      <div class="diag-item">투썸 공간+디저트 전략 안정</div>
+      <div class="diag-item">40대·고소득층 주 소비층</div>
+    </div>
+  </div>
+
+  <!-- 트렌드 5 -->
+  <div class="sec-hdr">수요를 만드는 핵심 트렌드 5</div>
+  <div class="row-list">
+    <div class="row-item">
+      <span class="row-code c-red">T1</span>
+      <span class="row-name">시장 양극화</span>
+      <span class="row-badge b-red">구조적</span>
+      <span class="row-desc">저가(~3,500원) vs 스벅(6,500원+). 중가 브랜드(이디야·커피빈·할리스) 도태 가속. 소비자는 용도에 따라 선택을 분리한다.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-blue">T2</span>
+      <span class="row-name">개인화 소비</span>
+      <span class="row-badge b-blue">소비 행동</span>
+      <span class="row-desc">전체 소비자 82.4%가 커스텀 옵션 경험. 커피 진하기·당도·얼음 조절 보편화. '나의 레시피'를 사는 시대.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-purple">T3</span>
+      <span class="row-name">경험 공간화</span>
+      <span class="row-badge b-purple">라이프스타일</span>
+      <span class="row-desc">카페가 음료 소비 공간에서 라이프스타일 플랫폼으로 전환. 장시간 체류 설계, MD 굿즈, 복합문화공간 시도 증가.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-teal">T4</span>
+      <span class="row-name">비커피 확장</span>
+      <span class="row-badge b-teal">카테고리 확장</span>
+      <span class="row-desc">말차·티 베리에이션·콜드브루 RTD 급성장. 아이스 음료는 연중 핵심 매출. 카페 = 음료 플랫폼으로 정체성 전환 중.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-amber">T5</span>
+      <span class="row-name">로컬·원산지</span>
+      <span class="row-badge b-amber">Origin</span>
+      <span class="row-desc">소비자 68%가 신선도·원산지를 구매 결정 핵심 요소로 꼽음. 지역 정체성 담은 브랜드가 '힙'한 메뉴로 자리잡는 중.</span>
+    </div>
+  </div>
+
+  <!-- 기회 5 -->
+  <div class="sec-hdr">아직 덜 공략된 기회 5</div>
+  <div class="row-list">
+    <div class="row-item">
+      <span class="row-code c-purple">O1</span>
+      <span class="row-name">중간가격 + 콘셉트</span>
+      <span class="row-badge b-purple">공백 포지션</span>
+      <span class="row-desc">5,000~8,000원대 포지션이 비어 있다. 단, '가격'이 아닌 '콘셉트로 정당화된 가격'이어야 한다. 원재료·공간·스토리 3축 조합 필수.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-teal">O2</span>
+      <span class="row-name">음용 경험 근거 제공</span>
+      <span class="row-badge b-teal">스토리텔링</span>
+      <span class="row-desc">'왜 이 커피가 맛있는가'를 공간·메뉴·바리스타가 자연스럽게 전달하는 구조 자체가 차별화 포인트.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-blue">O3</span>
+      <span class="row-name">구독·반복 방문 구조</span>
+      <span class="row-badge b-blue">수익 구조</span>
+      <span class="row-desc">동네 단위 오프라인 카페 레벨의 구독·멤버십 시스템은 거의 없다. 단골 구조 시스템화 시 LTV가 크게 달라진다.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-amber">O4</span>
+      <span class="row-name">비상업 상권 생활 밀착</span>
+      <span class="row-badge b-amber">입지 전략</span>
+      <span class="row-desc">주거·오피스 혼합 동네 상권. 경쟁 밀도 낮고 재방문율 높음. 하루 100~150명 타겟 소규모 고밀도 운영 가능.</span>
+    </div>
+    <div class="row-item">
+      <span class="row-code c-gray">O5</span>
+      <span class="row-name">굿즈·원두 채널 확장</span>
+      <span class="row-badge b-gray">채널 확장</span>
+      <span class="row-desc">원두 소분·드립백·브랜드 굿즈가 객단가와 브랜드 인지도를 동시에 올린다. 이커머스 연동 시 오프라인 의존도 감소.</span>
+    </div>
+  </div>
+
+  <!-- 돈이 흐르는 영역 -->
+  <div class="sec-hdr">돈이 흐르는 영역 (현재 기준)</div>
+  <div class="row-list">
+    <div class="money-item">
+      <span class="money-mark">₩</span>
+      <span class="money-name">저가 테이크아웃 프랜차이즈</span>
+      <span class="money-desc">메가·컴포즈·빽다방 3사 합계 약 9,000개 매장. 본사 가맹비·로열티 수익 안정적. 가맹점주는 위험.</span>
+    </div>
+    <div class="money-item">
+      <span class="money-mark">₩</span>
+      <span class="money-name">스타벅스코리아 단독 생태계</span>
+      <span class="money-desc">2023년 매출 약 2조 9,295억 원. 점포당 매출 약 12억 원 — 업계 평균 1.6억의 7.7배.</span>
+    </div>
+    <div class="money-item">
+      <span class="money-mark">₩</span>
+      <span class="money-name">RTD 커피·콜드브루 채널</span>
+      <span class="money-desc">편의점·마트 냉장 RTD 급성장. 오프라인 카페 매출을 채널로 이동시키는 핵심 경쟁자.</span>
+    </div>
+    <div class="money-item">
+      <span class="money-mark">₩</span>
+      <span class="money-name">스페셜티 원두·홈카페 시장</span>
+      <span class="money-desc">원두 관련 월 네이버 검색량 18만 건 (+35% 3년새). 커피 수입액 연 1조 9천억 원 (+11% YoY).</span>
+    </div>
+    <div class="money-item">
+      <span class="money-mark">₩</span>
+      <span class="money-name">해외 프리미엄 브랜드 진입</span>
+      <span class="money-desc">블루보틀·바샤커피 등 스페셜티 소매 형태 진입. 한국 시장이 글로벌 테스트베드로 기능 중.</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
