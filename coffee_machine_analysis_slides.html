@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>커피머신 핵심 분석 — 멀티 컨셉 싱글 엔진 전략</title>
+<style>
+:root {
+  --accent: #DE957B;
+  --line: #F6C8BB;
+  --card-bg: #FDF5F3;
+  --light-bg: #FAEAE4;
+  --sub: #6F6F6F;
+  --body: #1a1a1a;
+  --auto-c: #DE957B;
+  --hybrid-c: #7BAF9E;
+  --artisan-c: #7B8FDE;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+  background: #ddd;
+  color: var(--body);
+}
+
+/* ─── Slide container ─── */
+.slide {
+  width: 297mm;
+  height: 210mm;
+  background: white;
+  margin: 24px auto;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  box-shadow: 0 4px 28px rgba(0,0,0,.18);
+}
+
+/* ─── Common header / footer ─── */
+.s-header {
+  background: var(--accent);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 26px;
+  gap: 10px;
+}
+.s-header h2 { color: #fff; font-size: 11.5pt; font-weight: 700; letter-spacing: -.02em; }
+.s-header .hdesc { color: rgba(255,255,255,.8); font-size: 8pt; }
+.s-header .hnum { margin-left: auto; color: rgba(255,255,255,.55); font-size: 8pt; }
+
+.s-footer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: var(--line);
+  height: 22px;
+  display: flex; align-items: center;
+  padding: 0 26px;
+  justify-content: space-between;
+}
+.s-footer span { font-size: 6.5pt; color: var(--sub); }
+
+.s-body {
+  padding: 14px 26px 10px;
+  height: calc(210mm - 44px - 22px);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ══════════════════════════════════
+   SLIDE 0 — TITLE
+══════════════════════════════════ */
+.title-hd {
+  background: var(--accent);
+  height: 50px;
+  display: flex; align-items: center;
+  padding: 0 32px;
+}
+.title-hd h1 { color: #fff; font-size: 12pt; font-weight: 700; }
+.title-body {
+  padding: 30px 32px 0;
+  height: calc(210mm - 50px - 28px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.t-main { font-size: 21pt; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
+.t-main em { color: var(--accent); font-style: normal; }
+.t-sub { font-size: 10pt; color: var(--sub); margin-bottom: 26px; }
+.t-cards { display: flex; gap: 10px; }
+.t-card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 12px 18px;
+  min-width: 128px;
+}
+.t-card-num { font-size: 8.5pt; font-weight: 700; color: var(--accent); display: block; margin-bottom: 4px; }
+.t-card-title { font-size: 8.5pt; font-weight: 600; }
+.t-card-sub { font-size: 7pt; color: var(--sub); margin-top: 3px; }
+.title-ft {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: var(--line); height: 28px;
+  display: flex; align-items: center; padding: 0 32px;
+  justify-content: space-between;
+}
+.title-ft span { font-size: 7pt; color: var(--sub); }
+
+/* ══════════════════════════════════
+   SLIDE 1 — POSITIONING MAP
+══════════════════════════════════ */
+.map-layout { display: flex; gap: 12px; height: 100%; }
+.map-svg-wrap { flex: 1; min-width: 0; }
+.map-svg-wrap svg { width: 100%; height: 100%; }
+.map-right {
+  width: 118px; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 7px;
+}
+.leg-title {
+  font-size: 7.5pt; font-weight: 700; color: var(--body);
+  border-bottom: 1px solid var(--line); padding-bottom: 5px; margin-bottom: 1px;
+}
+.leg-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 7pt; color: var(--sub); line-height: 1.4;
+}
+.leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.leg-cnt { margin-left: auto; font-size: 6.5pt; font-weight: 700; color: var(--body); }
+.map-ins {
+  background: var(--light-bg);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 9px 9px;
+  margin-top: 4px;
+}
+.map-ins-t { font-size: 7pt; font-weight: 700; color: var(--accent); margin-bottom: 5px; }
+.map-ins p { font-size: 6.5pt; color: var(--sub); line-height: 1.65; }
+
+/* ══════════════════════════════════
+   SLIDE 2 — OPERATIONS COMPARISON
+══════════════════════════════════ */
+.ops-layout { height: 100%; display: flex; flex-direction: column; gap: 8px; }
+.ops-bar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 7px 18px;
+  position: relative;
+}
+.ops-bar::before {
+  content: '';
+  position: absolute; top: 50%; left: 18px; right: 18px;
+  height: 2px;
+  background: linear-gradient(to right, #7B8FDE 0%, #7BAF9E 50%, #DE957B 100%);
+  z-index: 0;
+}
+.ops-lbl {
+  z-index: 1;
+  background: white;
+  border: 1.5px solid currentColor;
+  border-radius: 12px;
+  padding: 3px 12px;
+  font-size: 7.5pt; font-weight: 700;
+}
+.lbl-a { color: #7B8FDE; }
+.lbl-h { color: #7BAF9E; }
+.lbl-au { color: #DE957B; }
+.ops-arrow { font-size: 12pt; color: #ccc; z-index: 1; margin: 0 6px; }
+
+.ops-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; flex: 1; }
+.ops-col { border-radius: 6px; overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; }
+.ops-col-hd { padding: 7px 12px; color: white; text-align: center; }
+.ops-col-hd .col-name { font-size: 9pt; font-weight: 700; }
+.ops-col-hd .col-sub { font-size: 7pt; opacity: .85; margin-top: 2px; }
+.hd-a { background: #7B8FDE; }
+.hd-h { background: #7BAF9E; }
+.hd-au { background: #DE957B; }
+.ops-col-bd { padding: 10px 12px; background: var(--card-bg); flex: 1; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 9px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+.chip {
+  background: white; border: 1px solid var(--line);
+  border-radius: 10px; padding: 2px 8px;
+  font-size: 6.5pt; color: var(--body);
+}
+.chip-star {
+  background: var(--light-bg); border-color: var(--accent);
+  color: var(--accent); font-weight: 700;
+}
+.ops-sec { margin-bottom: 6px; }
+.ops-sec-lbl {
+  font-size: 6.5pt; font-weight: 700; color: var(--accent);
+  margin-bottom: 3px; text-transform: uppercase; letter-spacing: .05em;
+}
+.ops-pt { font-size: 6.5pt; color: var(--body); line-height: 1.75; padding-left: 8px; position: relative; }
+.ops-pt::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.ops-risk { font-size: 6.5pt; color: #c0392b; line-height: 1.75; padding-left: 8px; position: relative; }
+.ops-risk::before { content: '!'; position: absolute; left: 0; font-weight: 700; }
+
+/* ══════════════════════════════════
+   SLIDE 3 — LABOR DEPENDENCY CHART
+══════════════════════════════════ */
+.labor-layout { display: flex; gap: 14px; height: 100%; }
+.labor-chart { flex: 1; display: flex; flex-direction: column; gap: 3px; overflow: hidden; }
+.labor-grp-hd {
+  font-size: 7pt; font-weight: 700; color: white;
+  padding: 3px 8px; border-radius: 3px; margin-bottom: 1px; margin-top: 3px;
+}
+.grp-low { background: #5DA58E; }
+.grp-mid { background: #B89020; }
+.grp-high { background: #C84020; }
+.labor-row { display: flex; align-items: center; gap: 6px; }
+.lb-name {
+  font-size: 6.5pt; color: var(--body);
+  width: 80px; text-align: right; flex-shrink: 0; line-height: 1.3;
+}
+.lb-bg { flex: 1; height: 11px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+.lb-fill { height: 100%; border-radius: 3px; }
+.fill-low { background: #7BAF9E; }
+.fill-lowmid { background: #AECF60; }
+.fill-mid { background: #E8C050; }
+.fill-high { background: #E87050; }
+.lb-tag {
+  font-size: 5.8pt; font-weight: 700; color: white;
+  width: 24px; text-align: center; border-radius: 8px; padding: 1px 0;
+  flex-shrink: 0;
+}
+.tag-low { background: #7BAF9E; }
+.tag-lowmid { background: #90B030; }
+.tag-mid { background: #B89020; }
+.tag-high { background: #C84020; }
+
+.labor-right {
+  width: 130px; flex-shrink: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ins-card {
+  background: var(--card-bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 10px 10px;
+}
+.ins-title { font-size: 7.5pt; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.ins-stat { display: flex; align-items: baseline; gap: 5px; margin-bottom: 4px; }
+.ins-val { font-size: 15pt; font-weight: 700; color: var(--accent); line-height: 1; }
+.ins-unit { font-size: 7pt; color: var(--sub); }
+.ins-note { font-size: 6.5pt; color: var(--sub); line-height: 1.65; }
+.ins-sep { border: none; border-top: 1px dashed var(--line); margin: 6px 0; }
+.rec-card {
+  background: var(--light-bg); border: 1px solid var(--accent);
+  border-radius: 6px; padding: 9px 10px;
+}
+.rec-title { font-size: 7pt; font-weight: 700; color: var(--accent); margin-bottom: 5px; }
+.rec-card p { font-size: 6.5pt; color: var(--body); line-height: 1.65; }
+
+@media print {
+  body { background: white; }
+  .slide { margin: 0; box-shadow: none; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     SLIDE 0 — TITLE
+══════════════════════════════ -->
+<div class="slide">
+  <div class="title-hd">
+    <h1>카페 프로젝트 2026 — 커피머신 운영 분석</h1>
+  </div>
+  <div class="title-body">
+    <div class="t-main">커피머신 <em>핵심 분석</em><br>멀티 컨셉 싱글 엔진 전략</div>
+    <div class="t-sub">22개 브랜드 포지셔닝 · 운영 구조 비교 · 인력 의존도 분석 기반 설비 선정 가이드</div>
+    <div class="t-cards">
+      <div class="t-card">
+        <span class="t-card-num">SLIDE 01</span>
+        <div class="t-card-title">포지셔닝 맵</div>
+        <div class="t-card-sub">운영 효율 × 고객 경험 가치</div>
+      </div>
+      <div class="t-card">
+        <span class="t-card-num">SLIDE 02</span>
+        <div class="t-card-title">운영 구조 비교</div>
+        <div class="t-card-sub">장인형 · 하이브리드 · 자동화 3분류</div>
+      </div>
+      <div class="t-card">
+        <span class="t-card-num">SLIDE 03</span>
+        <div class="t-card-title">인력 의존도 그래프</div>
+        <div class="t-card-sub">22개 브랜드 전체 비교 랭킹</div>
+      </div>
+    </div>
+  </div>
+  <div class="title-ft">
+    <span>멀티 컨셉 싱글 엔진 전략 기준 · 2026.04</span>
+    <span>Cafe Project 2026</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SLIDE 1 — POSITIONING MAP
+══════════════════════════════ -->
+<div class="slide">
+  <div class="s-header">
+    <h2>포지셔닝 맵</h2>
+    <span class="hdesc">운영 효율 × 고객 경험 가치 — 22개 브랜드</span>
+    <span class="hnum">01 / 03</span>
+  </div>
+  <div class="s-body">
+    <div class="map-layout">
+      <div class="map-svg-wrap">
+        <svg viewBox="0 0 520 285" xmlns="http://www.w3.org/2000/svg">
+          <!-- Quadrant backgrounds -->
+          <rect x="55" y="20" width="228" height="125" fill="#EEF2FB" rx="3" opacity=".55"/>
+          <rect x="283" y="20" width="228" height="125" fill="#FFF0E8" rx="3" opacity=".55"/>
+          <rect x="55" y="145" width="228" height="120" fill="#F5F5F5" rx="3" opacity=".45"/>
+          <rect x="283" y="145" width="228" height="120" fill="#FDF5F3" rx="3" opacity=".55"/>
+
+          <!-- Center dividers -->
+          <line x1="55" y1="145" x2="511" y2="145" stroke="#ddd" stroke-width=".8" stroke-dasharray="4,3"/>
+          <line x1="283" y1="20" x2="283" y2="265" stroke="#ddd" stroke-width=".8" stroke-dasharray="4,3"/>
+
+          <!-- Quadrant labels -->
+          <text x="169" y="36" text-anchor="middle" font-size="8" fill="#7B8FDE" font-weight="700" opacity=".8">장인형 (고경험 · 저효율)</text>
+          <text x="397" y="36" text-anchor="middle" font-size="8" fill="#DE957B" font-weight="700" opacity=".9">전략 최적 구간 ★</text>
+          <text x="169" y="258" text-anchor="middle" font-size="8" fill="#aaa" font-weight="600" opacity=".8">저경험 · 저효율 구간</text>
+          <text x="397" y="258" text-anchor="middle" font-size="8" fill="#DE957B" font-weight="700" opacity=".8">자동화 중심 (고효율 · 중경험)</text>
+
+          <!-- Axes -->
+          <line x1="55" y1="265" x2="511" y2="265" stroke="#bbb" stroke-width="1.2"/>
+          <line x1="55" y1="20" x2="55" y2="265" stroke="#bbb" stroke-width="1.2"/>
+          <!-- Arrow tips -->
+          <polygon points="514,265 508,262 508,268" fill="#bbb"/>
+          <polygon points="55,17 52,23 58,23" fill="#bbb"/>
+
+          <!-- Axis text -->
+          <text x="284" y="279" text-anchor="middle" font-size="9" fill="#6F6F6F" font-weight="700">운영 효율  →</text>
+          <text x="13" y="143" text-anchor="middle" font-size="9" fill="#6F6F6F" font-weight="700" transform="rotate(-90,13,143)">고객 경험 가치  →</text>
+          <text x="62" y="261" font-size="7" fill="#aaa">낮음</text>
+          <text x="490" y="261" font-size="7" fill="#aaa">높음</text>
+          <text x="60" y="270" font-size="7" fill="#aaa">낮음</text>
+          <text x="60" y="25" font-size="7" fill="#aaa">높음</text>
+
+          <!-- ── ARTISAN GROUP (blue #7B8FDE) ── -->
+          <!-- La Marzocco: eff=18, exp=88 → x=137, y=54 -->
+          <circle cx="137" cy="54" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+          <text x="145" y="52" font-size="6.2" fill="#3a4ab0" font-weight="600">라마르조코</text>
+
+          <!-- Synesso: eff=12, exp=85 → x=110, y=62 -->
+          <circle cx="110" cy="62" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+          <text x="118" y="60" font-size="6.2" fill="#3a4ab0" font-weight="600">시네소</text>
+
+          <!-- Slayer: eff=9, exp=82 → x=97, y=70 -->
+          <circle cx="97" cy="70" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+          <text x="58" y="68" font-size="6.2" fill="#3a4ab0" font-weight="600">슬레이어</text>
+
+          <!-- Victoria Arduino: eff=24, exp=84 → x=165, y=58 -->
+          <circle cx="165" cy="58" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+          <text x="173" y="62" font-size="6.2" fill="#3a4ab0" font-weight="600">빅토리아</text>
+          <text x="173" y="70" font-size="6.2" fill="#3a4ab0" font-weight="600">아르두이노</text>
+
+          <!-- Elektra: eff=16, exp=74 → x=128, y=82 -->
+          <circle cx="128" cy="82" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+          <text x="136" y="86" font-size="6.2" fill="#3a4ab0" font-weight="600">일렉트라</text>
+
+          <!-- ── HYBRID GROUP (teal #7BAF9E) ── -->
+          <!-- Sanremo: eff=35, exp=70 → x=214, y=91 -->
+          <circle cx="214" cy="91" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+          <text x="222" y="89" font-size="6.2" fill="#2d7060" font-weight="600">샌레모</text>
+
+          <!-- Dalla Corte: eff=38, exp=64 → x=228, y=103 -->
+          <circle cx="228" cy="103" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+          <text x="236" y="101" font-size="6.2" fill="#2d7060" font-weight="600">달라코르테</text>
+
+          <!-- BFC: eff=27, exp=61 → x=178, y=112 -->
+          <circle cx="178" cy="112" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+          <text x="186" y="110" font-size="6.2" fill="#2d7060" font-weight="600">BFC</text>
+
+          <!-- VBM: eff=30, exp=59 → x=191, y=117 -->
+          <circle cx="191" cy="117" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+          <text x="199" y="122" font-size="6.2" fill="#2d7060" font-weight="600">VBM</text>
+
+          <!-- Faema: eff=42, exp=58 → x=246, y=120 -->
+          <circle cx="246" cy="120" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+          <text x="254" y="118" font-size="6.2" fill="#2d7060" font-weight="600">훼마</text>
+
+          <!-- Raptor: eff=50, exp=46 → x=283, y=150 -->
+          <circle cx="283" cy="150" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+          <text x="291" y="148" font-size="6.2" fill="#2d7060" font-weight="600">랩터</text>
+
+          <!-- CIME: eff=47, exp=50 → x=269, y=140 -->
+          <circle cx="269" cy="140" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+          <text x="253" y="133" font-size="6.2" fill="#2d7060" font-weight="600">씨메</text>
+
+          <!-- ── FULL AUTO GROUP (orange #DE957B) ── -->
+          <!-- Eversys: eff=90, exp=52 → x=464, y=139 -->
+          <circle cx="464" cy="139" r="6.5" fill="#DE957B" stroke="white" stroke-width="2"/>
+          <text x="472" y="137" font-size="6.2" fill="#8B3010" font-weight="700">에버시스 ★</text>
+
+          <!-- Jura/Franke: eff=77, exp=41 → x=405, y=161 -->
+          <circle cx="405" cy="161" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+          <text x="413" y="159" font-size="6.2" fill="#8B3010" font-weight="600">유라/프랑케</text>
+
+          <!-- Thermoplan: eff=82, exp=44 → x=428, y=155 -->
+          <circle cx="428" cy="155" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+          <text x="436" y="153" font-size="6.2" fill="#8B3010" font-weight="600">써모플랜</text>
+
+          <!-- WMF: eff=75, exp=36 → x=396, y=175 -->
+          <circle cx="396" cy="175" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+          <text x="404" y="173" font-size="6.2" fill="#8B3010" font-weight="600">WMF</text>
+
+          <!-- Egro: eff=80, exp=40 → x=419, y=163 -->
+          <circle cx="419" cy="163" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+          <text x="419" y="176" font-size="6.2" fill="#8B3010" font-weight="600">에그로</text>
+
+          <!-- Rex Royal: eff=84, exp=34 → x=437, y=180 -->
+          <circle cx="437" cy="180" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+          <text x="445" y="178" font-size="6.2" fill="#8B3010" font-weight="600">렉스로얄</text>
+
+          <!-- Seaco: eff=79, exp=27 → x=415, y=198 -->
+          <circle cx="415" cy="198" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+          <text x="423" y="196" font-size="6.2" fill="#8B3010" font-weight="600">세코</text>
+
+          <!-- Kalerm: eff=87, exp=19 → x=451, y="218" -->
+          <circle cx="451" cy="218" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+          <text x="459" y="216" font-size="6.2" fill="#8B3010" font-weight="600">칼렘</text>
+
+          <!-- ── OTHER EQUIPMENT (gray) ── -->
+          <!-- Poursteady: eff=85, exp=55 → x=442, y=132 -->
+          <circle cx="442" cy="130" r="5" fill="#B0B0B0" stroke="white" stroke-width="1.5"/>
+          <text x="450" y="128" font-size="6.2" fill="#666">푸어스테디</text>
+          <text x="450" y="136" font-size="5.5" fill="#999">(드립 브루어)</text>
+
+          <!-- Mahlkönig: eff=50, exp=80 → x=283, y=68 -->
+          <circle cx="283" cy="72" r="5" fill="#B0B0B0" stroke="white" stroke-width="1.5"/>
+          <text x="291" y="70" font-size="6.2" fill="#666">말코닉</text>
+          <text x="291" y="78" font-size="5.5" fill="#999">(그라인더)</text>
+        </svg>
+      </div>
+
+      <div class="map-right">
+        <div class="leg-title">브랜드 그룹 구분</div>
+        <div class="leg-item">
+          <div class="leg-dot" style="background:#7B8FDE"></div>
+          장인형 (세미오토)
+          <span class="leg-cnt">5</span>
+        </div>
+        <div class="leg-item">
+          <div class="leg-dot" style="background:#7BAF9E"></div>
+          하이브리드
+          <span class="leg-cnt">7</span>
+        </div>
+        <div class="leg-item">
+          <div class="leg-dot" style="background:#DE957B"></div>
+          자동화 중심
+          <span class="leg-cnt">8</span>
+        </div>
+        <div class="leg-item">
+          <div class="leg-dot" style="background:#B0B0B0"></div>
+          기타 설비
+          <span class="leg-cnt">2</span>
+        </div>
+
+        <div style="border-top:1px solid var(--line);margin:4px 0"></div>
+
+        <div style="font-size:7pt;font-weight:700;color:var(--body);margin-bottom:3px">축 정의</div>
+        <div style="font-size:6.5pt;color:var(--sub);line-height:1.65">
+          <b>X축</b> 운영 효율<br>
+          자동화 · 생산성 · 인건비 절감<br><br>
+          <b>Y축</b> 고객 경험 가치<br>
+          장인성 · 브랜드 퍼포먼스 · 포지셔닝
+        </div>
+
+        <div class="map-ins">
+          <div class="map-ins-t">★ 프로젝트 추천</div>
+          <p>
+            <b style="color:var(--accent)">에버시스(Eversys)</b><br>
+            자동화 최상 + 고객 경험 유지.<br>
+            레시피 복제·품질 일관성이<br>
+            싱글 엔진 전략 최적 조건.<br><br>
+            <b>써모플랜</b>은 스타벅스 납품<br>
+            실적으로 운영 안정성 검증.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="s-footer">
+    <span>멀티 컨셉 싱글 엔진 전략 기준 · 22개 브랜드 비교</span>
+    <span>2026.04 · Cafe Project 2026</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SLIDE 2 — OPERATIONS COMPARISON
+══════════════════════════════ -->
+<div class="slide">
+  <div class="s-header">
+    <h2>운영 구조 비교 다이어그램</h2>
+    <span class="hdesc">장인형 · 하이브리드 · 자동화 3분류 기준 브랜드 재정의</span>
+    <span class="hnum">02 / 03</span>
+  </div>
+  <div class="s-body">
+    <div class="ops-layout">
+      <!-- Spectrum bar -->
+      <div class="ops-bar">
+        <div class="ops-lbl lbl-a">장인형</div>
+        <div class="ops-arrow">→</div>
+        <div class="ops-lbl lbl-h">하이브리드</div>
+        <div class="ops-arrow">→</div>
+        <div class="ops-lbl lbl-au">자동화 중심</div>
+      </div>
+
+      <!-- 3 columns -->
+      <div class="ops-3col">
+
+        <!-- A. 장인형 -->
+        <div class="ops-col">
+          <div class="ops-col-hd hd-a">
+            <div class="col-name">장인형 그룹</div>
+            <div class="col-sub">바리스타 퍼포먼스 핵심</div>
+          </div>
+          <div class="ops-col-bd">
+            <div class="chips">
+              <span class="chip">라마르조코</span>
+              <span class="chip">시네소</span>
+              <span class="chip">슬레이어</span>
+              <span class="chip">빅토리아 아르두이노</span>
+              <span class="chip">일렉트라</span>
+              <span class="chip">BFC</span>
+              <span class="chip">VBM</span>
+            </div>
+            <div class="ops-sec">
+              <div class="ops-sec-lbl">운영 특징</div>
+              <div class="ops-pt">바리스타 퍼포먼스가 품질의 핵심</div>
+              <div class="ops-pt">브랜드 경험·감성 극대화 가능</div>
+              <div class="ops-pt">고가 포지셔닝 및 스페셜티 대응</div>
+              <div class="ops-pt">WBC 수상 이력 등 대외 신뢰도</div>
+            </div>
+            <div class="ops-sec">
+              <div class="ops-sec-lbl">운영 리스크</div>
+              <div class="ops-risk">인력 의존 극대화 — 숙련 바리스타 필수</div>
+              <div class="ops-risk">품질 편차 발생 (사람 컨디션 의존)</div>
+              <div class="ops-risk">피크타임 대응력 구조적으로 취약</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B. 하이브리드 -->
+        <div class="ops-col">
+          <div class="ops-col-hd hd-h">
+            <div class="col-name">하이브리드 그룹</div>
+            <div class="col-sub">경험 + 효율 절충 · 확장성 양호</div>
+          </div>
+          <div class="ops-col-bd">
+            <div class="chips">
+              <span class="chip">샌레모</span>
+              <span class="chip">달라코르테</span>
+              <span class="chip">훼마</span>
+              <span class="chip">씨메</span>
+              <span class="chip">랩터</span>
+              <span class="chip">말코닉 (그라인더)</span>
+              <span class="chip">푸어스테디 (드립)</span>
+            </div>
+            <div class="ops-sec">
+              <div class="ops-sec-lbl">운영 특징</div>
+              <div class="ops-pt">경험가치 + 운영 효율 두 마리 토끼</div>
+              <div class="ops-pt">교육 난이도 중간 (1~2주 트레이닝)</div>
+              <div class="ops-pt">멀티 컨셉 확장 시 유연한 대응</div>
+              <div class="ops-pt">이탈리아 크래프트 감성 브랜드 다수</div>
+            </div>
+            <div class="ops-sec">
+              <div class="ops-sec-lbl">운영 리스크</div>
+              <div class="ops-risk">포지셔닝이 애매해질 수 있음</div>
+              <div class="ops-risk">자동화/장인형 대비 정체성 약함</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C. 자동화 -->
+        <div class="ops-col">
+          <div class="ops-col-hd hd-au">
+            <div class="col-name">자동화 중심 그룹</div>
+            <div class="col-sub">1인 운영 · 피크 대응 최적</div>
+          </div>
+          <div class="ops-col-bd">
+            <div class="chips">
+              <span class="chip chip-star">에버시스 ★</span>
+              <span class="chip chip-star">써모플랜 ★</span>
+              <span class="chip">WMF</span>
+              <span class="chip">에그로</span>
+              <span class="chip">렉스로얄</span>
+              <span class="chip">세코</span>
+              <span class="chip">칼렘</span>
+              <span class="chip">유라/프랑케</span>
+            </div>
+            <div class="ops-sec">
+              <div class="ops-sec-lbl">운영 특징</div>
+              <div class="ops-pt">1인 운영 가능 — 인건비 구조 최적화</div>
+              <div class="ops-pt">신규 직원 교육 최소화 (즉시 운영)</div>
+              <div class="ops-pt">피크타임 대응 · 일관된 추출 품질</div>
+              <div class="ops-pt">레시피 저장·복제로 멀티 컨셉 구현</div>
+              <div class="ops-pt">원격 데이터 모니터링 지원 (에버시스)</div>
+            </div>
+            <div class="ops-sec">
+              <div class="ops-sec-lbl">운영 리스크</div>
+              <div class="ops-risk">기계 의존 — 장애 시 운영 전면 중단</div>
+              <div class="ops-risk">바리스타 감성·퍼포먼스 연출 불가</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="s-footer">
+    <span>핵심 메시지: "리스크는 사라지지 않는다, 위치만 바뀐다" — 자동화 선택 시 인력 리스크 → 기계 리스크로 전환</span>
+    <span>2026.04 · Cafe Project 2026</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SLIDE 3 — LABOR DEPENDENCY
+══════════════════════════════ -->
+<div class="slide">
+  <div class="s-header">
+    <h2>인력 의존도 그래프</h2>
+    <span class="hdesc">22개 브랜드 전체 비교 — 인력 의존도 하 → 상 순</span>
+    <span class="hnum">03 / 03</span>
+  </div>
+  <div class="s-body">
+    <div class="labor-layout">
+
+      <div class="labor-chart">
+
+        <!-- 인력 하 GROUP -->
+        <div class="labor-grp-hd grp-low">인력 의존도 하 &nbsp;—&nbsp; 8개 브랜드 (풀 자동화, 즉시 운영 가능)</div>
+
+        <div class="labor-row">
+          <div class="lb-name">에버시스</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">써모플랜</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">WMF</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">에그로</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">렉스로얄</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">세코</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">칼렘</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">유라 / 프랑케</div>
+          <div class="lb-bg"><div class="lb-fill fill-low" style="width:22%"></div></div>
+          <div class="lb-tag tag-low">하</div>
+        </div>
+
+        <!-- 인력 하~중 GROUP -->
+        <div class="labor-grp-hd" style="background:#7A9830;margin-top:4px">인력 의존도 하~중 &nbsp;—&nbsp; 2개 브랜드</div>
+
+        <div class="labor-row">
+          <div class="lb-name">푸어스테디</div>
+          <div class="lb-bg"><div class="lb-fill fill-lowmid" style="width:38%"></div></div>
+          <div class="lb-tag tag-lowmid">하중</div>
+        </div>
+        <div class="labor-row">
+          <div class="lb-name">말코닉 (그라인더)</div>
+          <div class="lb-bg"><div class="lb-fill fill-mid" style="width:55%"></div></div>
+          <div class="lb-tag tag-mid">중</div>
+        </div>
+
+        <!-- 인력 상 GROUP -->
+        <div class="labor-grp-hd grp-high" style="margin-top:4px">인력 의존도 상 &nbsp;—&nbsp; 12개 브랜드 (숙련 바리스타 필수)</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 10px">
+          <div class="labor-row">
+            <div class="lb-name">라마르조코</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:90%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">시네소</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:88%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">슬레이어</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:92%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">빅토리아 아르두이노</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:88%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">샌레모</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:85%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">일렉트라</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:90%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">훼마</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:85%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">달라코르테</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:85%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">랩터</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:82%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">씨메</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:82%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">BFC</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:88%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+          <div class="labor-row">
+            <div class="lb-name">VBM</div>
+            <div class="lb-bg"><div class="lb-fill fill-high" style="width:88%"></div></div>
+            <div class="lb-tag tag-high">상</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right panel -->
+      <div class="labor-right">
+        <div class="ins-card">
+          <div class="ins-title">브랜드 분포</div>
+          <div class="ins-stat">
+            <span class="ins-val">8</span>
+            <span class="ins-unit">개 브랜드</span>
+          </div>
+          <div class="ins-note" style="color:#5DA58E;font-weight:700">인력 의존도 하</div>
+          <hr class="ins-sep">
+          <div class="ins-stat">
+            <span class="ins-val" style="color:#C84020">12</span>
+            <span class="ins-unit">개 브랜드</span>
+          </div>
+          <div class="ins-note" style="color:#C84020;font-weight:700">인력 의존도 상</div>
+          <hr class="ins-sep">
+          <div class="ins-note">
+            세미오토 에스프레소 브랜드 대부분이 인력 의존도 <b>상</b>에 해당.<br>
+            자동화 여부가 인력 구조를 결정하는 핵심 변수.
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-title">★ 전략 인사이트</div>
+          <p>
+            <b>자동화 선택 = 인력 리스크 제거</b><br><br>
+            에버시스·써모플랜 등 인력 의존도 하 그룹 선택 시 숙련 바리스타 이슈를 구조적으로 해소.<br><br>
+            인력 의존도 상 브랜드는 브랜드 경험·감성은 우수하나 인건비·운영 리스크 동시 상승.
+          </p>
+        </div>
+
+        <div class="ins-card">
+          <div class="ins-title">컬러 범례</div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:28px;height:9px;background:#7BAF9E;border-radius:3px"></div>
+              <span style="font-size:6.5pt;color:var(--sub)">하 — 즉시 운영</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:28px;height:9px;background:#AECF60;border-radius:3px"></div>
+              <span style="font-size:6.5pt;color:var(--sub)">하~중 — 단기 교육</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:28px;height:9px;background:#E8C050;border-radius:3px"></div>
+              <span style="font-size:6.5pt;color:var(--sub)">중 — 전문 교육 필요</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:28px;height:9px;background:#E87050;border-radius:3px"></div>
+              <span style="font-size:6.5pt;color:var(--sub)">상 — 숙련 바리스타</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="s-footer">
+    <span>멀티 컨셉 싱글 엔진 전략 핵심 요건: 자동화 上 · 인력 의존도 下 · 국내 AS 가능</span>
+    <span>2026.04 · Cafe Project 2026</span>
+  </div>
+</div>
+
+</body>
+</html>
