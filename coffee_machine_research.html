@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>커피머신 설비 리서치 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 9pt;
+  color: #1a1a1a;
+  background: #FAF8F6;
+  padding: 20px;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── 헤더 ── */
+.doc-header {
+  background: #DE957B;
+  color: #fff;
+  padding: 22px 28px 18px;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 0;
+}
+.doc-title { font-size: 18pt; font-weight: 700; letter-spacing: -0.02em; }
+.doc-meta { font-size: 8pt; opacity: 0.85; margin-top: 4px; }
+
+/* ── KPI 바 ── */
+.kpi-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: #F6C8BB;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.kpi-cell {
+  padding: 12px 14px;
+  border-right: 1px solid #DE957B;
+  text-align: center;
+}
+.kpi-cell:last-child { border-right: none; }
+.kpi-label { font-size: 7pt; color: #7a4030; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.kpi-value { font-size: 16pt; font-weight: 700; color: #1a1a1a; }
+.kpi-sub { font-size: 7pt; color: #6F6F6F; margin-top: 2px; }
+
+/* ── 섹션 제목 ── */
+.sec-hdr {
+  font-size: 8pt; font-weight: 700; color: #DE957B;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border-bottom: 1.5px solid #DE957B;
+  padding-bottom: 4px; margin: 20px 0 12px;
+}
+
+.divider { border: none; border-top: 0.5px solid #F6C8BB; margin: 20px 0; }
+
+/* ── 추천 배너 ── */
+.rec-banner {
+  background: #FDF5F3;
+  border-left: 4px solid #DE957B;
+  border-radius: 0 6px 6px 0;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.rec-item .rec-role { font-size: 7pt; color: #DE957B; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.rec-item .rec-brand { font-size: 11pt; font-weight: 700; color: #1a1a1a; }
+.rec-item .rec-reason { font-size: 8pt; color: #6F6F6F; margin-top: 3px; line-height: 1.5; }
+
+/* ── 카드 그리드 ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #F6C8BB;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.card-head {
+  background: #FDF5F3;
+  padding: 10px 14px 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-bottom: 1px solid #F6C8BB;
+}
+.card-name { font-size: 12pt; font-weight: 700; color: #1a1a1a; }
+.card-en { font-size: 8pt; color: #6F6F6F; }
+.card-country { font-size: 9pt; margin-left: auto; }
+.card-type {
+  font-size: 7pt; font-weight: 500; color: #DE957B;
+  background: #FAEAE4;
+  border: 1px solid #F6C8BB;
+  border-radius: 10px;
+  padding: 1px 8px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.card-body { padding: 10px 14px; }
+
+.meter-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 40px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.meter-label { font-size: 7.5pt; color: #6F6F6F; white-space: nowrap; }
+.meter-bar-bg {
+  height: 8px;
+  background: #FAEAE4;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.meter-bar { height: 100%; border-radius: 4px; }
+.meter-val { font-size: 7.5pt; font-weight: 700; text-align: right; }
+
+.green  { background: #6CBF7F; }
+.yellow { background: #F5C842; }
+.red    { background: #E07070; }
+
+.card-info {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+  border-top: 0.5px solid #F6C8BB;
+  padding-top: 8px;
+}
+.info-row { display: flex; gap: 4px; align-items: flex-start; }
+.info-label { font-size: 7pt; color: #DE957B; font-weight: 500; white-space: nowrap; min-width: 42px; }
+.info-val { font-size: 7.5pt; color: #1a1a1a; line-height: 1.4; }
+
+.tag-as {
+  display: inline-block;
+  font-size: 7pt; font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  margin-top: 2px;
+}
+.tag-ok   { background: #D4EDDA; color: #2d7a3d; }
+.tag-warn { background: #FFF3CD; color: #856404; }
+.tag-bad  { background: #F8D7DA; color: #721c24; }
+
+/* ── 비교 매트릭스 ── */
+.matrix-wrap { overflow-x: auto; margin-bottom: 24px; }
+table.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+  min-width: 700px;
+}
+table.matrix th {
+  background: #DE957B;
+  color: #fff;
+  padding: 8px 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 7.5pt;
+  letter-spacing: 0.03em;
+  border: 1px solid #F6C8BB;
+}
+table.matrix td {
+  padding: 7px 10px;
+  border: 1px solid #F6C8BB;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+table.matrix tr:nth-child(even) td { background: #FDF5F3; }
+table.matrix tr:nth-child(odd)  td { background: #fff; }
+table.matrix td:first-child { font-weight: 700; }
+
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 7pt;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge-up  { background: #C3E6CB; color: #155724; }
+.badge-mid { background: #FFEAA7; color: #856404; }
+.badge-dn  { background: #F5C6CB; color: #721c24; }
+
+/* ── 푸터 ── */
+.footer {
+  background: #F6C8BB;
+  text-align: center;
+  font-size: 7pt;
+  color: #7a4030;
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+  margin-top: 24px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- 헤더 -->
+<div class="doc-header">
+  <div class="doc-title">커피머신 설비 리서치 2026</div>
+  <div class="doc-meta">멀티 컨셉 싱글 엔진 전략 기준 · 10개 브랜드 비교 분석 · 2026.04</div>
+</div>
+
+<!-- KPI 바 -->
+<div class="kpi-bar">
+  <div class="kpi-cell">
+    <div class="kpi-label">조사 브랜드</div>
+    <div class="kpi-value">10</div>
+    <div class="kpi-sub">개</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-label">풀오토 (인력↓)</div>
+    <div class="kpi-value">3</div>
+    <div class="kpi-sub">에버시스·유라프랑케·써모플랜</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-label">국내 AS 가능</div>
+    <div class="kpi-value">6</div>
+    <div class="kpi-sub">공식 딜러 확인 기준</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-label">그라인더 전문</div>
+    <div class="kpi-value">1</div>
+    <div class="kpi-sub">말코닉 (세트 도입 필수)</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kpi-label">드립 브루어</div>
+    <div class="kpi-value">1</div>
+    <div class="kpi-sub">푸어스테디 (자동 핸드드립)</div>
+  </div>
+</div>
+
+<!-- 카페 프로젝트 추천 -->
+<div class="sec-hdr">카페 프로젝트 추천 — 멀티 컨셉 싱글 엔진 전략 기준</div>
+<div class="rec-banner">
+  <div class="rec-item">
+    <div class="rec-role">🏆 메인 추천 (에스프레소)</div>
+    <div class="rec-brand">에버시스 Eversys</div>
+    <div class="rec-reason">자동화 최상, 인력 의존도 최하. 레시피 복제·품질 일관성·데이터 시각화 지원. 스페셜티 감성 + 완전 자동화를 동시에 구현하는 유일한 선택지.</div>
+  </div>
+  <div class="rec-item">
+    <div class="rec-role">☕ 보조 추천 (드립)</div>
+    <div class="rec-brand">푸어스테디 Poursteady</div>
+    <div class="rec-reason">핸드드립 자동화로 시각적 퍼포먼스 + 인건비 절감. 생수 브랜드 특성 살린 드립 레시피를 기계가 완벽 재현. AS 인프라 사전 확보 필요.</div>
+  </div>
+  <div class="rec-item">
+    <div class="rec-role">🔧 그라인더 세트</div>
+    <div class="rec-brand">말코닉 E80W</div>
+    <div class="rec-reason">에버시스와 조합 시 분쇄도 데이터화·WiFi 레시피 관리로 멀티 지점 표준화 완성. 입도 수치를 매장 디스플레이로 시각화 가능.</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 브랜드 카드 -->
+<div class="sec-hdr">브랜드별 상세 분석</div>
+<div class="card-grid">
+
+  <!-- 에버시스 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">에버시스</span>
+      <span class="card-en">Eversys</span>
+      <span class="card-type">풀오토 에스프레소</span>
+      <span class="card-country">스위스 🇨🇭</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:95%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:95%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:10%"></div></div><span class="meter-val" style="color:#2d7a3d">하</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">Cameo, Enigma</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">200~300잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">2,325만~5,425만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 8~15년</span></div>
+        <div class="info-row"><span class="info-label">교육난이도</span><span class="info-val">하 (수일 내 운용 가능)</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-warn">딜러 경유</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 유라/프랑케 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">유라 / 프랑케</span>
+      <span class="card-en">Jura / Franke</span>
+      <span class="card-type">풀오토 에스프레소</span>
+      <span class="card-country">스위스 🇨🇭</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:90%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:78%"></div></div><span class="meter-val" style="color:#856404">중상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:10%"></div></div><span class="meter-val" style="color:#2d7a3d">하</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">Giga X8 / A600</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">100~180잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">465만~2,325만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 7~12년</span></div>
+        <div class="info-row"><span class="info-label">교육난이도</span><span class="info-val">하 (직관적 UI)</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-ok">유라코리아 공식</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 써모플랜 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">써모플랜</span>
+      <span class="card-en">Thermoplan</span>
+      <span class="card-type">풀오토 대용량 상업용</span>
+      <span class="card-country">스위스 🇨🇭</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:95%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:78%"></div></div><span class="meter-val" style="color:#856404">중상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:10%"></div></div><span class="meter-val" style="color:#2d7a3d">하</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">BW4, BW4c</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">250~400잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">3,100만~6,200만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 10~15년</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">⭐ 스타벅스 전 세계 공식 납품</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-bad">딜러 희소·문의 필요</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 푸어스테디 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">푸어스테디</span>
+      <span class="card-en">Poursteady</span>
+      <span class="card-type">자동 핸드드립 브루어</span>
+      <span class="card-country">미국 🇺🇸</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:90%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:92%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:35%"></div></div><span class="meter-val" style="color:#856404">하~중</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">PS1</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">40~80잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">1,260만~1,680만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 5~10년</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">최대 5잔 동시 드립 추출</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-bad">딜러 없음·직수입</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 말코닉 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">말코닉</span>
+      <span class="card-en">Mahlkönig</span>
+      <span class="card-type">그라인더 전문</span>
+      <span class="card-country">독일 🇩🇪</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:60%"></div></div><span class="meter-val" style="color:#856404">중</span></div>
+      <div class="meter-row"><span class="meter-label">분쇄 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:95%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:55%"></div></div><span class="meter-val" style="color:#856404">중</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">E80W, EK43</span></div>
+        <div class="info-row"><span class="info-label">처리속도</span><span class="info-val">도징 1~3초 (E80W)</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">232만~387만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 8~15년</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">EK43 WBC 공식 그라인더. 에스프레소 머신 세트 도입 필수</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-ok">공식 딜러 있음</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 라마르조코 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">라마르조코</span>
+      <span class="card-en">La Marzocco</span>
+      <span class="card-type">세미오토 에스프레소</span>
+      <span class="card-country">이탈리아 🇮🇹</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:55%"></div></div><span class="meter-val" style="color:#856404">중</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:98%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar red" style="width:90%"></div></div><span class="meter-val" style="color:#721c24">상</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">Linea PB, GB5, Strada</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">80~150잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">1,240만~3,875만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 15~25년 (업계 최장)</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">스페셜티 카페 글로벌 표준 머신</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-ok">라마르조코코리아 공식</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시네소 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">시네소</span>
+      <span class="card-en">Synesso</span>
+      <span class="card-type">세미오토 (압력 프로파일링)</span>
+      <span class="card-country">미국 🇺🇸</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:55%"></div></div><span class="meter-val" style="color:#856404">중</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:96%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar red" style="width:90%"></div></div><span class="meter-val" style="color:#721c24">상</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">MVP Hydra, S200, S300</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">80~130잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">1,680만~3,500만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 12~20년</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">그룹별 독립 온도·압력 제어</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-warn">딜러 제한적</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 슬레이어 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">슬레이어</span>
+      <span class="card-en">Slayer</span>
+      <span class="card-type">세미오토 (프리-인퓨전)</span>
+      <span class="card-country">미국 🇺🇸</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar red" style="width:35%"></div></div><span class="meter-val" style="color:#721c24">중하</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:97%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar red" style="width:97%"></div></div><span class="meter-val" style="color:#721c24">상</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">Single / Steam LP / 2-3 Group</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">60~100잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">1,120만~3,080만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 12~20년</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">니들 밸브 수동 압력 조절. 인테리어 오브제 효과</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-bad">딜러 없음·병행수입</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 샌레모 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">샌레모</span>
+      <span class="card-en">Sanremo</span>
+      <span class="card-type">세미오토 에스프레소</span>
+      <span class="card-country">이탈리아 🇮🇹</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:55%"></div></div><span class="meter-val" style="color:#856404">중</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:92%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar red" style="width:88%"></div></div><span class="meter-val" style="color:#721c24">상</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">Opera, Cafe Racer, You</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">80~140잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">775만~2,790만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 12~20년</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">라마르조코 대비 가격 경쟁력. WBC 참가 바리스타 사용</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-warn">딜러 일부</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 빅토리아 아르두이노 -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-name">빅토리아 아르두이노</span>
+      <span class="card-en">Victoria Arduino</span>
+      <span class="card-type">세미오토 (WBC 공식)</span>
+      <span class="card-country">이탈리아 🇮🇹</span>
+    </div>
+    <div class="card-body">
+      <div class="meter-row"><span class="meter-label">자동화 수준</span><div class="meter-bar-bg"><div class="meter-bar yellow" style="width:60%"></div></div><span class="meter-val" style="color:#856404">중</span></div>
+      <div class="meter-row"><span class="meter-label">추출 품질</span><div class="meter-bar-bg"><div class="meter-bar green" style="width:99%"></div></div><span class="meter-val" style="color:#2d7a3d">상</span></div>
+      <div class="meter-row"><span class="meter-label">인력 의존도</span><div class="meter-bar-bg"><div class="meter-bar red" style="width:88%"></div></div><span class="meter-val" style="color:#721c24">상</span></div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-label">대표모델</span><span class="info-val">Black Eagle Gravitech, White Eagle</span></div>
+        <div class="info-row"><span class="info-label">생산속도</span><span class="info-val">80~150잔/시간</span></div>
+        <div class="info-row"><span class="info-label">가격대</span><span class="info-val">1,860만~4,340만원</span></div>
+        <div class="info-row"><span class="info-label">기계수명</span><span class="info-val">약 12~20년</span></div>
+        <div class="info-row"><span class="info-label">특이사항</span><span class="info-val">⭐ WBC 공식 머신. Gravitech 중력 기반 추출량 자동 보정</span></div>
+        <div class="info-row"><span class="info-label">국내 AS</span><span class="info-val"><span class="tag-as tag-ok">공식 딜러 있음</span></span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- 비교 매트릭스 -->
+<div class="sec-hdr">전체 비교 매트릭스</div>
+<div class="matrix-wrap">
+<table class="matrix">
+  <thead>
+    <tr>
+      <th>브랜드</th>
+      <th>국가</th>
+      <th>머신 타입</th>
+      <th>자동화</th>
+      <th>추출품질</th>
+      <th>인력의존도</th>
+      <th>시간당 생산</th>
+      <th>교육난이도</th>
+      <th>가격대</th>
+      <th>기계수명</th>
+      <th>국내 AS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>에버시스</td><td>스위스 🇨🇭</td><td>풀오토 에스프레소</td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-up">하</span></td>
+      <td>200~300잔</td>
+      <td><span class="badge badge-up">하</span></td>
+      <td>2,325~5,425만원</td><td>8~15년</td>
+      <td><span class="badge badge-mid">딜러 경유</span></td>
+    </tr>
+    <tr>
+      <td>유라/프랑케</td><td>스위스 🇨🇭</td><td>풀오토 에스프레소</td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-mid">중상</span></td>
+      <td><span class="badge badge-up">하</span></td>
+      <td>100~180잔</td>
+      <td><span class="badge badge-up">하</span></td>
+      <td>465~2,325만원</td><td>7~12년</td>
+      <td><span class="badge badge-up">유라코리아 공식</span></td>
+    </tr>
+    <tr>
+      <td>써모플랜</td><td>스위스 🇨🇭</td><td>풀오토 대용량</td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-mid">중상</span></td>
+      <td><span class="badge badge-up">하</span></td>
+      <td>250~400잔</td>
+      <td><span class="badge badge-up">하</span></td>
+      <td>3,100~6,200만원</td><td>10~15년</td>
+      <td><span class="badge badge-dn">딜러 희소</span></td>
+    </tr>
+    <tr>
+      <td>푸어스테디</td><td>미국 🇺🇸</td><td>자동 핸드드립</td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-mid">하~중</span></td>
+      <td>40~80잔</td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td>1,260~1,680만원</td><td>5~10년</td>
+      <td><span class="badge badge-dn">없음·직수입</span></td>
+    </tr>
+    <tr>
+      <td>말코닉</td><td>독일 🇩🇪</td><td>그라인더 전문</td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td><span class="badge badge-up">상 (분쇄)</span></td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td>머신 종속</td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td>232~387만원</td><td>8~15년</td>
+      <td><span class="badge badge-up">공식 딜러</span></td>
+    </tr>
+    <tr>
+      <td>라마르조코</td><td>이탈리아 🇮🇹</td><td>세미오토</td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>80~150잔</td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>1,240~3,875만원</td><td>15~25년</td>
+      <td><span class="badge badge-up">공식 딜러</span></td>
+    </tr>
+    <tr>
+      <td>시네소</td><td>미국 🇺🇸</td><td>세미오토 (압력)</td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>80~130잔</td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>1,680~3,500만원</td><td>12~20년</td>
+      <td><span class="badge badge-mid">딜러 제한</span></td>
+    </tr>
+    <tr>
+      <td>슬레이어</td><td>미국 🇺🇸</td><td>세미오토 (프리-인퓨전)</td>
+      <td><span class="badge badge-dn">중하</span></td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>60~100잔</td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>1,120~3,080만원</td><td>12~20년</td>
+      <td><span class="badge badge-dn">없음</span></td>
+    </tr>
+    <tr>
+      <td>샌레모</td><td>이탈리아 🇮🇹</td><td>세미오토</td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>80~140잔</td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>775~2,790만원</td><td>12~20년</td>
+      <td><span class="badge badge-mid">딜러 일부</span></td>
+    </tr>
+    <tr>
+      <td>빅토리아 아르두이노</td><td>이탈리아 🇮🇹</td><td>세미오토 (WBC)</td>
+      <td><span class="badge badge-mid">중</span></td>
+      <td><span class="badge badge-up">상</span></td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>80~150잔</td>
+      <td><span class="badge badge-dn">상</span></td>
+      <td>1,860~4,340만원</td><td>12~20년</td>
+      <td><span class="badge badge-up">공식 딜러</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- 푸터 -->
+<div class="footer">
+  Cafe Project 2026 · 커피머신 설비 리서치 · 멀티 컨셉 싱글 엔진 전략 기준 · 2026.04 · 가격 환산: EUR×1,550 / USD×1,400
+</div>
+
+</div>
+</body>
+</html>
