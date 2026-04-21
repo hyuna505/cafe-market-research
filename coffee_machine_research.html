@@ -522,6 +522,126 @@ table.matrix td a:hover { background: #DE957B; color: #fff; }
 
 <hr class="divider">
 
+<!-- 포지셔닝 맵 -->
+<div class="sec-hdr">포지셔닝 맵 — 운영 효율 × 고객 경험 가치</div>
+<div style="display:flex;gap:18px;align-items:flex-start;margin-bottom:28px;background:#FDF5F3;border:1px solid #F6C8BB;border-radius:10px;padding:18px 20px;">
+  <div style="flex:1;min-width:0;">
+    <svg viewBox="0 0 520 285" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+      <!-- Quadrant backgrounds -->
+      <rect x="55" y="20" width="228" height="125" fill="#EEF2FB" rx="3" opacity=".55"/>
+      <rect x="283" y="20" width="228" height="125" fill="#FFF0E8" rx="3" opacity=".55"/>
+      <rect x="55" y="145" width="228" height="120" fill="#F5F5F5" rx="3" opacity=".45"/>
+      <rect x="283" y="145" width="228" height="120" fill="#FDF5F3" rx="3" opacity=".55"/>
+      <!-- Center dividers -->
+      <line x1="55" y1="145" x2="511" y2="145" stroke="#ddd" stroke-width=".8" stroke-dasharray="4,3"/>
+      <line x1="283" y1="20" x2="283" y2="265" stroke="#ddd" stroke-width=".8" stroke-dasharray="4,3"/>
+      <!-- Quadrant labels -->
+      <text x="169" y="36" text-anchor="middle" font-size="8" fill="#7B8FDE" font-weight="700" opacity=".8">장인형 (고경험 · 저효율)</text>
+      <text x="397" y="36" text-anchor="middle" font-size="8" fill="#DE957B" font-weight="700" opacity=".9">전략 최적 구간 ★</text>
+      <text x="169" y="258" text-anchor="middle" font-size="8" fill="#aaa" font-weight="600" opacity=".8">저경험 · 저효율 구간</text>
+      <text x="397" y="258" text-anchor="middle" font-size="8" fill="#DE957B" font-weight="700" opacity=".8">자동화 중심 (고효율 · 중경험)</text>
+      <!-- Axes -->
+      <line x1="55" y1="265" x2="511" y2="265" stroke="#bbb" stroke-width="1.2"/>
+      <line x1="55" y1="20" x2="55" y2="265" stroke="#bbb" stroke-width="1.2"/>
+      <polygon points="514,265 508,262 508,268" fill="#bbb"/>
+      <polygon points="55,17 52,23 58,23" fill="#bbb"/>
+      <text x="284" y="279" text-anchor="middle" font-size="9" fill="#6F6F6F" font-weight="700">운영 효율  →</text>
+      <text x="13" y="143" text-anchor="middle" font-size="9" fill="#6F6F6F" font-weight="700" transform="rotate(-90,13,143)">고객 경험 가치  →</text>
+      <text x="62" y="261" font-size="7" fill="#aaa">낮음</text>
+      <text x="490" y="261" font-size="7" fill="#aaa">높음</text>
+      <text x="60" y="25" font-size="7" fill="#aaa">높음</text>
+      <!-- ARTISAN GROUP (blue) -->
+      <circle cx="137" cy="54" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+      <text x="145" y="52" font-size="6.2" fill="#3a4ab0" font-weight="600">라마르조코</text>
+      <circle cx="110" cy="62" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+      <text x="118" y="60" font-size="6.2" fill="#3a4ab0" font-weight="600">시네소</text>
+      <circle cx="97" cy="70" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+      <text x="58" y="68" font-size="6.2" fill="#3a4ab0" font-weight="600">슬레이어</text>
+      <circle cx="165" cy="58" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+      <text x="173" y="62" font-size="6.2" fill="#3a4ab0" font-weight="600">빅토리아 아르두이노</text>
+      <circle cx="128" cy="82" r="5" fill="#7B8FDE" stroke="white" stroke-width="1.5"/>
+      <text x="136" y="86" font-size="6.2" fill="#3a4ab0" font-weight="600">일렉트라</text>
+      <!-- HYBRID GROUP (teal) -->
+      <circle cx="214" cy="91" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+      <text x="222" y="89" font-size="6.2" fill="#2d7060" font-weight="600">샌레모</text>
+      <circle cx="228" cy="103" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+      <text x="236" y="101" font-size="6.2" fill="#2d7060" font-weight="600">달라코르테</text>
+      <circle cx="178" cy="112" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+      <text x="186" y="110" font-size="6.2" fill="#2d7060" font-weight="600">BFC</text>
+      <circle cx="191" cy="117" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+      <text x="199" y="122" font-size="6.2" fill="#2d7060" font-weight="600">VBM</text>
+      <circle cx="246" cy="120" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+      <text x="254" y="118" font-size="6.2" fill="#2d7060" font-weight="600">훼마</text>
+      <circle cx="283" cy="150" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+      <text x="291" y="148" font-size="6.2" fill="#2d7060" font-weight="600">랩터</text>
+      <circle cx="269" cy="140" r="5" fill="#7BAF9E" stroke="white" stroke-width="1.5"/>
+      <text x="253" y="133" font-size="6.2" fill="#2d7060" font-weight="600">씨메</text>
+      <!-- FULL AUTO GROUP (orange) -->
+      <circle cx="464" cy="139" r="6.5" fill="#DE957B" stroke="white" stroke-width="2"/>
+      <text x="472" y="137" font-size="6.2" fill="#8B3010" font-weight="700">에버시스 ★</text>
+      <circle cx="405" cy="161" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+      <text x="413" y="159" font-size="6.2" fill="#8B3010" font-weight="600">유라/프랑케</text>
+      <circle cx="428" cy="155" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+      <text x="436" y="153" font-size="6.2" fill="#8B3010" font-weight="600">써모플랜</text>
+      <circle cx="396" cy="175" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+      <text x="404" y="173" font-size="6.2" fill="#8B3010" font-weight="600">WMF</text>
+      <circle cx="419" cy="163" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+      <text x="419" y="176" font-size="6.2" fill="#8B3010" font-weight="600">에그로</text>
+      <circle cx="437" cy="180" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+      <text x="445" y="178" font-size="6.2" fill="#8B3010" font-weight="600">렉스로얄</text>
+      <circle cx="415" cy="198" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+      <text x="423" y="196" font-size="6.2" fill="#8B3010" font-weight="600">세코</text>
+      <circle cx="451" cy="218" r="5" fill="#DE957B" stroke="white" stroke-width="1.5"/>
+      <text x="459" y="216" font-size="6.2" fill="#8B3010" font-weight="600">칼렘</text>
+      <!-- OTHER (gray) -->
+      <circle cx="442" cy="130" r="5" fill="#B0B0B0" stroke="white" stroke-width="1.5"/>
+      <text x="450" y="128" font-size="6.2" fill="#666">푸어스테디</text>
+      <text x="450" y="136" font-size="5.5" fill="#999">(드립 브루어)</text>
+      <circle cx="283" cy="72" r="5" fill="#B0B0B0" stroke="white" stroke-width="1.5"/>
+      <text x="291" y="70" font-size="6.2" fill="#666">말코닉</text>
+      <text x="291" y="78" font-size="5.5" fill="#999">(그라인더)</text>
+    </svg>
+  </div>
+  <!-- Legend -->
+  <div style="width:150px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;padding-top:4px;">
+    <div style="font-size:8pt;font-weight:700;color:#1a1a1a;border-bottom:1px solid #F6C8BB;padding-bottom:6px;">브랜드 그룹</div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:7.5pt;color:#6F6F6F;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#7B8FDE;flex-shrink:0;"></div>
+      장인형 (세미오토) <span style="margin-left:auto;font-weight:700;color:#1a1a1a;">5</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:7.5pt;color:#6F6F6F;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#7BAF9E;flex-shrink:0;"></div>
+      하이브리드 <span style="margin-left:auto;font-weight:700;color:#1a1a1a;">7</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:7.5pt;color:#6F6F6F;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#DE957B;flex-shrink:0;"></div>
+      자동화 중심 <span style="margin-left:auto;font-weight:700;color:#1a1a1a;">8</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:7.5pt;color:#6F6F6F;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#B0B0B0;flex-shrink:0;"></div>
+      기타 설비 <span style="margin-left:auto;font-weight:700;color:#1a1a1a;">2</span>
+    </div>
+    <div style="border-top:1px solid #F6C8BB;padding-top:8px;">
+      <div style="font-size:7pt;font-weight:700;color:#1a1a1a;margin-bottom:5px;">축 정의</div>
+      <div style="font-size:6.8pt;color:#6F6F6F;line-height:1.7;">
+        <b>X축</b> 운영 효율<br>자동화 · 생산성 · 인건비<br><br>
+        <b>Y축</b> 고객 경험 가치<br>장인성 · 브랜드 · 포지셔닝
+      </div>
+    </div>
+    <div style="background:#FAEAE4;border:1px solid #DE957B;border-radius:6px;padding:9px 10px;margin-top:2px;">
+      <div style="font-size:7pt;font-weight:700;color:#DE957B;margin-bottom:4px;">★ 프로젝트 추천</div>
+      <div style="font-size:6.5pt;color:#1a1a1a;line-height:1.65;">
+        <b>에버시스(Eversys)</b><br>
+        자동화 최상 + 고객 경험 유지.<br>
+        레시피 복제 · 품질 일관성이<br>
+        싱글 엔진 전략 최적 조건.
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
 <!-- 비교 매트릭스 -->
 <div class="sec-hdr">전체 비교 매트릭스</div>
 <div class="matrix-wrap">
