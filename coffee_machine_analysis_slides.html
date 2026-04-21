@@ -139,7 +139,7 @@ body {
   display: flex; gap: 0; height: 100%;
 }
 .merged-left {
-  flex: 1; display: flex; flex-direction: column; gap: 7px;
+  flex: 1; display: flex; flex-direction: column; gap: 0;
   padding-right: 14px;
   border-right: 1px solid var(--line);
 }
@@ -151,36 +151,53 @@ body {
 .sub-hdr {
   font-size: 9.5pt; font-weight: 700; color: var(--body);
   border-bottom: 2px solid var(--accent);
-  padding-bottom: 4px; margin-bottom: 4px;
+  padding-bottom: 4px; margin-bottom: 6px;
   flex-shrink: 0;
 }
 
-/* Ops comparison (left) */
-.ops-spectrum {
-  display: flex; align-items: center;
-  background: var(--card-bg); border: 1px solid var(--line);
-  border-radius: 6px; padding: 6px 14px;
-  position: relative; flex-shrink: 0;
+/* ── 순서도 + 컬럼을 동일 grid로 완벽 정렬 ── */
+.ops-unified {
+  /* spectrum bar + 3col이 같은 grid 컨테이너 안에서 동일 컬럼 너비 공유 */
+  display: flex; flex-direction: column; flex: 1; overflow: hidden;
 }
-.ops-spectrum::before {
-  content: '';
-  position: absolute; top: 50%; left: 14px; right: 14px;
-  height: 2px;
-  background: linear-gradient(to right, #7B8FDE 0%, #7BAF9E 50%, #DE957B 100%);
-  z-index: 0;
-}
-.spec-lbl {
-  z-index: 1; background: white;
-  border: 1.5px solid currentColor; border-radius: 12px;
-  padding: 3px 10px; font-size: 8pt; font-weight: 700;
-}
-.lbl-a { color: #7B8FDE; }
-.lbl-h { color: #7BAF9E; }
-.lbl-au { color: #DE957B; }
-.spec-arrow { font-size: 11pt; color: #ccc; z-index: 1; margin: 0 4px; }
 
-.ops-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; flex: 1; overflow: hidden; }
-.ops-col { border-radius: 6px; overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; }
+/* 순서도 행: 3col과 완전히 동일한 grid */
+.ops-spectrum-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 7px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+.spec-cell {
+  padding: 5px 8px; text-align: center;
+  font-size: 8pt; font-weight: 700;
+  border-radius: 6px 6px 0 0;
+  border-width: 1px 1px 0 1px; border-style: solid;
+  position: relative;
+}
+.spec-cell-a  { color: #7B8FDE; background: #EEF2FB; border-color: #7B8FDE; }
+.spec-cell-h  { color: #7BAF9E; background: #EEF6F4; border-color: #7BAF9E; }
+.spec-cell-au { color: #DE957B; background: #FFF0E8; border-color: #DE957B; }
+/* 화살표 — 셀 우측 절대 배치 */
+.spec-cell::after {
+  content: '→';
+  position: absolute; right: -14px; top: 50%; transform: translateY(-50%);
+  font-size: 10pt; color: #ccc; z-index: 10;
+}
+.spec-cell:last-child::after { display: none; }
+
+/* 3컬럼 그리드 — 순서도와 동일 grid 구조 */
+.ops-3col {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px;
+  flex: 1; overflow: hidden;
+}
+.ops-col {
+  /* 상단 테두리 없음(순서도와 시각적으로 연결) */
+  border-radius: 0 0 6px 6px; overflow: hidden;
+  border: 1px solid var(--line); border-top: none;
+  display: flex; flex-direction: column;
+}
 .ops-col-hd { padding: 7px 8px; color: white; text-align: center; }
 .ops-col-hd .col-name { font-size: 9pt; font-weight: 700; }
 .ops-col-hd .col-sub { font-size: 7.5pt; opacity: .85; margin-top: 2px; }
@@ -188,6 +205,30 @@ body {
 .hd-h { background: #7BAF9E; }
 .hd-au { background: #DE957B; }
 .ops-col-bd { padding: 8px 8px; background: var(--card-bg); flex: 1; overflow: hidden; }
+
+/* ── 하단 인사이트 2칸 ── */
+.insight-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  flex: 0 0 auto; margin-top: 7px;
+}
+.ins-box {
+  border-radius: 6px; padding: 9px 10px;
+}
+.ins-box-strategy {
+  background: var(--card-bg); border: 1px solid var(--line);
+}
+.ins-box-investor {
+  background: var(--light-bg); border: 1px solid var(--accent);
+}
+.ins-box-title {
+  font-size: 8.5pt; font-weight: 700; color: var(--accent);
+  margin-bottom: 5px;
+}
+.ins-box-pt {
+  font-size: 7.5pt; color: var(--body); line-height: 1.75;
+  padding-left: 9px; position: relative;
+}
+.ins-box-pt::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 7px; padding-bottom: 6px; border-bottom: 1px dashed var(--line); }
 .chip {
@@ -436,7 +477,7 @@ body {
 <div class="slide" id="slide2">
   <div class="s-header">
     <h2>운영 구조 비교 &amp; 인력 의존도 그래프</h2>
-    <span class="hdesc">3분류 다이어그램 · 22개 브랜드 인력 랭킹</span>
+    <span class="hdesc">3분류 다이어그램 · 22개 브랜드 인력 랭킹 · 전략 결론</span>
     <span class="hnum">02 / 02</span>
   </div>
   <div class="s-body">
@@ -446,110 +487,127 @@ body {
       <div class="merged-left">
         <div class="sub-hdr">운영 구조 비교</div>
 
-        <!-- Spectrum -->
-        <div class="ops-spectrum">
-          <div class="spec-lbl lbl-a">장인형</div>
-          <div class="spec-arrow">→</div>
-          <div class="spec-lbl lbl-h">하이브리드</div>
-          <div class="spec-arrow">→</div>
-          <div class="spec-lbl lbl-au">자동화</div>
+        <div class="ops-unified">
+          <!-- ① 순서도 행 — 3col과 동일 grid로 완벽 정렬 -->
+          <div class="ops-spectrum-row">
+            <div class="spec-cell spec-cell-a">← 장인형</div>
+            <div class="spec-cell spec-cell-h">하이브리드</div>
+            <div class="spec-cell spec-cell-au">자동화 중심 →</div>
+          </div>
+
+          <!-- ② 3컬럼 — 순서도에 시각적으로 연결 -->
+          <div class="ops-3col">
+            <!-- 장인형 -->
+            <div class="ops-col">
+              <div class="ops-col-hd hd-a">
+                <div class="col-name">장인형</div>
+                <div class="col-sub">바리스타 퍼포먼스</div>
+              </div>
+              <div class="ops-col-bd">
+                <div class="chips">
+                  <span class="chip">라마르조코</span>
+                  <span class="chip">시네소</span>
+                  <span class="chip">슬레이어</span>
+                  <span class="chip">빅토리아 아르두이노</span>
+                  <span class="chip">일렉트라</span>
+                  <span class="chip">BFC</span>
+                  <span class="chip">VBM</span>
+                </div>
+                <div style="margin-bottom:5px">
+                  <div class="ops-sec-lbl">운영 특징</div>
+                  <div class="ops-pt">바리스타 퍼포먼스 = 품질</div>
+                  <div class="ops-pt">감성·경험 극대화</div>
+                  <div class="ops-pt">고가·스페셜티 포지셔닝</div>
+                </div>
+                <div>
+                  <div class="ops-sec-lbl">리스크</div>
+                  <div class="ops-risk">숙련 바리스타 필수</div>
+                  <div class="ops-risk">품질 편차 (사람 의존)</div>
+                  <div class="ops-risk">피크타임 대응 취약</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 하이브리드 -->
+            <div class="ops-col">
+              <div class="ops-col-hd hd-h">
+                <div class="col-name">하이브리드</div>
+                <div class="col-sub">경험 + 효율 절충</div>
+              </div>
+              <div class="ops-col-bd">
+                <div class="chips">
+                  <span class="chip">샌레모</span>
+                  <span class="chip">달라코르테</span>
+                  <span class="chip">훼마</span>
+                  <span class="chip">씨메</span>
+                  <span class="chip">랩터</span>
+                  <span class="chip">말코닉</span>
+                  <span class="chip">푸어스테디</span>
+                </div>
+                <div style="margin-bottom:5px">
+                  <div class="ops-sec-lbl">운영 특징</div>
+                  <div class="ops-pt">경험 + 효율 두 마리 토끼</div>
+                  <div class="ops-pt">1~2주 트레이닝으로 운영</div>
+                  <div class="ops-pt">멀티 컨셉 유연 대응</div>
+                </div>
+                <div>
+                  <div class="ops-sec-lbl">리스크</div>
+                  <div class="ops-risk">포지셔닝 불명확 우려</div>
+                  <div class="ops-risk">정체성 약함</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 자동화 -->
+            <div class="ops-col">
+              <div class="ops-col-hd hd-au">
+                <div class="col-name">자동화 중심</div>
+                <div class="col-sub">1인 운영 · 피크 최적</div>
+              </div>
+              <div class="ops-col-bd">
+                <div class="chips">
+                  <span class="chip chip-star">에버시스 ★</span>
+                  <span class="chip chip-star">써모플랜 ★</span>
+                  <span class="chip">WMF</span>
+                  <span class="chip">에그로</span>
+                  <span class="chip">렉스로얄</span>
+                  <span class="chip">세코</span>
+                  <span class="chip">칼렘</span>
+                  <span class="chip">유라/프랑케</span>
+                </div>
+                <div style="margin-bottom:5px">
+                  <div class="ops-sec-lbl">운영 특징</div>
+                  <div class="ops-pt">1인 운영 · 인건비 최적화</div>
+                  <div class="ops-pt">즉시 운영 (교육 최소화)</div>
+                  <div class="ops-pt">레시피 복제로 멀티 구현</div>
+                </div>
+                <div>
+                  <div class="ops-sec-lbl">리스크</div>
+                  <div class="ops-risk">장애 시 운영 전면 중단</div>
+                  <div class="ops-risk">바리스타 감성 연출 불가</div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /ops-3col -->
+        </div><!-- /ops-unified -->
+
+        <!-- ③ 하단 인사이트 2칸 -->
+        <div class="insight-row">
+          <div class="ins-box ins-box-strategy">
+            <div class="ins-box-title">⚡ 전략방향 — 혼합형 운영 구조</div>
+            <div class="ins-box-pt">풀오토(에버시스) 1대를 싱글 엔진으로 채택, 공간 컨셉별 레시피 분리 저장</div>
+            <div class="ins-box-pt">자동화 기반으로 품질 일관성 확보 + 드립·밀크폼 등 하이브리드 메뉴 병행</div>
+            <div class="ins-box-pt">스페셜티 연출이 필요한 공간엔 세미오토 1대 추가 옵션으로 유연 확장 가능</div>
+          </div>
+          <div class="ins-box ins-box-investor">
+            <div class="ins-box-title">💡 투자자관점 인사이트</div>
+            <div class="ins-box-pt">에버시스 1대(약 3~5천만원) 투자 → 숙련 바리스타 2인분 인건비 구조 대체</div>
+            <div class="ins-box-pt">레시피 표준화 완료 시 추가 지점 설비 즉시 복제 → 확장 속도 극대화</div>
+            <div class="ins-box-pt">기계 의존 리스크 대비 국내 AS 계약 사전 체결이 투자 안정성의 핵심 전제</div>
+          </div>
         </div>
 
-        <!-- 3 Columns -->
-        <div class="ops-3col">
-          <!-- 장인형 -->
-          <div class="ops-col">
-            <div class="ops-col-hd hd-a">
-              <div class="col-name">장인형</div>
-              <div class="col-sub">바리스타 퍼포먼스</div>
-            </div>
-            <div class="ops-col-bd">
-              <div class="chips">
-                <span class="chip">라마르조코</span>
-                <span class="chip">시네소</span>
-                <span class="chip">슬레이어</span>
-                <span class="chip">빅토리아 아르두이노</span>
-                <span class="chip">일렉트라</span>
-                <span class="chip">BFC</span>
-                <span class="chip">VBM</span>
-              </div>
-              <div style="margin-bottom:5px">
-                <div class="ops-sec-lbl">운영 특징</div>
-                <div class="ops-pt">바리스타 퍼포먼스 = 품질</div>
-                <div class="ops-pt">감성·경험 극대화</div>
-                <div class="ops-pt">고가·스페셜티 포지셔닝</div>
-              </div>
-              <div>
-                <div class="ops-sec-lbl">리스크</div>
-                <div class="ops-risk">숙련 바리스타 필수</div>
-                <div class="ops-risk">품질 편차 (사람 의존)</div>
-                <div class="ops-risk">피크타임 대응 취약</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 하이브리드 -->
-          <div class="ops-col">
-            <div class="ops-col-hd hd-h">
-              <div class="col-name">하이브리드</div>
-              <div class="col-sub">경험 + 효율 절충</div>
-            </div>
-            <div class="ops-col-bd">
-              <div class="chips">
-                <span class="chip">샌레모</span>
-                <span class="chip">달라코르테</span>
-                <span class="chip">훼마</span>
-                <span class="chip">씨메</span>
-                <span class="chip">랩터</span>
-                <span class="chip">말코닉</span>
-                <span class="chip">푸어스테디</span>
-              </div>
-              <div style="margin-bottom:5px">
-                <div class="ops-sec-lbl">운영 특징</div>
-                <div class="ops-pt">경험 + 효율 두 마리 토끼</div>
-                <div class="ops-pt">1~2주 트레이닝으로 운영</div>
-                <div class="ops-pt">멀티 컨셉 유연 대응</div>
-              </div>
-              <div>
-                <div class="ops-sec-lbl">리스크</div>
-                <div class="ops-risk">포지셔닝 불명확 우려</div>
-                <div class="ops-risk">정체성 약함</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 자동화 -->
-          <div class="ops-col">
-            <div class="ops-col-hd hd-au">
-              <div class="col-name">자동화 중심</div>
-              <div class="col-sub">1인 운영 · 피크 최적</div>
-            </div>
-            <div class="ops-col-bd">
-              <div class="chips">
-                <span class="chip chip-star">에버시스 ★</span>
-                <span class="chip chip-star">써모플랜 ★</span>
-                <span class="chip">WMF</span>
-                <span class="chip">에그로</span>
-                <span class="chip">렉스로얄</span>
-                <span class="chip">세코</span>
-                <span class="chip">칼렘</span>
-                <span class="chip">유라/프랑케</span>
-              </div>
-              <div style="margin-bottom:5px">
-                <div class="ops-sec-lbl">운영 특징</div>
-                <div class="ops-pt">1인 운영 · 인건비 최적화</div>
-                <div class="ops-pt">즉시 운영 (교육 최소화)</div>
-                <div class="ops-pt">레시피 복제로 멀티 구현</div>
-              </div>
-              <div>
-                <div class="ops-sec-lbl">리스크</div>
-                <div class="ops-risk">장애 시 운영 전면 중단</div>
-                <div class="ops-risk">바리스타 감성 연출 불가</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div><!-- /merged-left -->
 
       <!-- RIGHT: LABOR DEPENDENCY CHART -->
       <div class="merged-right">
