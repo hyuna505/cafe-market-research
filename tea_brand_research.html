@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tea Brand Research 2026 — Tea 브랜드 조사보고서</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --base:      #EB9176;
+  --point:     #707070;
+  --sub-light: #F3F3F3;
+  --sub-pink:  #F4C8BB;
+  --gradient:  #F4B1BA;
+  --dark:      #333333;
+  --paper:     #FFFFFF;
+  --line:      rgba(0,0,0,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "맑은 고딕", "Malgun Gothic", sans-serif;
+  background: #EDE8E5;
+  color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+}
+.page, .cover, .src-page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto 10mm;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+@media screen { body { padding: 10mm 0; } .page,.cover,.src-page { box-shadow: 0 3px 24px rgba(0,0,0,0.14); } }
+@media print { body { background: white; padding: 0; } .page,.cover,.src-page { margin:0; page-break-after:always; break-after:page; } }
+
+/* ── COVER ── */
+.cover { display: flex; flex-direction: column; }
+.cover-top {
+  background: #1C1C1E; padding: 20mm 18mm 16mm;
+  position: relative; overflow: hidden; flex-shrink: 0;
+}
+.cover-glow {
+  position: absolute; top: 0; right: 0; width: 90mm; height: 90mm;
+  background: radial-gradient(circle at top right, #EB9176 0%, transparent 65%);
+  opacity: 0.28;
+}
+.cover-deco {
+  position: absolute; bottom: -6mm; right: 12mm;
+  font-size: 90pt; opacity: 0.06; color: white;
+  line-height: 1; user-select: none; pointer-events: none;
+}
+.cover-eyebrow {
+  font-size: 10pt; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--base); font-weight: 700; margin-bottom: 7mm; position: relative; z-index: 1;
+}
+.cover-title {
+  font-size: 30pt; font-weight: 700; color: white;
+  line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 2mm;
+  position: relative; z-index: 1;
+}
+.cover-subtitle {
+  font-size: 12pt; color: rgba(255,255,255,0.45); margin-bottom: 11mm;
+  position: relative; z-index: 1;
+}
+.cover-rule { width: 14mm; height: 2px; background: var(--base); margin-bottom: 6mm; position: relative; z-index: 1; }
+.cover-desc {
+  font-size: 10pt; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.02em; line-height: 1.75; position: relative; z-index: 1;
+}
+.cover-body { flex: 1; padding: 10mm 18mm 12mm; display: flex; flex-direction: column; }
+.cover-section-label {
+  font-size: 8.5pt; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--point); font-weight: 700; margin-bottom: 4mm;
+  display: flex; align-items: center; gap: 2mm;
+}
+.cover-section-label::before { content: '✦'; color: var(--base); font-size: 7pt; }
+.brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; margin-bottom: 8mm; }
+.brand-row {
+  display: flex; align-items: center; gap: 3mm;
+  padding: 2.8mm 0; border-bottom: 1px solid var(--line);
+}
+.brand-num { font-size: 8.5pt; font-weight: 700; color: var(--base); min-width: 8mm; }
+.brand-name-text { font-size: 10.5pt; font-weight: 600; color: var(--dark); flex: 1; }
+.brand-tag-small { font-size: 8.5pt; color: var(--point); }
+.cat-section { margin-bottom: 5mm; }
+.cat-label {
+  font-size: 8.5pt; letter-spacing: 0.15em; font-weight: 700;
+  color: white; background: var(--point); padding: 1.2mm 3mm;
+  border-radius: 3px; display: inline-block; margin-bottom: 2mm;
+}
+.cat-label.base { background: var(--base); }
+.cover-footer {
+  margin-top: auto; padding-top: 5mm; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.cover-footer-text { font-size: 10pt; color: var(--point); line-height: 1.7; }
+.cover-footer-icon { font-size: 22pt; color: var(--base); opacity: 0.3; }
+
+/* ── PAGE BAR ── */
+.page { padding: 11mm 14mm 17mm; }
+.page::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 5mm; background: linear-gradient(90deg, var(--base) 0%, var(--gradient) 100%);
+}
+.src-page { padding: 12mm 14mm 17mm; }
+.src-page::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 5mm; background: linear-gradient(90deg, var(--base) 0%, var(--gradient) 100%);
+}
+
+/* ── BRAND HEADER ── */
+.brand-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 4mm; padding-bottom: 4mm; border-bottom: 2px solid var(--dark);
+}
+.brand-label {
+  font-size: 8.5pt; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--base); font-weight: 700; margin-bottom: 1mm;
+  display: flex; align-items: center; gap: 2mm;
+}
+.brand-label::before { content: '✦'; font-size: 8pt; }
+.brand-name { font-size: 18pt; font-weight: 700; color: var(--dark); letter-spacing: -0.015em; line-height: 1.1; }
+.brand-tagline { font-size: 10pt; color: var(--point); margin-top: 1.5mm; }
+.brand-badge {
+  background: var(--dark); color: white; font-size: 8.5pt; font-weight: 700;
+  padding: 2.5mm 4mm; border-radius: 7px; text-align: center; min-width: 26mm; flex-shrink: 0;
+}
+.badge-base { background: var(--base) !important; }
+.badge-year { display: block; font-size: 14pt; font-weight: 900; line-height: 1; }
+.badge-lbl { display: block; font-size: 9pt; opacity: 0.7; margin-top: 0.5mm; }
+.badge-flag { display: block; font-size: 9.5pt; margin-top: 1mm; }
+
+/* ── LAYOUT ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; margin-bottom: 2.5mm; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2mm; margin-bottom: 2.5mm; }
+.g22 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+.mb2 { margin-bottom: 2mm; } .mb3 { margin-bottom: 3mm; } .mb0 { margin-bottom: 0; }
+
+/* ── CARD ── */
+.card {
+  background: var(--sub-light); border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 7px; padding: 3mm 4mm; break-inside: avoid;
+}
+.card-title {
+  font-size: 9pt; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--base); margin-bottom: 2mm; padding-bottom: 1.5mm;
+  border-bottom: 1px solid rgba(235,145,118,0.2);
+  display: flex; align-items: center; gap: 1.5mm;
+}
+.card-title::before {
+  content: ''; display: inline-block; width: 4px; height: 4px;
+  border-radius: 50%; background: var(--base); flex-shrink: 0;
+}
+.card p { font-size: 10pt; color: var(--dark); line-height: 1.6; margin-bottom: 1mm; }
+.card p:last-child { margin-bottom: 0; }
+.card ul { padding-left: 3.5mm; }
+.card li { font-size: 10pt; color: var(--dark); line-height: 1.55; margin-bottom: 0.8mm; }
+
+/* ── TAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 1.5mm; margin-top: 2mm; }
+.tag { background: var(--base); color: white; font-size: 9.5pt; font-weight: 700; padding: 0.8mm 2.5mm; border-radius: 3px; }
+.tag.soft { background: var(--sub-pink); color: var(--dark); }
+.tag.gray { background: var(--point); color: white; }
+.tag.dark { background: var(--dark); color: white; }
+
+/* ── PRO/CON ── */
+.pro-con { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
+.pc-head { font-size: 7.5pt; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5mm; }
+.pc-pro { color: var(--base); }
+.pc-con { color: var(--point); }
+.pc-list { list-style: none; padding: 0; }
+.pc-list li { font-size: 10pt; color: var(--dark); padding-left: 3.5mm; position: relative; margin-bottom: 1mm; line-height: 1.45; }
+.pc-list.pro li::before { content: '+'; position: absolute; left: 0; color: var(--base); font-weight: 900; }
+.pc-list.con li::before { content: '–'; position: absolute; left: 0; color: var(--point); font-weight: 700; }
+
+/* ── TABLE ── */
+.mini-table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+.mini-table th {
+  background: var(--base); color: white; font-weight: 700;
+  padding: 1.5mm 2.5mm; font-size: 8.5pt; text-align: left; letter-spacing: 0.04em;
+}
+.mini-table td {
+  padding: 1.5mm 2.5mm; border-bottom: 1px solid rgba(0,0,0,0.05);
+  vertical-align: top; line-height: 1.5; color: var(--dark);
+}
+.mini-table tr:last-child td { border-bottom: none; }
+.mini-table tr:nth-child(even) td { background: #FBF1EE; }
+.mini-table .lbl { font-weight: 700; color: var(--point); white-space: nowrap; width: 30%; }
+
+/* ── QUOTE ── */
+.quote-block {
+  background: var(--sub-pink); border-left: 3px solid var(--base);
+  border-radius: 0 7px 7px 0; padding: 3mm 4mm; margin-top: 2mm;
+}
+.quote-text { font-size: 10pt; color: var(--dark); line-height: 1.6; font-style: italic; }
+
+/* ── SUMMARY ── */
+.summary { background: var(--dark); color: white; padding: 3.5mm 5mm; border-radius: 7px; margin-top: 2mm; }
+.summary-lbl {
+  font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  opacity: 0.55; margin-bottom: 1.5mm; display: flex; align-items: center; gap: 2mm;
+}
+.summary-lbl::before { content: '✦'; color: var(--base); opacity: 1; font-size: 7pt; }
+.summary-text { font-size: 10pt; line-height: 1.65; }
+
+/* ── FOOTER ── */
+.footer-info {
+  position: absolute; bottom: 6mm; left: 14mm; right: 14mm;
+  display: flex; align-items: center; justify-content: space-between; z-index: 10;
+}
+.footer-source { font-size: 9.5pt; color: rgba(255,255,255,0.75); }
+.footer-source-lbl { font-weight: 700; color: white; }
+.page-num { font-size: 10pt; color: white; font-weight: 500; }
+
+/* ── PENDING BADGE ── */
+.pending-card {
+  background: #F9F4F2; border: 1.5px dashed var(--sub-pink);
+  border-radius: 7px; padding: 5mm 6mm; text-align: center;
+}
+.pending-card p { font-size: 10pt; color: var(--point); line-height: 1.7; }
+.pending-label {
+  display: inline-block; background: var(--sub-pink); color: var(--dark);
+  font-size: 8.5pt; font-weight: 700; padding: 1mm 3mm; border-radius: 3px; margin-bottom: 2mm;
+}
+
+/* ── CATEGORY CHIP ── */
+.cat-chip {
+  display: inline-flex; align-items: center; gap: 1.5mm;
+  background: var(--sub-pink); color: var(--dark);
+  font-size: 8.5pt; font-weight: 700; padding: 1mm 2.5mm;
+  border-radius: 3px; margin-bottom: 3mm;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ COVER ════════════════ -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-glow"></div>
+    <div class="cover-deco">茶</div>
+    <div class="cover-eyebrow">Tea Brand Research · 2026</div>
+    <div class="cover-title">Tea 브랜드<br>조사보고서</div>
+    <div class="cover-subtitle">국내외 주요 Tea 브랜드 시장조사 아카이브</div>
+    <div class="cover-rule"></div>
+    <div class="cover-desc">
+      Tea 전문 브랜드 / 다도 경험형 / 디저트 공간형 / 중국차·밀크티<br>
+      4개 카테고리 · 주력 5개 브랜드 딥리서치 · 19개 항목 분석
+    </div>
+  </div>
+  <div class="cover-body">
+    <div class="cover-section-label">주력 조사 브랜드</div>
+    <div class="brand-grid">
+      <div class="brand-row">
+        <span class="brand-num">01</span>
+        <span class="brand-name-text">맥파이앤타이거</span>
+        <span class="brand-tag-small">🇰🇷</span>
+      </div>
+      <div class="brand-row">
+        <span class="brand-num">02</span>
+        <span class="brand-name-text">TWG Tea</span>
+        <span class="brand-tag-small">🇸🇬</span>
+      </div>
+      <div class="brand-row">
+        <span class="brand-num">03</span>
+        <span class="brand-name-text">소소로</span>
+        <span class="brand-tag-small">🇰🇷</span>
+      </div>
+      <div class="brand-row">
+        <span class="brand-num">04</span>
+        <span class="brand-name-text">리브르 더 티하우스</span>
+        <span class="brand-tag-small">🇰🇷</span>
+      </div>
+      <div class="brand-row">
+        <span class="brand-num">05</span>
+        <span class="brand-name-text">티피데스 의인</span>
+        <span class="brand-tag-small">🇰🇷</span>
+      </div>
+    </div>
+    <div class="cat-section">
+      <div class="cover-section-label" style="margin-bottom:3mm;">전체 조사 브랜드 목록</div>
+      <div style="margin-bottom:3mm;">
+        <span class="cat-label base">A · Tea 전문 / 플레이숍</span>
+        <span style="font-size:10pt;color:var(--dark);margin-left:2mm;">소소로 · 맥파이앤타이거 · 티피데스 의인 · TWG Tea · 티컬렉티브 · 리브르 더 티하우스 성심</span>
+      </div>
+      <div style="margin-bottom:3mm;">
+        <span class="cat-label">B · 다도 / 전통 경험형</span>
+        <span style="font-size:10pt;color:var(--dark);margin-left:2mm;">티하우스 일지 · 차차티클럽 · 운심헌 티하우스 · 내미엔</span>
+      </div>
+      <div style="margin-bottom:3mm;">
+        <span class="cat-label">C · 디저트 + 공간형</span>
+        <span style="font-size:10pt;color:var(--dark);margin-left:2mm;">티브마더 · 청실비 · 브핑</span>
+      </div>
+      <div>
+        <span class="cat-label">D · 중국차 &amp; 밀크티</span>
+        <span style="font-size:10pt;color:var(--dark);margin-left:2mm;">공차 · 키어티 · 차지 · 차백당</span>
+      </div>
+    </div>
+    <div class="cover-footer">
+      <div class="cover-footer-text">
+        Cafe Project 2026 · Tea Brand Research Archive<br>
+        조사기준일 2026.05
+      </div>
+      <div class="cover-footer-icon">茶</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 01 · 맥파이앤타이거 ════════════════ -->
+<div class="page">
+  <div class="brand-header">
+    <div>
+      <div class="brand-label">A · Tea 전문 브랜드 / 플레이숍 &nbsp;·&nbsp; 01</div>
+      <div class="brand-name">맥파이앤타이거</div>
+      <div class="brand-tagline">Magpie&amp;Tiger — 동아시아의 좋은 차를 일상으로</div>
+      <div class="tags" style="margin-top:2mm;">
+        <span class="tag soft">동아시아 잎차</span>
+        <span class="tag soft">취향 기반 큐레이션</span>
+        <span class="tag soft">일상의 탄탄함</span>
+      </div>
+    </div>
+    <div class="brand-badge badge-base">
+      <span class="badge-year">2020s</span>
+      <span class="badge-lbl">설립</span>
+      <span class="badge-flag">🇰🇷 한국</span>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">브랜드 정의</div>
+      <p>조선 민화 <strong>호작도(虎鵲圖)</strong>에서 이름을 딴 동아시아 차 전문 브랜드. '차를 더 가까이, 일상을 더 탄탄하게'라는 철학 아래 한국·중국 잎차와 다기를 큐레이션한다.</p>
+      <p>의례적이고 어려운 차 문화의 장벽을 낮춰 취향 도구로 재정의한 것이 핵심.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">핵심 타깃 &amp; 가격대</div>
+      <p><strong>타깃:</strong> 차에 관심 갖기 시작한 2030대 도시 직장인, 라이프스타일 감도 높은 층, 선물 구매 목적층</p>
+      <p><strong>음료:</strong> 8,000~15,000원</p>
+      <p><strong>잎차:</strong> 16,000~35,000원</p>
+      <p><strong>선물세트:</strong> 20,500~86,500원</p>
+    </div>
+  </div>
+
+  <div class="g3 mb2">
+    <div class="card">
+      <div class="card-title">시그니처 메뉴</div>
+      <ul>
+        <li>하동 잭살 홍차</li>
+        <li>운남 백차·흑차</li>
+        <li>말차 (세레모니얼 / 프리미엄 / 호지)</li>
+        <li>쑥말차</li>
+        <li>밀크티 + 차 베이스 칵테일 (야간)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Tea 제공 방식</div>
+      <p>팔각형 오픈 브루잉 바에서 차 추출 과정을 직접 관람.</p>
+      <p>다관·티팟 방식 제공. 온도별 최적 추출 안내. 계절 메뉴 운영.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">MD 구성</div>
+      <ul>
+        <li>잎차 (한국·중국산)</li>
+        <li>티백 / 말차</li>
+        <li>유리 티팟·도자기 찻잔</li>
+        <li>차 도구 (차시·차판)</li>
+        <li>선물세트 (보자기 포장)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">공간 경험 구조</div>
+      <p><strong>성수 티룸</strong> — 3면 통유리, 루프탑 바(Bar). 고층빌딩 뷰. 팔각형 카운터 중심으로 추출 관람 구조.</p>
+      <p><strong>신사 티룸</strong> — 가로수길 골목. 오감 집중형 공간.</p>
+      <p>화~일 12:00~21:30 운영. 반려동물 동행 가능.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">비주얼 &amp; 마케팅</div>
+      <p>미니멀 한글 타이포그래피 / 자연소재 패키징 / 보자기 포장 / 파스텔 톤.</p>
+      <p>인스타그램 중심 SNS 운영. 29CM·FOURB 등 라이프스타일 편집숍 입점 콜라보. 팝업·이벤트 정기 운영.</p>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">수익 구조</div>
+      <p>온라인 쇼핑몰(잎차·MD 중심) + 오프라인 티룸 2곳(신사·성수).</p>
+      <p>MD 판매 비중 높음. 주식회사 마지노 운영.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">강점 / 한계</div>
+      <div class="pro-con">
+        <div>
+          <div class="pc-head pc-pro">강점</div>
+          <ul class="pc-list pro">
+            <li>동아시아 차 문화 현대적 재해석 선도</li>
+            <li>팔각형 브루잉 바 — 체험형 공간 차별화</li>
+            <li>온·오프 MD 시너지 강함</li>
+          </ul>
+        </div>
+        <div>
+          <div class="pc-head pc-con">한계</div>
+          <ul class="pc-list con">
+            <li>매장 2곳 — 확장성 제한</li>
+            <li>음료보다 MD 구매 유도 구조</li>
+            <li>가격대 진입장벽 있음</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-lbl">핵심 인사이트</div>
+    <div class="summary-text">차 문화 플레이숍 기획의 핵심 레퍼런스. '추출 과정을 보여주는 오픈 바' 구조와 잎차+MD 연계 수익 모델이 특히 주목할 포인트. 라이프스타일 편집숍 콜라보 전략으로 MZ 타깃 접근성 확보.</div>
+  </div>
+
+  <div class="footer-info">
+    <div class="footer-source"><span class="footer-source-lbl">출처</span> magpie-and-tiger.com · heypop.kr · musinsa.com</div>
+    <div class="page-num">P.01</div>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 02 · TWG Tea ════════════════ -->
+<div class="page">
+  <div class="brand-header">
+    <div>
+      <div class="brand-label">A · Tea 전문 브랜드 / 럭셔리 &nbsp;·&nbsp; 02</div>
+      <div class="brand-name">TWG Tea</div>
+      <div class="brand-tagline">The Wellbeing Group — 세계 최초 럭셔리 차 살롱</div>
+      <div class="tags" style="margin-top:2mm;">
+        <span class="tag soft">럭셔리 차 살롱</span>
+        <span class="tag soft">1,000종 큐레이션</span>
+        <span class="tag soft">역광고 전략</span>
+      </div>
+    </div>
+    <div class="brand-badge">
+      <span class="badge-year">2008</span>
+      <span class="badge-lbl">설립</span>
+      <span class="badge-flag">🇸🇬 싱가포르</span>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">브랜드 정의</div>
+      <p>향수 산업 출신 창업자 <strong>Taha Bouqdib</strong>가 설립. 47개국에서 소싱한 1,000종 이상의 차를 럭셔리 살롱 경험으로 패키징.</p>
+      <p>'광고 없이 매장과 입소문만으로' 성장한 역발상 마케팅의 정석. 23개국 77개 매장, 연매출 약 9,000만 달러.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">핵심 타깃 &amp; 가격대</div>
+      <p><strong>타깃:</strong> 고소득층 30~60대, 차 애호가, 럭셔리 선물 구매자, 백화점 쇼핑 고객</p>
+      <p><strong>티백:</strong> 35,100~39,000원</p>
+      <p><strong>루스리프:</strong> 56,700~61,000원</p>
+      <p><strong>선물세트:</strong> 105,300원~</p>
+    </div>
+  </div>
+
+  <div class="g3 mb2">
+    <div class="card">
+      <div class="card-title">시그니처 메뉴</div>
+      <ul>
+        <li>Singapore Breakfast Tea</li>
+        <li>French Earl Grey</li>
+        <li>Silver Moon (베리 향 녹차)</li>
+        <li>Cream Caramel Tea (루이보스)</li>
+        <li>Chocolate Earl Grey</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Tea 제공 방식</div>
+      <p>루스리프 우선. 수제 면 티백 병행.</p>
+      <p>살롱 내 티푸드(샐러드·케이크·디저트) 페어링. 단순 음료 이상의 '살롱 다이닝' 경험.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">MD 구성</div>
+      <ul>
+        <li>루스리프 캔 (100g/250g)</li>
+        <li>고급 면 티백</li>
+        <li>티웨어 (황금·백금 찻잔)</li>
+        <li>다기 세트</li>
+        <li>시즌 한정 선물 컬렉션</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">공간 경험 구조</div>
+      <p>프리미엄 백화점 고층·호텔 로비 독점 입지.</p>
+      <p>고급 목재 패널·황동 저울·이탈리아 대리석 바닥. 오픈 셀렉션 바 + 살롱 다이닝 결합.</p>
+      <p><strong>한국 4개점:</strong> 광화문 · 성수 낙낙 · 안다즈 · 에비뉴L 월드타워</p>
+    </div>
+    <div class="card">
+      <div class="card-title">비주얼 &amp; 마케팅</div>
+      <p>황금 악센트 + 딥 다크 그린 패키징. 오리엔탈 럭셔리 미학.</p>
+      <p>광고 비집행 — 매장 위치·디스플레이 집중 투자. 고급 백화점·호텔 B2B 채널. 입소문 의존 전략. 도시명 딴 고유 블렌드 개발.</p>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">수익 구조</div>
+      <p>살롱 <strong>30%</strong> / 소매(루스리프·MD) <strong>70%</strong>.</p>
+      <p>연매출 약 9,000만 달러. 고급 호텔·백화점 B2B 병행. 초기 자본 1,000만 달러 → 현재 3,000명 고용.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">강점 / 한계</div>
+      <div class="pro-con">
+        <div>
+          <div class="pc-head pc-pro">강점</div>
+          <ul class="pc-list pro">
+            <li>광고 없이 럭셔리 포지셔닝 — 희소성 교과서</li>
+            <li>살롱+MD 시너지로 높은 객단가</li>
+            <li>1,000+ 품목 — 선물 시장 압도적 지위</li>
+          </ul>
+        </div>
+        <div>
+          <div class="pc-head pc-con">한계</div>
+          <ul class="pc-list con">
+            <li>프리미엄 가격 — 대중화 한계</li>
+            <li>로컬 차 문화 연결 약함</li>
+            <li>디지털·SNS 마케팅 상대적 약세</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-lbl">핵심 인사이트</div>
+    <div class="summary-text">'광고 없이 럭셔리로 성장'하는 방정식의 국내 적용 가능성 분석. 선물 시장 공략 시 고급 캔+황금 리본 패키징 전략 참고. 살롱 30% / MD 70% 비중 → 음료보다 MD가 수익 핵심임을 시사.</div>
+  </div>
+
+  <div class="footer-info">
+    <div class="footer-source"><span class="footer-source-lbl">출처</span> twgtea.com · twgkorea.com · martinroll.com · latterly.org</div>
+    <div class="page-num">P.02</div>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 03 · 소소로 ════════════════ -->
+<div class="page">
+  <div class="brand-header">
+    <div>
+      <div class="brand-label">A · Tea 전문 브랜드 &nbsp;·&nbsp; 03</div>
+      <div class="brand-name">소소로</div>
+      <div class="brand-tagline">Sosoro — 한국 전통차의 일상적 미감</div>
+      <div class="tags" style="margin-top:2mm;">
+        <span class="tag soft">한국 전통차</span>
+        <span class="tag soft">일상의 차</span>
+        <span class="tag soft">소소한 미학</span>
+      </div>
+    </div>
+    <div class="brand-badge badge-base">
+      <span class="badge-year">—</span>
+      <span class="badge-lbl">확인 필요</span>
+      <span class="badge-flag">🇰🇷 한국</span>
+    </div>
+  </div>
+
+  <div class="pending-card mb3">
+    <span class="pending-label">추가 조사 필요</span>
+    <p>온라인 공개 자료가 부족하여 일부 항목은 현장 방문 또는 공식 SNS(인스타그램·네이버 블로그) 직접 조사가 필요합니다.<br>아래 항목은 조사된 범위 내 추정 정보입니다.</p>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">브랜드 정의</div>
+      <p>한국 전통 차 문화를 현대적 감성으로 재해석한 국내 독립 Tea 브랜드. '소소하지만 확실한 차 한 잔'이라는 일상적 미감을 핵심 가치로 삼는 것으로 파악됨.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">핵심 키워드 &amp; 타깃</div>
+      <p><strong>키워드:</strong> 한국 전통차 / 일상의 차 / 소소한 미학</p>
+      <p><strong>타깃(추정):</strong> 전통차에 관심 있는 20~40대 / 슬로라이프 추구층 / 한국 문화 관심 MZ세대</p>
+    </div>
+  </div>
+
+  <div class="g3 mb2">
+    <div class="card">
+      <div class="card-title">시그니처 메뉴</div>
+      <p style="color:var(--point);">현장 확인 필요.<br>한국 녹차·발효차·전통 블렌딩 예상.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Tea 제공 방식</div>
+      <p style="color:var(--point);">한국 전통 다도 방식 잎차 제공 추정.<br>(다관 세트, 온도별 추출 가능성)</p>
+    </div>
+    <div class="card">
+      <div class="card-title">공간 경험</div>
+      <p style="color:var(--point);">소규모 독립 공간.<br>차 중심의 정적인 경험 예상.</p>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">비주얼 &amp; 마케팅</div>
+      <p>한국적 미감 / 자연 소재 / 소박하고 따뜻한 톤 추정.</p>
+      <p>SNS 중심 운영, 입소문 마케팅.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">수익 구조</div>
+      <p>오프라인 매장 + 온라인 직판 추정.</p>
+      <p>소규모 독립 운영.</p>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">강점 / 한계</div>
+      <div class="pro-con">
+        <div>
+          <div class="pc-head pc-pro">강점(추정)</div>
+          <ul class="pc-list pro">
+            <li>한국 전통차 정체성 명확</li>
+            <li>독립 브랜드 특유의 세계관</li>
+            <li>일상 차 문화 확산 기여</li>
+          </ul>
+        </div>
+        <div>
+          <div class="pc-head pc-con">한계</div>
+          <ul class="pc-list con">
+            <li>웹 공식 정보 부족</li>
+            <li>확장성 제한적</li>
+            <li>브랜드 인지도 낮음</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">핵심 인사이트</div>
+      <p>한국 전통차 기반 카페 기획 시 레퍼런스 후보. 과도한 퍼포먼스 없이 '차 자체'로 승부하는 접근법 참고 가치 있음.</p>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">※ 소소로 브랜드는 인스타그램(@) 또는 네이버 플레이스 직접 조회 후 19개 필드 보완 필요.</div>
+  </div>
+
+  <div class="footer-info">
+    <div class="footer-source"><span class="footer-source-lbl">상태</span> 추가 조사 필요 — SNS/현장 확인 권장</div>
+    <div class="page-num">P.03</div>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 04 · 리브르 더 티하우스 ════════════════ -->
+<div class="page">
+  <div class="brand-header">
+    <div>
+      <div class="brand-label">A · 하이엔드 Tea Salon &nbsp;·&nbsp; 04</div>
+      <div class="brand-name">리브르 더 티하우스</div>
+      <div class="brand-tagline">Livre de Thé — 국내 하이엔드 Tea Salon</div>
+      <div class="tags" style="margin-top:2mm;">
+        <span class="tag soft">하이엔드 살롱</span>
+        <span class="tag soft">차 다이닝</span>
+        <span class="tag soft">공간 경험</span>
+      </div>
+    </div>
+    <div class="brand-badge">
+      <span class="badge-year">—</span>
+      <span class="badge-lbl">확인 필요</span>
+      <span class="badge-flag">🇰🇷 한국</span>
+    </div>
+  </div>
+
+  <div class="pending-card mb3">
+    <span class="pending-label">추가 조사 필요</span>
+    <p>온라인 공개 자료가 부족하여 현장 방문 또는 공식 SNS 직접 조사가 필요합니다.<br>국내 하이엔드 Tea Salon 포지션의 희소 사례로 중요 조사 대상입니다.</p>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">브랜드 정의</div>
+      <p>국내 하이엔드 Tea Salon으로 분류된 브랜드. 차를 고급 다이닝 경험으로 승화시키는 방향성으로 파악됨.</p>
+      <p>'성심' 소재 (성수 인근 또는 성심여대 상권 추정).</p>
+    </div>
+    <div class="card">
+      <div class="card-title">포지셔닝 가설</div>
+      <p>국내 프리미엄 Tea Salon 시장은 TWG Tea(외국 럭셔리)와 일반 카페 사이의 공백 지대.</p>
+      <p>리브르 더 티하우스가 이 포지션을 점유하고 있다면 희소한 국내 브랜드 사례.</p>
+    </div>
+  </div>
+
+  <div class="g3 mb2">
+    <div class="card">
+      <div class="card-title">예상 시그니처</div>
+      <p style="color:var(--point);">현장 확인 필요.<br>하이엔드 Tea 페어링 코스 예상.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">예상 Tea 제공 방식</div>
+      <p style="color:var(--point);">살롱급 브루잉 서비스 추정.<br>티푸드 페어링 가능성.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">예상 공간 구조</div>
+      <p style="color:var(--point);">예약제 운영 가능성.<br>프라이빗 다석 구조 추정.</p>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">강점(추정) / 한계</div>
+      <div class="pro-con">
+        <div>
+          <div class="pc-head pc-pro">강점(추정)</div>
+          <ul class="pc-list pro">
+            <li>국내 하이엔드 Tea Salon 희소 포지션</li>
+            <li>트렌디 상권 입지 (성수 인근)</li>
+            <li>차 다이닝 경험 확장 가능성</li>
+          </ul>
+        </div>
+        <div>
+          <div class="pc-head pc-con">한계</div>
+          <ul class="pc-list con">
+            <li>온라인 정보 극히 부족</li>
+            <li>접근성 제한 가능성</li>
+            <li>검증 필요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">조사 방향 제안</div>
+      <ul>
+        <li>인스타그램 키워드: #리브르티하우스 #리브르더티하우스</li>
+        <li>네이버 플레이스: "리브르 더 티하우스" 검색</li>
+        <li>카카오맵 위치 확인</li>
+        <li>성심여대 상권 현장 탐방</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">※ 국내 하이엔드 Tea Salon 시장은 블루오션. 리브르 더 티하우스가 이 포지션을 실현하고 있다면 우리 브랜드 기획의 핵심 레퍼런스로 활용 가능.</div>
+  </div>
+
+  <div class="footer-info">
+    <div class="footer-source"><span class="footer-source-lbl">상태</span> 추가 조사 필요 — SNS/현장 확인 권장</div>
+    <div class="page-num">P.04</div>
+  </div>
+</div>
+
+<!-- ════════════════ PAGE 05 · 티피데스 의인 ════════════════ -->
+<div class="page">
+  <div class="brand-header">
+    <div>
+      <div class="brand-label">A · 라이프스타일 Tea 브랜드 &nbsp;·&nbsp; 05</div>
+      <div class="brand-name">티피데스 의인</div>
+      <div class="brand-tagline">라이프스타일 Tea 브랜드</div>
+      <div class="tags" style="margin-top:2mm;">
+        <span class="tag soft">라이프스타일</span>
+        <span class="tag soft">차 일상화</span>
+        <span class="tag soft">감성 서사</span>
+      </div>
+    </div>
+    <div class="brand-badge badge-base">
+      <span class="badge-year">—</span>
+      <span class="badge-lbl">확인 필요</span>
+      <span class="badge-flag">🇰🇷 한국</span>
+    </div>
+  </div>
+
+  <div class="pending-card mb3">
+    <span class="pending-label">추가 조사 필요</span>
+    <p>온라인 공개 자료가 부족하여 현장 방문 또는 공식 SNS 직접 조사가 필요합니다.<br>라이프스타일 Tea 브랜드 포지션의 국내 주목 사례입니다.</p>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">브랜드 정의</div>
+      <p>라이프스타일 Tea 브랜드로 분류된 국내 독립 브랜드. 차를 일상 라이프스타일의 도구로 제안하는 방향성으로 파악됨.</p>
+      <p>'의인화된 차 서사' — 차에 감정·인격을 부여하는 서사적 브랜딩 추정.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">포지셔닝 가설</div>
+      <p>맥파이앤타이거가 '취향 기반 큐레이션'이라면, 티피데스 의인은 '감성 서사 중심 라이프스타일' 포지션으로 차별화될 가능성.</p>
+    </div>
+  </div>
+
+  <div class="g3 mb2">
+    <div class="card">
+      <div class="card-title">예상 제품 방향</div>
+      <p style="color:var(--point);">현장 확인 필요.<br>블렌딩 티 + 라이프스타일 MD 예상.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">예상 타깃</div>
+      <p style="color:var(--point);">감성 소비 성향 2030대.<br>차를 라이프스타일 아이템으로 수집하는 층.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">예상 채널</div>
+      <p style="color:var(--point);">인스타그램 중심 SNS.<br>독립 온라인몰 또는 편집숍 입점.</p>
+    </div>
+  </div>
+
+  <div class="g2 mb2">
+    <div class="card">
+      <div class="card-title">강점(추정) / 한계</div>
+      <div class="pro-con">
+        <div>
+          <div class="pc-head pc-pro">강점(추정)</div>
+          <ul class="pc-list pro">
+            <li>라이프스타일 접근 차별화</li>
+            <li>독립 브랜드 진정성</li>
+            <li>의인화 서사 — 강력한 감성 코드</li>
+          </ul>
+        </div>
+        <div>
+          <div class="pc-head pc-con">한계</div>
+          <ul class="pc-list con">
+            <li>온라인 자료 극히 부족</li>
+            <li>브랜드 가시성 낮음</li>
+            <li>검증 필요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">조사 방향 제안</div>
+      <ul>
+        <li>인스타그램 키워드: #티피데스의인 #티피데스</li>
+        <li>네이버 블로그 "티피데스 의인" 검색</li>
+        <li>카카오 채널 / 링크트리 확인</li>
+        <li>편집숍 (마켓컬리·29CM 등) 입점 여부 확인</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <div class="quote-text">※ 라이프스타일 Tea 브랜드의 국내 성장 가능성은 높음. 티피데스 의인의 서사적 접근법이 확인될 경우, 브랜드 스토리텔링 전략에 주요 인사이트 제공 예상.</div>
+  </div>
+
+  <div class="footer-info">
+    <div class="footer-source"><span class="footer-source-lbl">상태</span> 추가 조사 필요 — SNS/현장 확인 권장</div>
+    <div class="page-num">P.05</div>
+  </div>
+</div>
+
+<!-- ════════════════ SOURCE PAGE ════════════════ -->
+<div class="src-page">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5mm;padding-bottom:4mm;border-bottom:2px solid var(--dark);">
+    <div>
+      <div style="font-size:8.5pt;letter-spacing:0.2em;text-transform:uppercase;color:var(--base);font-weight:700;margin-bottom:1mm;">출처 &amp; 조사 방법론</div>
+      <div style="font-size:17pt;font-weight:700;color:var(--dark);letter-spacing:-0.01em;">References &amp; Research Notes</div>
+    </div>
+    <div style="font-size:10.5pt;color:var(--point);text-align:right;line-height:1.8;">Tea Brand Research 2026<br>조사기준일 2026.05</div>
+  </div>
+
+  <div class="g2 mb3">
+    <div class="card">
+      <div class="card-title">확인 완료 브랜드 출처</div>
+      <table class="mini-table">
+        <tr><th>브랜드</th><th>주요 출처</th></tr>
+        <tr><td class="lbl">맥파이앤타이거</td><td>magpie-and-tiger.com · heypop.kr · musinsa.com · makefolio.co.kr</td></tr>
+        <tr><td class="lbl">TWG Tea</td><td>twgtea.com · twgkorea.com · martinroll.com · latterly.org · Wikipedia</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">추가 조사 필요 브랜드</div>
+      <table class="mini-table">
+        <tr><th>브랜드</th><th>조사 방법</th></tr>
+        <tr><td class="lbl">소소로</td><td>인스타그램 직접 검색, 네이버 플레이스</td></tr>
+        <tr><td class="lbl">리브르 더 티하우스</td><td>현장 방문, 카카오맵, 네이버 블로그</td></tr>
+        <tr><td class="lbl">티피데스 의인</td><td>인스타그램, 29CM, 마켓컬리 입점 확인</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="g2 mb3">
+    <div class="card">
+      <div class="card-title">조사 필드 구조 (19개)</div>
+      <table class="mini-table">
+        <tr><th colspan="2">그룹</th></tr>
+        <tr><td class="lbl">① 기본 정보</td><td>브랜드명 · 영문명 · 홈페이지 · 국가 · 설립연도</td></tr>
+        <tr><td class="lbl">② 브랜드 전략</td><td>브랜드 정의 · 핵심 키워드 · 핵심 타깃 · 가격대 포지션</td></tr>
+        <tr><td class="lbl">③ 제품·서비스</td><td>시그니처 메뉴 · Tea 제공 방식 · MD 구성 · 물·추출 방식</td></tr>
+        <tr><td class="lbl">④ 공간·브랜딩</td><td>비주얼·디자인 · 공간 경험 구조 · 마케팅·공간</td></tr>
+        <tr><td class="lbl">⑤ 사업성 분석</td><td>수익 구조 · 강점/한계</td></tr>
+        <tr><td class="lbl">⑥ 전략 인사이트</td><td>핵심 인사이트</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">향후 조사 브랜드 (전체 목록)</div>
+      <table class="mini-table">
+        <tr><th>카테고리</th><th>브랜드</th></tr>
+        <tr><td class="lbl">A · 전문</td><td>티컬렉티브</td></tr>
+        <tr><td class="lbl">B · 다도</td><td>티하우스 일지 · 차차티클럽 · 운심헌 티하우스 · 내미엔</td></tr>
+        <tr><td class="lbl">C · 디저트</td><td>티브마더 · 청실비 · 브핑</td></tr>
+        <tr><td class="lbl">D · 밀크티</td><td>공차 · 키어티 · 차지 · 차백당</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-lbl">조사 총평</div>
+    <div class="summary-text">국내 Tea 브랜드 시장은 맥파이앤타이거(취향 기반 큐레이션)와 TWG Tea(럭셔리 살롱) 양극단 사이에 다양한 포지션이 존재. 소소로·리브르 더 티하우스·티피데스 의인은 온라인 자료가 부족한 인디 브랜드군으로, 현장 조사 후 이 아카이브에 추가 권장. Tea 시장의 핵심 차별화 축: 차 자체 퀄리티 vs 공간 경험 vs 라이프스타일 서사.</div>
+  </div>
+
+  <div class="footer-info">
+    <div class="footer-source"><span class="footer-source-lbl">아카이브</span> Tea Brand Research 2026 — Cafe Project 2026</div>
+    <div class="page-num">REF</div>
+  </div>
+</div>
+
+</body>
+</html>
