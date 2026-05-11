@@ -26,7 +26,7 @@ body {
 }
 .page, .cover, .map-page, .comp-page, .src-page {
   width: 210mm;
-  min-height: 297mm;
+  height: 297mm;
   margin: 0 auto 10mm;
   position: relative;
   overflow: hidden;
@@ -56,46 +56,46 @@ body {
   line-height: 1; user-select: none; pointer-events: none;
 }
 .cover-eyebrow {
-  font-size: 10pt; letter-spacing: 0.28em; text-transform: uppercase;
+  font-size: 9pt; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--base); font-weight: 700; margin-bottom: 7mm;
   position: relative; z-index: 1;
 }
 .cover-main-title {
-  font-size: 38pt; font-weight: 700; color: white;
+  font-size: 32pt; font-weight: 700; color: white;
   line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 2mm;
   position: relative; z-index: 1;
 }
 .cover-sub-title {
-  font-size: 16pt; font-weight: 400; color: rgba(255,255,255,0.50);
+  font-size: 15pt; font-weight: 400; color: rgba(255,255,255,0.50);
   margin-bottom: 11mm; position: relative; z-index: 1;
 }
 .cover-rule { width: 14mm; height: 2px; background: var(--base); margin-bottom: 6mm; position: relative; z-index: 1; }
 .cover-desc {
-  font-size: 12pt; color: rgba(255,255,255,0.42);
+  font-size: 11pt; color: rgba(255,255,255,0.42);
   letter-spacing: 0.02em; line-height: 1.7; position: relative; z-index: 1;
 }
 .cover-body { flex: 1; padding: 10mm 18mm 12mm; background: var(--paper); display: flex; flex-direction: column; }
 .cover-eyebrow2 {
-  font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 8pt; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--point); font-weight: 700; margin-bottom: 4mm;
   display: flex; align-items: center; gap: 2mm;
 }
-.cover-eyebrow2::before { content: '♧'; color: var(--base); font-size: 9pt; }
+.cover-eyebrow2::before { content: '♧'; color: var(--base); font-size: 8pt; }
 .brand-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; margin-bottom: 8mm; }
 .brand-list-item {
   display: flex; align-items: center; gap: 3mm;
   padding: 2.8mm 0; border-bottom: 1px solid var(--line);
 }
-.brand-list-num { font-size: 9pt; font-weight: 700; color: var(--base); min-width: 8mm; letter-spacing: 0.05em; }
-.brand-list-name { font-size: 12pt; font-weight: 600; color: var(--dark); flex: 1; }
-.brand-list-origin { font-size: 10pt; color: var(--point); }
-.brand-list-focus { font-size: 8pt; background: var(--base); color: white; padding: 0.5mm 2mm; border-radius: 3px; font-weight: 700; }
+.brand-list-num { font-size: 8pt; font-weight: 700; color: var(--base); min-width: 8mm; letter-spacing: 0.05em; }
+.brand-list-name { font-size: 11pt; font-weight: 600; color: var(--dark); flex: 1; }
+.brand-list-origin { font-size: 9pt; color: var(--point); }
+.brand-list-focus { font-size: 7pt; background: var(--base); color: white; padding: 0.5mm 2mm; border-radius: 3px; font-weight: 700; }
 .cover-footer {
   margin-top: auto; padding-top: 5mm; border-top: 1px solid var(--line);
   display: flex; justify-content: space-between; align-items: flex-end;
 }
-.cover-footer-text { font-size: 10pt; color: var(--point); line-height: 1.7; }
-.cover-footer-clover { font-size: 31pt; color: var(--base); opacity: 0.28; line-height: 1; }
+.cover-footer-text { font-size: 9pt; color: var(--point); line-height: 1.7; }
+.cover-footer-clover { font-size: 28pt; color: var(--base); opacity: 0.28; line-height: 1; }
 .map-page { background: var(--paper); padding: 12mm 14mm 17mm; }
 .map-page::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
@@ -121,32 +121,32 @@ body {
   margin-bottom: 5mm; padding-bottom: 4mm; border-bottom: 2px solid var(--dark);
 }
 .page-header-eyebrow {
-  font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 8pt; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--base); font-weight: 700; margin-bottom: 1mm;
   display: flex; align-items: center; gap: 2mm;
 }
-.page-header-eyebrow::before { content: '♧'; font-size: 8pt; }
-.page-header-title { font-size: 22pt; font-weight: 700; color: var(--dark); letter-spacing: -0.01em; }
-.page-header-sub { font-size: 10pt; color: var(--point); letter-spacing: 0.06em; text-align: right; line-height: 1.8; }
+.page-header-eyebrow::before { content: '♧'; font-size: 7pt; }
+.page-header-title { font-size: 20pt; font-weight: 700; color: var(--dark); letter-spacing: -0.01em; }
+.page-header-sub { font-size: 9pt; color: var(--point); letter-spacing: 0.06em; text-align: right; line-height: 1.8; }
 .brand-header {
   display: flex; align-items: flex-start; justify-content: space-between;
   margin-bottom: 5mm; padding-bottom: 4mm; border-bottom: 2px solid var(--accent);
 }
 .brand-label {
-  font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 8pt; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--accent); font-weight: 700; margin-bottom: 1mm;
   display: flex; align-items: center; gap: 2mm;
 }
-.brand-label::before { content: '♧'; font-size: 8pt; }
-.brand-name { font-size: 23pt; font-weight: 700; color: var(--dark); letter-spacing: -0.015em; line-height: 1.1; }
-.brand-tagline { font-size: 11pt; color: var(--point); margin-top: 1.5mm; }
+.brand-label::before { content: '♧'; font-size: 7pt; }
+.brand-name { font-size: 21pt; font-weight: 700; color: var(--dark); letter-spacing: -0.015em; line-height: 1.1; }
+.brand-tagline { font-size: 10pt; color: var(--point); margin-top: 1.5mm; }
 .brand-badge {
-  background: var(--accent); color: white; font-size: 9pt; font-weight: 700;
+  background: var(--accent); color: white; font-size: 8pt; font-weight: 700;
   padding: 2.5mm 4mm; border-radius: 7px; text-align: center; min-width: 26mm; flex-shrink: 0;
 }
-.badge-year { display: block; font-size: 18pt; font-weight: 900; line-height: 1; }
-.badge-lbl { display: block; font-size: 8pt; opacity: 0.7; margin-top: 0.5mm; }
-.badge-country { display: block; font-size: 10pt; margin-top: 1mm; }
+.badge-year { display: block; font-size: 16pt; font-weight: 900; line-height: 1; }
+.badge-lbl { display: block; font-size: 7pt; opacity: 0.7; margin-top: 0.5mm; }
+.badge-country { display: block; font-size: 9pt; margin-top: 1mm; }
 .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-bottom: 3mm; }
 .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5mm; margin-bottom: 3mm; }
 .g4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 2mm; margin-bottom: 3mm; }
@@ -158,7 +158,7 @@ body {
   border-radius: 7px; padding: 3.5mm 4mm; break-inside: avoid;
 }
 .card-title {
-  font-size: 8pt; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 7pt; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--base); margin-bottom: 2mm; padding-bottom: 1.5mm;
   border-bottom: 1px solid rgba(235,145,118,0.2);
   display: flex; align-items: center; gap: 1.5mm;
@@ -167,18 +167,18 @@ body {
   content: ''; display: inline-block; width: 4px; height: 4px;
   border-radius: 50%; background: var(--base); flex-shrink: 0;
 }
-.card p { font-size: 10pt; color: var(--dark); line-height: 1.6; margin-bottom: 1.5mm; }
+.card p { font-size: 9pt; color: var(--dark); line-height: 1.6; margin-bottom: 1.5mm; }
 .card p:last-child { margin-bottom: 0; }
 .tags { display: flex; flex-wrap: wrap; gap: 1.5mm; margin-top: 2mm; }
-.tag { background: var(--base); color: white; font-size: 8pt; font-weight: 700; padding: 0.8mm 2.5mm; border-radius: 3px; }
+.tag { background: var(--base); color: white; font-size: 7pt; font-weight: 700; padding: 0.8mm 2.5mm; border-radius: 3px; }
 .tag.soft { background: var(--sub-pink); color: var(--dark); }
 .tag.dark { background: var(--dark); color: white; }
 .tag.gray { background: var(--point); color: white; }
 .tag.green { background: #2E6B3E; color: white; }
-.mini-table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+.mini-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
 .mini-table th {
   background: var(--accent); color: white; font-weight: 700;
-  padding: 1.5mm 2mm; font-size: 9pt; text-align: left; letter-spacing: 0.04em;
+  padding: 1.5mm 2mm; font-size: 8pt; text-align: left; letter-spacing: 0.04em;
 }
 .mini-table td {
   padding: 1.5mm 2mm; border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -187,76 +187,76 @@ body {
 .mini-table tr:last-child td { border-bottom: none; }
 .mini-table tr:nth-child(even) td { background: #FAF0EE; }
 .mini-table .lbl { font-weight: 700; color: var(--point); white-space: nowrap; width: 28%; }
-.strat-num { font-size: 8pt; font-weight: 700; color: var(--base); letter-spacing: 0.06em; margin-bottom: 1.5mm; }
-.strat-text { font-size: 10pt; color: var(--dark); line-height: 1.6; }
+.strat-num { font-size: 7pt; font-weight: 700; color: var(--base); letter-spacing: 0.06em; margin-bottom: 1.5mm; }
+.strat-text { font-size: 9pt; color: var(--dark); line-height: 1.6; }
 .pos-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2mm; }
 .pos-item { text-align: center; }
-.pos-lbl { font-size: 7pt; color: var(--point); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 1mm; text-transform: uppercase; }
+.pos-lbl { font-size: 6.5pt; color: var(--point); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 1mm; text-transform: uppercase; }
 .pos-track { height: 2.5mm; background: rgba(0,0,0,0.08); border-radius: 2px; }
 .pos-fill { height: 100%; background: linear-gradient(90deg, var(--base), var(--gradient)); border-radius: 2px; }
-.pos-val { font-size: 9pt; font-weight: 700; color: var(--base); margin-top: 1mm; }
+.pos-val { font-size: 8pt; font-weight: 700; color: var(--base); margin-top: 1mm; }
 .pro-con { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; }
-.pc-head { font-size: 8pt; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5mm; }
+.pc-head { font-size: 7pt; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5mm; }
 .pc-pro { color: var(--base); }
 .pc-con { color: var(--point); }
 .pc-list { list-style: none; }
-.pc-list li { font-size: 10pt; color: var(--dark); padding-left: 3mm; position: relative; margin-bottom: 1mm; line-height: 1.45; }
+.pc-list li { font-size: 9pt; color: var(--dark); padding-left: 3mm; position: relative; margin-bottom: 1mm; line-height: 1.45; }
 .pc-list.pro li::before { content: '+'; position: absolute; left: 0; color: var(--base); font-weight: 900; }
 .pc-list.con li::before { content: '–'; position: absolute; left: 0; color: var(--point); }
 .quote-block {
   background: var(--sub-pink); border-left: 3px solid var(--base);
   border-radius: 0 7px 7px 0; padding: 3mm 4mm;
 }
-.quote-text { font-size: 10pt; color: var(--dark); line-height: 1.65; font-style: italic; margin-bottom: 1mm; }
-.quote-src { font-size: 8pt; color: var(--point); font-weight: 700; }
+.quote-text { font-size: 9pt; color: var(--dark); line-height: 1.65; font-style: italic; margin-bottom: 1mm; }
+.quote-src { font-size: 7pt; color: var(--point); font-weight: 700; }
 .summary { background: var(--dark); color: white; padding: 3.5mm 5mm; border-radius: 7px; margin-top: 3mm; }
 .summary-lbl {
-  font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 7pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
   opacity: 0.55; margin-bottom: 1.5mm; display: flex; align-items: center; gap: 2mm;
 }
-.summary-lbl::before { content: '♧'; color: var(--base); opacity: 1; font-size: 8pt; }
-.summary-text { font-size: 11pt; line-height: 1.65; }
+.summary-lbl::before { content: '♧'; color: var(--base); opacity: 1; font-size: 7pt; }
+.summary-text { font-size: 10pt; line-height: 1.65; }
 .footer-info {
   position: absolute; bottom: 6.5mm; left: 14mm; right: 14mm;
   display: flex; align-items: center; justify-content: space-between; z-index: 10;
 }
-.footer-source { font-size: 8pt; color: rgba(255,255,255,0.75); display: flex; align-items: center; gap: 2mm; }
+.footer-source { font-size: 7pt; color: rgba(255,255,255,0.75); display: flex; align-items: center; gap: 2mm; }
 .footer-source-lbl { font-weight: 700; color: white; }
-.page-num { font-size: 13pt; color: white; font-weight: 500; }
+.page-num { font-size: 12pt; color: white; font-weight: 500; }
 .src-link { color: rgba(255,255,255,0.8); text-decoration: none; }
 .comp-hero {
   background: var(--dark); color: white; padding: 5mm 6mm;
   border-radius: 8px; margin-bottom: 4mm;
 }
 .comp-hero-eyebrow {
-  font-size: 9pt; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 8pt; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--base); font-weight: 700; margin-bottom: 1.5mm;
   display: flex; align-items: center; gap: 2mm;
 }
-.comp-hero-eyebrow::before { content: '♧'; font-size: 8pt; }
-.comp-hero-title { font-size: 20pt; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1mm; }
-.comp-hero-sub { font-size: 11pt; color: rgba(255,255,255,0.5); }
+.comp-hero-eyebrow::before { content: '♧'; font-size: 7pt; }
+.comp-hero-title { font-size: 18pt; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1mm; }
+.comp-hero-sub { font-size: 10pt; color: rgba(255,255,255,0.5); }
 .src-header {
   display: flex; align-items: flex-start; justify-content: space-between;
   margin-bottom: 5mm; padding-bottom: 4mm; border-bottom: 2px solid var(--dark);
 }
-.src-title { font-size: 22pt; font-weight: 700; color: var(--dark); letter-spacing: -0.01em; }
-.src-header-sub { font-size: 10pt; color: var(--point); letter-spacing: 0.06em; text-align: right; line-height: 1.8; }
+.src-title { font-size: 20pt; font-weight: 700; color: var(--dark); letter-spacing: -0.01em; }
+.src-header-sub { font-size: 9pt; color: var(--point); letter-spacing: 0.06em; text-align: right; line-height: 1.8; }
 .src-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 7mm; }
 .src-section-title {
-  font-size: 9pt; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 8pt; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--base); margin-bottom: 2mm; padding-bottom: 1.5mm;
   border-bottom: 1px solid rgba(235,145,118,0.25);
   display: flex; align-items: center; gap: 1.5mm;
 }
-.src-section-title::before { content: '♧'; font-size: 8pt; }
+.src-section-title::before { content: '♧'; font-size: 7pt; }
 .src-list { list-style: none; }
-.src-list li { font-size: 9pt; color: var(--dark); padding: 1.2mm 0; border-bottom: 1px solid rgba(0,0,0,0.04); line-height: 1.5; }
+.src-list li { font-size: 8pt; color: var(--dark); padding: 1.2mm 0; border-bottom: 1px solid rgba(0,0,0,0.04); line-height: 1.5; }
 .src-list li:last-child { border-bottom: none; }
 .src-a { color: var(--base); text-decoration: none; }
 .src-full { grid-column: 1/-1; border-top: 1px solid var(--line); padding-top: 3mm; margin-top: 1mm; }
-.comp-table { width:100%; border-collapse:collapse; font-size:10pt; }
-.comp-table th { background:var(--dark); color:white; padding:2mm 2.5mm; font-size:9pt; text-align:left; }
+.comp-table { width:100%; border-collapse:collapse; font-size: 9pt; }
+.comp-table th { background:var(--dark); color:white; padding:2mm 2.5mm; font-size: 8pt; text-align:left; }
 .comp-table th.h-accent { background:var(--accent); }
 .comp-table td { padding:2mm 2.5mm; border-bottom:1px solid rgba(0,0,0,0.06); vertical-align:top; line-height:1.5; }
 .comp-table tr:nth-child(even) td { background:#FAF9F8; }
@@ -413,111 +413,111 @@ body {
       <!-- border -->
       <rect x="70" y="28" width="498" height="370" fill="none" stroke="#E0E0E0" stroke-width="0.8"/>
       <!-- axis labels -->
-      <text x="318" y="16" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#333">감성 / 경험 소비</text>
-      <text x="318" y="418" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#333">기능 / 효율 소비</text>
-      <text x="62" y="227" text-anchor="end" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#333">프리미엄</text>
-      <text x="580" y="227" text-anchor="start" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#333">저가/효율</text>
+      <text x="318" y="16" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#333">감성 / 경험 소비</text>
+      <text x="318" y="418" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#333">기능 / 효율 소비</text>
+      <text x="62" y="227" text-anchor="end" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#333">프리미엄</text>
+      <text x="580" y="227" text-anchor="start" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#333">저가/효율</text>
       <!-- quadrant labels -->
-      <text x="90" y="48" font-family="-apple-system,sans-serif" font-size="9" fill="#D4B8B0" font-style="italic">Premium Experience</text>
-      <text x="332" y="48" font-family="-apple-system,sans-serif" font-size="9" fill="#B8C0D0" font-style="italic">Value Experience</text>
-      <text x="90" y="390" font-family="-apple-system,sans-serif" font-size="9" fill="#D4B8B0" font-style="italic">Premium Functional</text>
-      <text x="332" y="390" font-family="-apple-system,sans-serif" font-size="9" fill="#B8C0D0" font-style="italic">Low-Cost Functional</text>
+      <text x="90" y="48" font-family="-apple-system,sans-serif" font-size="8" fill="#D4B8B0" font-style="italic">Premium Experience</text>
+      <text x="332" y="48" font-family="-apple-system,sans-serif" font-size="8" fill="#B8C0D0" font-style="italic">Value Experience</text>
+      <text x="90" y="390" font-family="-apple-system,sans-serif" font-size="8" fill="#D4B8B0" font-style="italic">Premium Functional</text>
+      <text x="332" y="390" font-family="-apple-system,sans-serif" font-size="8" fill="#B8C0D0" font-style="italic">Low-Cost Functional</text>
 
       <!-- ★ 집중 분석 브랜드 (크게, 진한색) -->
 
       <!-- 오설록 ★ -->
       <circle cx="188" cy="118" r="21" fill="#EB9176" opacity="0.92"/>
-      <text x="188" y="114" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="white">오설록</text>
-      <text x="188" y="124" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" fill="rgba(255,255,255,0.85)">O'sulloc</text>
+      <text x="188" y="114" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="white">오설록</text>
+      <text x="188" y="124" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.85)">O'sulloc</text>
 
       <!-- 맥파이앤타이거 ★ -->
       <circle cx="138" cy="78" r="20" fill="#333333" opacity="0.88"/>
-      <text x="138" y="74" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="white">맥파이</text>
-      <text x="138" y="83" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" fill="rgba(255,255,255,0.8)">앤타이거</text>
+      <text x="138" y="74" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" font-weight="700" fill="white">맥파이</text>
+      <text x="138" y="83" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.8)">앤타이거</text>
 
       <!-- 슈퍼말차 ★ -->
       <circle cx="248" cy="100" r="19" fill="#2E6B3E" opacity="0.90"/>
-      <text x="248" y="96" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="white">슈퍼말차</text>
-      <text x="248" y="106" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">SUPER MATCHA</text>
+      <text x="248" y="96" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" font-weight="700" fill="white">슈퍼말차</text>
+      <text x="248" y="106" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">SUPER MATCHA</text>
 
       <!-- 공차 ★ -->
       <circle cx="448" cy="338" r="21" fill="#EB9176" opacity="0.88"/>
-      <text x="448" y="334" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="white">공차</text>
-      <text x="448" y="344" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" fill="rgba(255,255,255,0.85)">Gong Cha</text>
+      <text x="448" y="334" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="white">공차</text>
+      <text x="448" y="344" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" fill="rgba(255,255,255,0.85)">Gong Cha</text>
 
       <!-- 헤이티 ★ -->
       <circle cx="380" cy="152" r="19" fill="#707070" opacity="0.88"/>
-      <text x="380" y="148" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="white">헤이티</text>
-      <text x="380" y="158" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">HEYTEA</text>
+      <text x="380" y="148" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" font-weight="700" fill="white">헤이티</text>
+      <text x="380" y="158" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="rgba(255,255,255,0.8)">HEYTEA</text>
 
       <!-- 차지 ★ -->
       <circle cx="350" cy="182" r="19" fill="#F4B1BA" opacity="0.95"/>
-      <text x="350" y="178" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#333">차지</text>
-      <text x="350" y="188" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" fill="#555">CHAGEE</text>
+      <text x="350" y="178" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" font-weight="700" fill="#333">차지</text>
+      <text x="350" y="188" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#555">CHAGEE</text>
 
       <!-- 기타 브랜드 (작게) -->
 
       <!-- TWG Tea -->
       <circle cx="92" cy="62" r="12" fill="#333" opacity="0.75"/>
-      <text x="92" y="59" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="white">TWG</text>
-      <text x="92" y="67" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" fill="rgba(255,255,255,0.75)">Tea</text>
+      <text x="92" y="59" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="white">TWG</text>
+      <text x="92" y="67" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="rgba(255,255,255,0.75)">Tea</text>
 
       <!-- 리브르 티하우스 -->
       <circle cx="110" cy="108" r="13" fill="#F4C8BB" opacity="0.90"/>
-      <text x="110" y="105" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#333">리브르</text>
-      <text x="110" y="113" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#555">티하우스</text>
+      <text x="110" y="105" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#333">리브르</text>
+      <text x="110" y="113" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="#555">티하우스</text>
 
       <!-- 티퍼런스 서울 -->
       <circle cx="178" cy="162" r="13" fill="#F4C8BB" opacity="0.85"/>
-      <text x="178" y="159" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#333">티퍼런스</text>
-      <text x="178" y="167" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#555">서울</text>
+      <text x="178" y="159" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#333">티퍼런스</text>
+      <text x="178" y="167" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="#555">서울</text>
 
       <!-- 티컬렉티브 -->
       <circle cx="142" cy="228" r="12" fill="#E8E8E8" opacity="0.90"/>
-      <text x="142" y="225" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#555">티컬렉</text>
-      <text x="142" y="232" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#777">티브</text>
+      <text x="142" y="225" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#555">티컬렉</text>
+      <text x="142" y="232" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="#777">티브</text>
 
       <!-- 티하우스 일지 -->
       <circle cx="152" cy="210" r="12" fill="#E0D8F0" opacity="0.90"/>
-      <text x="152" y="207" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#444">일지</text>
-      <text x="152" y="214" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#666">티하우스</text>
+      <text x="152" y="207" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#444">일지</text>
+      <text x="152" y="214" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="#666">티하우스</text>
 
       <!-- 차차티클럽 -->
       <circle cx="252" cy="192" r="12" fill="#E8E8E8" opacity="0.85"/>
-      <text x="252" y="189" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#555">차차티</text>
-      <text x="252" y="196" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#777">클럽</text>
+      <text x="252" y="189" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#555">차차티</text>
+      <text x="252" y="196" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="#777">클럽</text>
 
       <!-- 산수화 티하우스 -->
       <circle cx="165" cy="182" r="12" fill="#E0EEE8" opacity="0.90"/>
-      <text x="165" y="179" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#2E5E3A">산수화</text>
-      <text x="165" y="186" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#555">티하우스</text>
+      <text x="165" y="179" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#2E5E3A">산수화</text>
+      <text x="165" y="186" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="#555">티하우스</text>
 
 
       <!-- 티노마드 -->
       <circle cx="338" cy="195" r="12" fill="#F0EEE8" opacity="0.88"/>
-      <text x="338" y="198" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#555">티노마드</text>
+      <text x="338" y="198" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#555">티노마드</text>
 
       <!-- 청수당 -->
       <circle cx="292" cy="138" r="12" fill="#E8F0E0" opacity="0.88"/>
-      <text x="292" y="141" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#2E5E3A">청수당</text>
+      <text x="292" y="141" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#2E5E3A">청수당</text>
 
       <!-- 델픽 -->
       <circle cx="308" cy="165" r="12" fill="#F4C8BB" opacity="0.80"/>
-      <text x="308" y="168" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="10" font-weight="700" fill="#333">델픽</text>
+      <text x="308" y="168" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" font-weight="700" fill="#333">델픽</text>
 
       <!-- 차백도 -->
       <circle cx="495" cy="355" r="13" fill="#E8E8E8" opacity="0.85"/>
-      <text x="495" y="352" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="12" font-weight="700" fill="#555">차백도</text>
-      <text x="495" y="360" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#777">Chabakdo</text>
+      <text x="495" y="352" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#555">차백도</text>
+      <text x="495" y="360" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="#777">Chabakdo</text>
 
       <!-- center dot -->
       <circle cx="318" cy="224" r="3" fill="#333"/>
 
       <!-- 범례 -->
       <circle cx="82" cy="415" r="8" fill="#EB9176" opacity="0.92"/>
-      <text x="94" y="418" font-family="-apple-system,sans-serif" font-size="9" fill="#333">★ 집중 분석 6개 브랜드</text>
+      <text x="94" y="418" font-family="-apple-system,sans-serif" font-size="8" fill="#333">★ 집중 분석 6개 브랜드</text>
       <circle cx="218" cy="415" r="7" fill="#E8E8E8" opacity="0.90" stroke="#ccc" stroke-width="0.5"/>
-      <text x="229" y="418" font-family="-apple-system,sans-serif" font-size="9" fill="#333">조사 대상 11개 브랜드</text>
+      <text x="229" y="418" font-family="-apple-system,sans-serif" font-size="8" fill="#333">조사 대상 11개 브랜드</text>
     </svg>
   </div>
 
@@ -540,7 +540,7 @@ body {
     </div>
   </div>
 
-  <div style="background:var(--dark);color:white;padding:4mm 5mm;border-radius:7px;text-align:center;font-size:11pt;font-style:italic;line-height:1.65;">
+  <div style="background:var(--dark);color:white;padding:4mm 5mm;border-radius:7px;text-align:center;font-size: 10pt;font-style:italic;line-height:1.65;">
     "국내 Tea 시장은 프리미엄 경험 영역이 밀집되어 있으며, 중가 감성형은 중국 브랜드가 선점 중. 저가 효율형은 공차가 독주하는 구조다."
   </div>
 
@@ -672,7 +672,7 @@ body {
     <div class="card">
       <div class="card-title">브랜드 개요</div>
       <p>호작도(虎鵲圖)에서 이름을 딴 동아시아 차 전문 브랜드. <strong>팔각형 오픈 브루잉 바</strong>를 중심으로 차 추출 과정을 퍼포먼스로 전환. 잎차+MD 연계 수익 모델로 차별화.</p>
-      <p style="font-size:10pt;color:var(--point);">신사(가로수길) + 성수(3면 통유리 루프탑) 2개 티룸 운영. 화~일 12:00~21:30.</p>
+      <p style="font-size: 9pt;color:var(--point);">신사(가로수길) + 성수(3면 통유리 루프탑) 2개 티룸 운영. 화~일 12:00~21:30.</p>
       <div class="tags">
         <span class="tag">동아시아 잎차</span><span class="tag">취향 큐레이션</span>
         <span class="tag soft">팔각형 브루잉 바</span><span class="tag soft">일상의 탄탄함</span>
@@ -774,7 +774,7 @@ body {
     <div class="card">
       <div class="card-title">브랜드 개요</div>
       <p>2017년 HIT THE TEA 설립. 보성 유기농 세레모니얼 그레이드 말차 단일 원산지를 기반으로 <strong>과잉 카페인 시대의 대안</strong>을 제안. 성수 플래그십에 로봇 암 '말로(Mallo)' 도입으로 국제적 주목.</p>
-      <p style="font-size:10pt;color:var(--point);">말레이시아·태국·필리핀 해외 진출. IGNANT·PRINT Magazine 등 국제 디자인 미디어 자연 노출.</p>
+      <p style="font-size: 9pt;color:var(--point);">말레이시아·태국·필리핀 해외 진출. IGNANT·PRINT Magazine 등 국제 디자인 미디어 자연 노출.</p>
       <div class="tags">
         <span class="tag green">유기농 말차</span><span class="tag green">슈퍼푸드</span>
         <span class="tag">로봇 위스킹</span><span class="tag soft">전통+첨단 융합</span>
@@ -876,7 +876,7 @@ body {
     <div class="card">
       <div class="card-title">브랜드 개요</div>
       <p>2006년 대만 설립, 2012년 한국 진출. <strong>당도·얼음 커스터마이징 시스템</strong>으로 밀크티 시장 대중화를 선도. 국내 600개+ 가맹점 운영하는 Tea 음료 1위 프랜차이즈.</p>
-      <p style="font-size:10pt;color:var(--point);">티백·농축액 기반 표준화 제조. 테이크아웃·배달 중심 운영.</p>
+      <p style="font-size: 9pt;color:var(--point);">티백·농축액 기반 표준화 제조. 테이크아웃·배달 중심 운영.</p>
       <div class="tags">
         <span class="tag">밀크티 표준</span><span class="tag">커스터마이징</span>
         <span class="tag dark">대중화 Tea</span><span class="tag soft">가맹 플랫폼</span>
@@ -978,7 +978,7 @@ body {
     <div class="card">
       <div class="card-title">브랜드 개요</div>
       <p>2012년 중국 선전 설립, 2024년 한국 진출. <strong>치즈 크림 티</strong>라는 새로운 카테고리를 창조한 브랜드. "긴 대기줄"이 바이럴이 되는 희소성 마케팅 모델로 Z세대 열풍.</p>
-      <p style="font-size:10pt;color:var(--point);">신선 과일 착즙 + 크림 치즈 토핑 시스템. 직영 중심 운영. 중국 본사 자본 기반.</p>
+      <p style="font-size: 9pt;color:var(--point);">신선 과일 착즙 + 크림 치즈 토핑 시스템. 직영 중심 운영. 중국 본사 자본 기반.</p>
       <div class="tags">
         <span class="tag gray">치즈 크림 티 원조</span><span class="tag gray">Z세대 감성</span>
         <span class="tag soft">신선 원재료</span><span class="tag soft">대기줄 마케팅</span>
@@ -1080,7 +1080,7 @@ body {
     <div class="card">
       <div class="card-title">브랜드 개요</div>
       <p>2017년 중국 쿤밍 설립. <strong>전통 중국차(우롱·보이·재스민)를 현대적 밀크티로 재해석</strong>한 브랜드. '동양의 스타벅스' 포지셔닝으로 2024년 한국 직진출. 글로벌 확장 전략 가속 중.</p>
-      <p style="font-size:10pt;color:var(--point);">고급스러운 브랜드 디자인 + 직영 운영 + 루스리프 강조. 중국 내 8,000개+ 매장 운영.</p>
+      <p style="font-size: 9pt;color:var(--point);">고급스러운 브랜드 디자인 + 직영 운영 + 루스리프 강조. 중국 내 8,000개+ 매장 운영.</p>
       <div class="tags">
         <span class="tag dark">전통차 현대화</span><span class="tag dark">동양의 스타벅스</span>
         <span class="tag soft">현대 Tea Bar</span><span class="tag soft">글로벌 확장</span>
@@ -1276,7 +1276,7 @@ body {
 <div class="src-page">
   <div class="src-header">
     <div>
-      <div style="font-size:9pt;letter-spacing:0.2em;text-transform:uppercase;color:var(--base);font-weight:700;margin-bottom:1mm;display:flex;align-items:center;gap:2mm;"><span>♧</span> References</div>
+      <div style="font-size: 8pt;letter-spacing:0.2em;text-transform:uppercase;color:var(--base);font-weight:700;margin-bottom:1mm;display:flex;align-items:center;gap:2mm;"><span>♧</span> References</div>
       <div class="src-title">종합 출처</div>
     </div>
     <div class="src-header-sub">Tea Brand Research Report 2026<br>조사 기준: 2026년 5월</div>
@@ -1347,30 +1347,5 @@ body {
   </div>
 </div>
 
-<script>
-// Per-page auto-fit: A4(297mm) 초과 페이지만 zoom 축소, 여유 페이지는 현재 폰트 유지
-(function () {
-  // 297mm → CSS px (96 dpi 기준, 브라우저 표준)
-  var A4H = 297 * 96 / 25.4; // ≈ 1122.5 px
-  var SEL = '.page, .cover, .map-page, .comp-page, .src-page';
-
-  function fitAll() {
-    document.querySelectorAll(SEL).forEach(function (el) {
-      el.style.zoom = '';          // 이전 zoom 초기화 → 자연 높이로 복귀
-      var h = el.offsetHeight;
-      if (h > A4H + 6) {           // 6 px 허용 오차
-        // 필요한 최소 zoom 계산 (최저 0.75 = 현재 ×1.3의 약 ×1.0 수준)
-        var z = Math.max(0.75, A4H / h);
-        el.style.zoom = z.toFixed(3);
-      }
-    });
-  }
-
-  // 1차: DOM + 기본 스타일 로딩 후
-  window.addEventListener('load', fitAll);
-  // 2차: 웹폰트(Noto Sans KR) 로딩 완료 후 재측정
-  setTimeout(fitAll, 800);
-}());
-</script>
 </body>
 </html>
